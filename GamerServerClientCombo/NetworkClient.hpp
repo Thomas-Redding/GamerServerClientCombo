@@ -18,16 +18,17 @@ class NetworkClient {
 public:
     NetworkClient(ServerCommunicator& com);
     ~NetworkClient();
-    void attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort);
+    void attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort, bool waitForCompletion);
     void sendOwnTcpServerMessageToQuit(unsigned short localTcpPort);
     
     // should be called by Client regularly to check ports
     int update();
     
     /*
-     0 = no connection established or attempted
-     1 = connection establishe
-     -1 = failed to connect
+     0 = no connection established - we go back to 0 if we initially had a connection but it fails
+     1 = connection is either established or being established
+     2 = connection definitely established
+     -1 = if waitForCompletion is "true" in attemptConnectionToServer(), then "-1" means we failed to connect
      */
     int getConnectionStage();
     void sendTcpMessage(std::string message);

@@ -18,23 +18,38 @@ NetworkClient::~NetworkClient() {
 
 
 int NetworkClient::update() {
+    if(connectionStage == 1) {
+        if(tcpSocket.getRemoteAddress() != sf::IpAddress::None) {
+            std::cout << "[connected]";
+            connectionStage = 2;
+        }
+    }
+    else if(connectionStage == 2) {
+        if(tcpSocket.getRemoteAddress() == sf::IpAddress::None) {
+            connectionStage = -1;
+        }
+    }
     return 0;
 }
 
-void NetworkClient::attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort) {
+void NetworkClient::attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort, bool waitForCompletion) {
     tcpSocket.disconnect();
     sf::Time waitTime = sf::milliseconds(3000);
-    tcpSocket.setBlocking(true);
-    sf::Socket::Status status = tcpSocket.connect(serverIpAddress, serverPort, waitTime);
-    tcpSocket.setBlocking(false);
-    if(status == sf::Socket::Status::Done) {
-        // we have successfuly connected to the server
-        connectionStage = 1;
-        return true;
+    if(waitForCompletion) {
+        tcpSocket.setBlocking(true);
+        sf::Socket::Status status = tcpSocket.connect(serverIpAddress, serverPort, waitTime);
+        tcpSocket.setBlocking(false);
+        if(status == sf::Socket::Status::Done) {
+            connectionStage = 2;
+        }
+        else {
+            connectionStage = -1;
+        }
     }
     else {
-        connectionStage = -1;
-        return false;
+        tcpSocket.setBlocking(false);
+        sf::Socket::Status status = tcpSocket.connect(serverIpAddress, serverPort, waitTime);
+        connectionStage = 1;
     }
 }
 
@@ -43,8 +58,10 @@ void NetworkClient::sendOwnTcpServerMessageToQuit(unsigned short localTcpPort) {
         sendTcpMessage("Quit Server");
     }
     else {
-        attemptConnectionToServer(sf::IpAddress::getLocalAddress(), localTcpPort);
-        std::cout << "{" << connectionStage << "}";
+        attemptConnectionToServer(sf::IpAddress::getLocalAddress(), localTcpPort, true);
+        if(connectionStage == -1) {
+            attemptConnectionToServer(sf::IpAddress::getLocalAddress(), localTcpPort, true);
+        }
         sendTcpMessage("Quit Server");
     }
 }

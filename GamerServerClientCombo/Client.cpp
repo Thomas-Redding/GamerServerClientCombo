@@ -9,7 +9,7 @@
 #include "Client.hpp"
 
 Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), networkClient(com) {
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(50);
 
     // Create a graphical text to display
     if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -36,12 +36,16 @@ int Client::mouseMoved(int x, int y) {
 }
 
 int Client::mousePressed(sf::Mouse::Button button, int x, int y) {
-    if(networkClient.getConnectionStage() == 1) {
+    if(networkClient.getConnectionStage() == 0 || networkClient.getConnectionStage() == -1) {
+        networkClient.attemptConnectionToServer(sf::IpAddress("25.141.132.52"), networkClient.getLocalServerTcpPort(), false);
+    }
+    else if(networkClient.getConnectionStage() == 2) {
         messageNumber++;
         networkClient.sendTcpMessage("\nQuails" + std::to_string(messageNumber));
     }
     else {
-        networkClient.attemptConnectionToServer(sf::IpAddress("192.168.1.79"), networkClient.getLocalServerTcpPort());
+        // connection stage is 1, we have to wait
+        // it's possible that sending messages this way will succeeed (assuming a connection is eventually established), but this isn't tested
     }
     return 0;
 }
