@@ -18,7 +18,8 @@
 class Client {
 public:
     // constructor(s)
-    Client(sf::RenderWindow &myWindow, std::string myName);
+    Client(sf::RenderWindow &myWindow, ServerCommunicator &com, std::string myName);
+    void applicationIsClosing(unsigned short localTcpPort);
     
     // user input events - returning anything but 0 will cause the application to close
     int keyPressed(sf::Keyboard::Key keyCode);
@@ -36,6 +37,7 @@ private:
     sf::Font font;
     sf::Text text;
     NetworkClient networkClient;
+    int messageNumber = 0;
 };
 
 #endif /* Client_cpp */

@@ -22,6 +22,9 @@ public:
     bool getShouldServersContinue();
     void setShouldServersContinue(bool newValue);
     
+    void setLocalTcpPort(unsigned short newValue);
+    unsigned short getLocalTcpPort();
+    
     // used by Server
     std::string receiveTcpMessage();
     std::vector<sf::TcpSocket*> getClients();
@@ -38,6 +41,9 @@ private:
     
     std::mutex clients_lock;
     std::vector<sf::TcpSocket*> clients;
+    
+    std::mutex localTcpPort_lock;
+    unsigned short localTcpPort;
 };
 
 #endif /* ServerCommunicator_cpp */

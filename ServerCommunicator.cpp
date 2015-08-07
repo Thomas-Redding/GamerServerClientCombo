@@ -56,3 +56,16 @@ std::vector<sf::TcpSocket*> ServerCommunicator::getClients() {
     clients_lock.unlock();
     return rtn;
 }
+
+void ServerCommunicator::setLocalTcpPort(unsigned short newValue) {
+    localTcpPort_lock.lock();
+    localTcpPort = newValue;
+    localTcpPort_lock.unlock();
+}
+
+unsigned short ServerCommunicator::getLocalTcpPort() {
+    localTcpPort_lock.lock();
+    unsigned short rtn = localTcpPort;
+    localTcpPort_lock.unlock();
+    return rtn;
+}

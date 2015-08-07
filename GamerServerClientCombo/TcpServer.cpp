@@ -9,9 +9,9 @@
 #include "TcpServer.hpp"
 
 TcpServer::TcpServer(ServerCommunicator &com): communicator(com) {
-    sf::Socket::Status status = listener.listen(sf::Socket::AnyPort);
+    sf::Socket::Status status = listener.listen(sf::TcpSocket::AnyPort);
     selector.add(listener);
-    unsigned short port = listener.getLocalPort();
+    communicator.setLocalTcpPort(listener.getLocalPort());
 }
 
 bool TcpServer::update() {

@@ -35,7 +35,7 @@ int main(int, char const**) {
     std::thread mainServerThread(startMainServer, &communicator);
     std::thread tcpServerThread(startTcpServer, &communicator);
     
-    Client client(window, "John Doe");
+    Client client(window, communicator, "John Doe");
     
     bool shouldCloseProgram = false;
     
@@ -110,6 +110,7 @@ int main(int, char const**) {
         
         if(shouldCloseProgram) {
             communicator.setShouldServersContinue(false);
+            client.applicationIsClosing(communicator.getLocalTcpPort());
             mainServerThread.join();
             tcpServerThread.join();
             window.close();

@@ -24,9 +24,10 @@ bool Server::update() {
     
     std::string tcpMessage = readTcp();
     
-    std::cout << "s";
-    
-    std::cout << tcpMessage;
+    if(tcpMessage != "") {
+        std::cout << "\nServer Received: " << tcpMessage << "\n";
+    }
+    std::cout << "*";
     
     return shouldContinue;
 }

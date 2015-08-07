@@ -8,7 +8,7 @@
 
 #include "Client.hpp"
 
-Client::Client(sf::RenderWindow &myWindow, std::string myName) : window(myWindow), networkClient() {
+Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com, std::string myName) : window(myWindow), networkClient(com) {
     window.setFramerateLimit(30);
 
     // Create a graphical text to display
@@ -17,6 +17,10 @@ Client::Client(sf::RenderWindow &myWindow, std::string myName) : window(myWindow
     }
     text = sf::Text(myName, font, 50);
     text.setColor(sf::Color::Red);
+}
+
+void Client::applicationIsClosing(unsigned short localTcpPort) {
+    networkClient.sendOwnTcpServerMessageToQuit(localTcpPort);
 }
 
 int Client::keyPressed(sf::Keyboard::Key keyCode) {
@@ -32,6 +36,13 @@ int Client::mouseMoved(int x, int y) {
 }
 
 int Client::mousePressed(sf::Mouse::Button button, int x, int y) {
+    if(networkClient.getConnectionStage() == 1) {
+        messageNumber++;
+        networkClient.sendTcpMessage("\nQuails" + std::to_string(messageNumber));
+    }
+    else {
+        networkClient.attemptConnectionToServer(sf::IpAddress("192.168.1.79"), networkClient.getLocalServerTcpPort());
+    }
     return 0;
 }
 
