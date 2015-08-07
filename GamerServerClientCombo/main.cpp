@@ -1,30 +1,28 @@
 
-//
-// Disclamer:
-// ----------
-//
-// This code will work only if you selected window, graphics and audio.
-//
-// Note that the "Run Script" build phase will copy the required frameworks
-// or dylibs to your application bundle so you can execute it on any OS X
-// computer.
-//
-// Your resource files (images, sounds, fonts, ...) are also copied to your
-// application bundle. To get the path to these resource, use the helper
-// method resourcePath() from ResourcePath.hpp
-//
+#include <thread>
+#include "Client.hpp"
+#include "Server.hpp"
+#include "TcpServer.hpp"
 
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
+void startMainServer(ServerCommunicator *com) {
+    Server server(*com);
+    bool shouldContine = true;
+    while (shouldContine) {
+        shouldContine = server.update();
+    }
+}
 
-// Here is a small helper for you ! Have a look.
-#include "ResourcePath.hpp"
+void startTcpServer(ServerCommunicator *com) {
+    TcpServer tcpServer(*com);
+    bool shouldContine = true;
+    while (shouldContine) {
+        shouldContine = tcpServer.update();
+    }
+}
 
-int main(int, char const**)
-{
+int main(int, char const**) {
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-    window.setFramerateLimit(30);
 
     // Set the Icon
     sf::Image icon;
@@ -32,41 +30,90 @@ int main(int, char const**)
         return EXIT_FAILURE;
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
-    // Create a graphical text to display
-    sf::Font font;
-    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
-        return EXIT_FAILURE;
-    }
-    sf::Text text("Hello SFML", font, 50);
-    text.setColor(sf::Color::Red);
-
+    
+    ServerCommunicator communicator;
+    std::thread mainServerThread(startMainServer, &communicator);
+    std::thread tcpServerThread(startTcpServer, &communicator);
+    
+    Client client(window, "John Doe");
+    
+    bool shouldCloseProgram = false;
+    
     // Start the game loop
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         // Process events
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while(window.pollEvent(event)) {
             // Close window: exit
-            if (event.type == sf::Event::Closed) {
-                window.close();
+            if(event.type == sf::Event::Closed) {
+                shouldCloseProgram = true;
+                break;
             }
-
-            // Escape pressed: exit
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-                window.close();
+            else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+                // Escape pressed: exit
+                shouldCloseProgram = true;
+                break;
             }
+            else if(event.type == sf::Event::KeyPressed) {
+                int exitCode = client.keyPressed(event.key.code);
+                if(exitCode != 0) {
+                    shouldCloseProgram = true;
+                }
+            }
+            else if(event.type == sf::Event::KeyReleased) {
+                int exitCode = client.keyReleased(event.key.code);
+                if(exitCode != 0) {
+                    shouldCloseProgram = true;
+                }
+            }
+            else if(event.type == sf::Event::MouseMoved) {
+                int exitCode = client.mouseMoved(event.mouseMove.x, event.mouseMove.y);
+                if(exitCode != 0) {
+                    shouldCloseProgram = true;
+                }
+            }
+            else if(event.type == sf::Event::MouseButtonPressed) {
+                int exitCode = client.mousePressed(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
+                if(exitCode != 0) {
+                    shouldCloseProgram = true;
+                }
+            }
+            else if(event.type == sf::Event::MouseButtonReleased) {
+                int exitCode = client.mouseReleased(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
+                if(exitCode != 0) {
+                    shouldCloseProgram = true;
+                }
+            }
+            else if(event.type == sf::Event::MouseWheelMoved) {
+                int exitCode = client.mouseWheeled(event.mouseWheel.delta, event.mouseButton.x, event.mouseButton.y);
+                if(exitCode != 0) {
+                    shouldCloseProgram = true;
+                }
+            }
+        }
+        
+        int exitCode = client.update();
+        if(exitCode != 0) {
+            shouldCloseProgram = true;
         }
 
         // Clear screen
         window.clear();
-
-        // Draw the string
-        window.draw(text);
+        
+        client.draw();
+        if(exitCode != 0) {
+            shouldCloseProgram = true;
+        }
 
         // Update the window
         window.display();
+        
+        if(shouldCloseProgram) {
+            communicator.setShouldServersContinue(false);
+            mainServerThread.join();
+            tcpServerThread.join();
+            window.close();
+        }
     }
 
     return EXIT_SUCCESS;
