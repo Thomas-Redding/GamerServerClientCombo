@@ -44,6 +44,7 @@ void NetworkClient::sendOwnTcpServerMessageToQuit(unsigned short localTcpPort) {
     }
     else {
         attemptConnectionToServer(sf::IpAddress::getLocalAddress(), localTcpPort);
+        std::cout << "{" << connectionStage << "}";
         sendTcpMessage("Quit Server");
     }
 }

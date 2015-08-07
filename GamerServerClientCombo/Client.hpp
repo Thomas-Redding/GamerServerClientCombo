@@ -18,7 +18,7 @@
 class Client {
 public:
     // constructor(s)
-    Client(sf::RenderWindow &myWindow, ServerCommunicator &com, std::string myName);
+    Client(sf::RenderWindow &myWindow, ServerCommunicator &com);
     void applicationIsClosing(unsigned short localTcpPort);
     
     // user input events - returning anything but 0 will cause the application to close

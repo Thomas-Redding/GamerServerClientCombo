@@ -35,7 +35,7 @@ int main(int, char const**) {
     std::thread mainServerThread(startMainServer, &communicator);
     std::thread tcpServerThread(startTcpServer, &communicator);
     
-    Client client(window, communicator, "John Doe");
+    Client client(window, communicator);
     
     bool shouldCloseProgram = false;
     

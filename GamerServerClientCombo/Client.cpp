@@ -8,14 +8,14 @@
 
 #include "Client.hpp"
 
-Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com, std::string myName) : window(myWindow), networkClient(com) {
+Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), networkClient(com) {
     window.setFramerateLimit(30);
 
     // Create a graphical text to display
     if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
         return EXIT_FAILURE;
     }
-    text = sf::Text(myName, font, 50);
+    text = sf::Text("---", font, 50);
     text.setColor(sf::Color::Red);
 }
 
@@ -59,6 +59,7 @@ int Client::draw() {
 }
 
 int Client::update() {
+    text.setString(std::to_string(networkClient.getLocalServerTcpPort()));
     int exitValue = networkClient.update();
     return exitValue;
 }
