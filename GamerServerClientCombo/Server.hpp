@@ -21,7 +21,8 @@ public:
     
     // return a boolean indicating whether the server should keep running
     bool update();
-    bool receivedTcp(std::string message);
+    bool receivedTcp(std::string message, sf::IpAddress ip);
+    bool receivedUdp(std::string message, sf::IpAddress ip);
     void gotNewClient(sf::TcpSocket *socket);
     void lostClient(sf::TcpSocket *socket);
 };

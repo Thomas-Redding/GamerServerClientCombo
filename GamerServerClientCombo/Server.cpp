@@ -25,10 +25,8 @@ bool Server::update() {
     return shouldContinue;
 }
 
-bool Server::receivedTcp(std::string message) {
-    if(message != "") {
-        std::cout << "Server Received: " << message << "\n";
-    }
+bool Server::receivedTcp(std::string message, sf::IpAddress ip) {
+    std::cout << "Server TCP Rec: " << message << "\n";
     return true;
 }
 
@@ -38,4 +36,8 @@ void Server::gotNewClient(sf::TcpSocket *socket) {
 
 void Server::lostClient(sf::TcpSocket *socket) {
     std::cout << "Lost Client\n";
+}
+
+bool Server::receivedUdp(std::string message, sf::IpAddress ip) {
+    std::cout << "Server UDP Rec: " << message << "\n";
 }

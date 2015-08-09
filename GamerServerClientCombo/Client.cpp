@@ -15,6 +15,8 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
     if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
         return EXIT_FAILURE;
     }
+    
+    // create the text we will be rendering
     serverTcpPortText = sf::Text("---", font, 50);
     serverTcpPortText.setColor(sf::Color::Red);
     serverTcpPortText.setPosition(0, 0);
@@ -27,9 +29,21 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
     messageText = sf::Text("", font, 50);
     messageText.setColor(sf::Color::Red);
     messageText.setPosition(0, 120);
+    
+    attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
 }
 
 bool Client::keyPressed(sf::Keyboard::Key keyCode) {
+    if(keyCode == 0) {
+        // if "A" pressed
+        std::cout << "Client UDP Sent: 'A' pressed\n";
+        if(getConnectionState() == 3) {
+            sendUdpMessage("'A' pressed");
+        }
+        else {
+            // haven't connected UDP socket to server yet
+        }
+    }
     return true;
 }
 
@@ -42,20 +56,12 @@ bool Client::mouseMoved(int x, int y) {
 }
 
 bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
-    if(getConnectionState() == 0 || getConnectionState() == -1) {
-        // connect to specific ipAddress
-        // networkClient.attemptConnectionToServer(sf::IpAddress("192.168.1.79"), networkClient.getMyLocalIpAddress(), true);
-        
-        // connect to own server
-        attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
-    }
-    else if(getConnectionState() == 2) {
-        messageNumber++;
-        sendTcpMessage("Quails" + std::to_string(messageNumber));
+    if(getConnectionState() >= 2) {
+        std::cout << "Client TCP Sent: Mouse Clicked\n";
+        sendTcpMessage("Mouse Clicked");
     }
     else {
-        // connection stage is 1, we have to wait
-        // it's possible that sending messages this way will succeeed (assuming a connection is eventually established), but this isn't tested
+        // haven't connected TCP socket to server yet
     }
     return true;
 }
@@ -87,6 +93,10 @@ void Client::connectionStateChanged(int oldState, int newState) {
     std::cout << "State Change: " << oldState << "->" << newState << "\n";
 }
 
-void Client::receivedTcpMessage(std::string message) {
-    std::cout << "Client Received: " << message << "\n";
+void Client::tcpMessageReceived(std::string message) {
+    std::cout << "Client TCP Rec: " << message << "\n";
+}
+
+void Client::udpMessageReceived(std::string message) {
+    std::cout << "Client UDP Rec: " << message << "\n";
 }

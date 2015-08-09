@@ -36,6 +36,13 @@ int main(int, char const**) {
     std::thread mainServerThread(startMainServer, &communicator);
     std::thread tcpServerThread(startTcpServer, &communicator);
     
+    // sleep for 100 ms to give the server time to set up
+    struct timespec tim, tim2;
+    tim.tv_sec = 0;
+    tim.tv_nsec = 100;
+    tim.tv_nsec *= 1000000;
+    nanosleep(&tim , &tim2);
+    
     Client client(window, communicator);
     
     bool shouldProgramContinue = true;

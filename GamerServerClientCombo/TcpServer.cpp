@@ -43,7 +43,12 @@ bool TcpServer::update() {
                     if(status == sf::Socket::Done) {
                         std::string str;
                         packet >> str;
-                        communicator.sendTcpMessageToServer(str);
+                        if(str.at(0) == '_') {
+                            communicator.sendTcpMessageToServer("_" + client->getRemoteAddress().toString() + "\n" + str.substr(1));
+                        }
+                        else {
+                            communicator.sendTcpMessageToServer(client->getRemoteAddress().toString() + "\n" + str);
+                        }
                     }
                     if(status == sf::Socket::Disconnected) {
                         selector.remove(*client);

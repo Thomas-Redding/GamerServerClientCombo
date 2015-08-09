@@ -32,7 +32,8 @@ public:
     bool update(); // do all thinking here - drawing will be ignored
     
     void connectionStateChanged(int oldState, int newState);
-    void receivedTcpMessage(std::string message);
+    void tcpMessageReceived(std::string message);
+    void udpMessageReceived(std::string message);
 private:
     sf::RenderWindow &window; // all drawing uses this reference to the game window
     sf::Font font;
@@ -41,8 +42,6 @@ private:
     sf::Text serverLocalIpAddress;
     sf::Text serverGlobalIpAddress;
     sf::Text messageText;
-    
-    int messageNumber = 0;
 };
 
 #endif /* Client_cpp */

@@ -10,6 +10,8 @@
 
 NetworkClient::NetworkClient(ServerCommunicator& com) : communicator(com) {
     tcpSocket.setBlocking(false);
+    udpSocket.setBlocking(false);
+    udpSocket.bind(sf::Socket::AnyPort);
 }
 
 NetworkClient::~NetworkClient() {
@@ -25,6 +27,7 @@ bool NetworkClient::networkUpdate() {
     if(connectionState == 1) {
         if(tcpSocket.getRemoteAddress() != sf::IpAddress::None) {
             // out TCP sockets just connected
+            sendTcpMessage("_" + std::to_string(udpSocket.getLocalPort()));
             int oldState = connectionState;
             connectionState = 2;
             connectionStateChanged(oldState, 2);
@@ -46,7 +49,37 @@ bool NetworkClient::networkUpdate() {
         std::string message = "";
         packet >> message;
         if(message != "") {
-            receivedTcpMessage(message);
+            if(message.at(0) == '_') {
+                // message is reserved for NetworkClient (Client shouldn't receive this)
+                udpPortOfServer = stoi(message.substr(1));
+                if(connectionState != 3) {
+                    int oldState = connectionState;
+                    connectionState = 3;
+                    connectionStateChanged(oldState, connectionState);
+                }
+            }
+            else {
+                tcpMessageReceived(message);
+            }
+        }
+        else {
+            break;
+        }
+    }
+    
+    // check for UDP messages
+    while(true) {
+        char buffer[1024];
+        char *begin = buffer;
+        char *end = begin + sizeof(buffer);
+        std::fill(begin, end, 0);
+        std::size_t received = 0;
+        sf::IpAddress sender;
+        unsigned short port;
+        udpSocket.receive(buffer, sizeof(buffer), received, sender, port);
+        std::string message = std::string(buffer);
+        if(message != "") {
+            udpMessageReceived(message);
         }
         else {
             break;
@@ -57,6 +90,7 @@ bool NetworkClient::networkUpdate() {
 }
 
 void NetworkClient::attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort) {
+    ipAddressOfServer = serverIpAddress;
     if(connectionState != 0) {
         int oldState = connectionState;
         connectionState = 0;
@@ -113,8 +147,11 @@ int NetworkClient::getConnectionState() {
 }
 
 void NetworkClient::sendTcpMessage(std::string message) {
-    std::cout << "Client Sent: " << message << "\n";
     sf::Packet packet;
     packet << message;
     tcpSocket.send(packet);
+}
+
+void NetworkClient::sendUdpMessage(std::string message) {
+    udpSocket.send(message.c_str(), message.size(), ipAddressOfServer, udpPortOfServer);
 }

@@ -38,12 +38,15 @@ public:
      0 = no connection established
      1 = connection being established
      2 = connection established
+     3 = received tcp port from server
      -1 = connection failed
      */
     int getConnectionState();
     
     void sendTcpMessage(std::string message);
-    virtual void receivedTcpMessage(std::string message) {};
+    virtual void tcpMessageReceived(std::string message) {};
+    virtual void udpMessageReceived(std::string message) {};
+    void sendUdpMessage(std::string message);
     
     unsigned short getLocalServerTcpPort();
     
@@ -59,8 +62,11 @@ public:
 private:
     int connectionState = 0;
     sf::TcpSocket tcpSocket;
+    sf::UdpSocket udpSocket;
     unsigned short tcpPortOfServer;
     ServerCommunicator &communicator;
+    sf::IpAddress ipAddressOfServer;
+    unsigned short udpPortOfServer = 0;
 };
 
 #endif /* NetworkClient_cpp */
