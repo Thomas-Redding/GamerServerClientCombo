@@ -39,12 +39,13 @@ bool TcpServer::update() {
                 if(selector.isReady(*client)) {
                     // The client has sent some data, we can receive it
                     sf::Packet packet;
-                    if(client->receive(packet) == sf::Socket::Done) {
+                    sf::Socket::Status status = client->receive(packet);
+                    if(status == sf::Socket::Done) {
                         std::string str;
                         packet >> str;
                         communicator.sendTcpMessageToServer(str);
                     }
-                    if(client->receive(packet) == sf::Socket::Disconnected) {
+                    if(status == sf::Socket::Disconnected) {
                         selector.remove(*client);
                         client->disconnect();
                         delete(client);
