@@ -16,6 +16,8 @@ NetworkServer::NetworkServer(ServerCommunicator &com): communicator(com) {
 bool NetworkServer::networkUpdate() {
     bool shouldContinue = true;
     
+    checkForNewClients();
+    
     // check for TCP messages
     // note, we will only read the first 100 messages
     for(int i=0; i<100; i++) {
@@ -25,8 +27,10 @@ bool NetworkServer::networkUpdate() {
         }
         else {
             if(message.at(0) == '_') {
-                unsigned short newUdpPort = stoi(message.substr(1));
-                std::string ip = split(message, '\n')[1];
+                message = message.substr(1);
+                std::vector<std::string> arr = split(message, '\n');
+                std::string ip = arr[0];
+                unsigned short newUdpPort = stoi(arr[1]);
                 for(int i=0; i<clients.size(); i++) {
                     if(clients[i].ip.toString() == ip) {
                         clients[i].udpPort = newUdpPort;
@@ -46,8 +50,6 @@ bool NetworkServer::networkUpdate() {
             }
         }
     }
-    
-    checkForNewClients();
     
     // check for UDP messages
     for(int i=0; i<100; i++) {
@@ -69,15 +71,6 @@ bool NetworkServer::networkUpdate() {
     }
     
     return shouldContinue;
-}
-
-void NetworkServer::sendTcp(std::string message, sf::IpAddress ip) {
-    for(int i=0; i<clients.size(); i++) {
-        if(clients[i].ip == ip) {
-            sendTcpBySocket(message, clients[i].tcp);
-            break;
-        }
-    }
 }
 
 bool NetworkServer::shouldServerContinue() {
@@ -107,10 +100,10 @@ void NetworkServer::checkForNewClients() {
     }
     
     for(int i=0; i<newClients.size(); i++) {
-        gotNewClient(newClients[i]);
+        gotNewClient(newClients[i]->getRemoteAddress());
     }
     for(int i=0; i<lostClients.size(); i++) {
-        lostClient(lostClients[i]);
+        lostClient(lostClients[i]->getRemoteAddress());
     }
 }
 
@@ -132,8 +125,22 @@ bool NetworkServer::isInClientList(sf::TcpSocket *ip) {
     return false;
 }
 
-void NetworkServer::sendUdp(std::string message, sf::IpAddress ipAddressOfClient, unsigned short portOfClient) {
-    udpSocket.send(message.c_str(), message.size(), ipAddressOfClient, portOfClient);
+void NetworkServer::sendUdp(std::string message, sf::IpAddress ipAddressOfClient) {
+    for(int i=0; i<clients.size(); i++) {
+        if(clients[i].ip == ipAddressOfClient) {
+            udpSocket.send(message.c_str(), message.size(), ipAddressOfClient, clients[i].udpPort);
+            break;
+        }
+    }
+}
+
+void NetworkServer::sendTcp(std::string message, sf::IpAddress ip) {
+    for(int i=0; i<clients.size(); i++) {
+        if(clients[i].ip == ip) {
+            sendTcpBySocket(message, clients[i].tcp);
+            break;
+        }
+    }
 }
 
 void NetworkServer::sendTcpBySocket(std::string message, sf::TcpSocket *socket) {

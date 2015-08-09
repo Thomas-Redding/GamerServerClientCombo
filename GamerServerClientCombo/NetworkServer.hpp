@@ -29,11 +29,11 @@ public:
     bool networkUpdate();
     void sendTcp(std::string message, sf::IpAddress ip);
     void sendTcpBySocket(std::string message, sf::TcpSocket *socket);
-    void sendUdp(std::string message, sf::IpAddress ipAddressOfClient, unsigned short portOfClient);
+    void sendUdp(std::string message, sf::IpAddress ipAddressOfClient);
     virtual bool receivedTcp(std::string message, sf::IpAddress ip) {};
     virtual bool receivedUdp(std::string message, sf::IpAddress ip) {};
-    virtual void gotNewClient(sf::TcpSocket *socket) {};
-    virtual void lostClient(sf::TcpSocket *socket) {};
+    virtual void gotNewClient(sf::IpAddress ip) {};
+    virtual void lostClient(sf::IpAddress ip) {};
     bool shouldServerContinue();
 private:
     ServerCommunicator &communicator;

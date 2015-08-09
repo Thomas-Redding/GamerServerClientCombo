@@ -23,8 +23,10 @@ public:
     bool update();
     bool receivedTcp(std::string message, sf::IpAddress ip);
     bool receivedUdp(std::string message, sf::IpAddress ip);
-    void gotNewClient(sf::TcpSocket *socket);
-    void lostClient(sf::TcpSocket *socket);
+    void gotNewClient(sf::IpAddress ip);
+    void lostClient(sf::IpAddress ip);
+private:
+    std::vector<sf::IpAddress> clients;
 };
 
 #endif /* Server_cpp */

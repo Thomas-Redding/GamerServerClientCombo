@@ -13,15 +13,19 @@ Server::Server(ServerCommunicator &com): NetworkServer(com) {
 }
 
 bool Server::update() {
-    // sleep for 100 milliseconds
+    // sleep for 1100 milliseconds
     struct timespec tim, tim2;
-    tim.tv_sec = 0;
+    tim.tv_sec = 1;
     tim.tv_nsec = 100;
     tim.tv_nsec *= 1000000;
     nanosleep(&tim , &tim2);
     
-    bool shouldContinue = shouldServerContinue();
+    if(clients.size() > 0) {
+        sendTcp("Server TCP", clients[0]);
+        sendUdp("Server UDP", clients[0]);
+    }
     
+    bool shouldContinue = shouldServerContinue();
     return shouldContinue;
 }
 
@@ -30,12 +34,13 @@ bool Server::receivedTcp(std::string message, sf::IpAddress ip) {
     return true;
 }
 
-void Server::gotNewClient(sf::TcpSocket *socket) {
-    std::cout << "New Client\n";
+void Server::gotNewClient(sf::IpAddress ip) {
+    clients.push_back(ip);
+    std::cout << "New Client (" << ip.toString() << ")\n";
 }
 
-void Server::lostClient(sf::TcpSocket *socket) {
-    std::cout << "Lost Client\n";
+void Server::lostClient(sf::IpAddress ip) {
+    std::cout << "Lost Client (" << ip.toString() << ")\n";
 }
 
 bool Server::receivedUdp(std::string message, sf::IpAddress ip) {
