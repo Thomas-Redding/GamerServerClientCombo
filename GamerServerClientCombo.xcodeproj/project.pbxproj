@@ -16,6 +16,7 @@
 		28434D071B753036008A51AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28434D061B753036008A51AC /* main.cpp */; };
 		28434D0E1B753037008A51AC /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0D1B753037008A51AC /* sansation.ttf */; };
 		28434D101B753037008A51AC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0F1B753037008A51AC /* icon.png */; };
+		28D9AA441B77A9500043A590 /* NetworkServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28D9AA421B77A9500043A590 /* NetworkServer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		28434D061B753036008A51AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		28434D0D1B753037008A51AC /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		28434D0F1B753037008A51AC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		28D9AA421B77A9500043A590 /* NetworkServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkServer.cpp; sourceTree = "<group>"; };
+		28D9AA431B77A9500043A590 /* NetworkServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkServer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +62,8 @@
 				2823299F1B753D1900CF7A30 /* TcpServer.hpp */,
 				282329941B75355E00CF7A30 /* NetworkClient.cpp */,
 				282329951B75355E00CF7A30 /* NetworkClient.hpp */,
+				28D9AA421B77A9500043A590 /* NetworkServer.cpp */,
+				28D9AA431B77A9500043A590 /* NetworkServer.hpp */,
 			);
 			name = "Thomas Stuff";
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 				28434D071B753036008A51AC /* main.cpp in Sources */,
 				28434D041B753036008A51AC /* ResourcePath.mm in Sources */,
 				282329A61B753EA800CF7A30 /* ServerCommunicator.cpp in Sources */,
+				28D9AA441B77A9500043A590 /* NetworkServer.cpp in Sources */,
 				282329A01B753D1900CF7A30 /* TcpServer.cpp in Sources */,
 				282329991B75380A00CF7A30 /* Server.cpp in Sources */,
 				282329931B75313100CF7A30 /* Client.cpp in Sources */,

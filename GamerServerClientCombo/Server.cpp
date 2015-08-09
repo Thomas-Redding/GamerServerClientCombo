@@ -8,7 +8,7 @@
 
 #include "Server.hpp"
 
-Server::Server(ServerCommunicator &com): communicator(com) {
+Server::Server(ServerCommunicator &com): NetworkServer(com) {
     // do stuff
 }
 
@@ -22,26 +22,12 @@ bool Server::update() {
     
     bool shouldContinue = shouldServerContinue();
     
-    std::string tcpMessage = readTcp();
-    
-    if(tcpMessage != "") {
-        std::cout << "\nServer Received: " << tcpMessage << "\n";
-    }
-    std::cout << "*";
-    
     return shouldContinue;
 }
 
-void Server::sendTcp(std::string message, sf::TcpSocket *socket) {
-    sf::Packet packet;
-    packet << message;
-    socket->send(packet);
-}
-
-std::string Server::readTcp() {
-    return communicator.receiveTcpMessage();
-}
-
-bool Server::shouldServerContinue() {
-    return communicator.getShouldServersContinue();
+bool Server::receivedTcp(std::string message) {
+    if(message != "") {
+        std::cout << "Server Received: " << message << "\n";
+    }
+    return true;
 }

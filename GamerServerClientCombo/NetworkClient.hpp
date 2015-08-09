@@ -12,31 +12,51 @@
 #include <stdio.h>
 #include <iostream>
 #include <SFML/Network.hpp>
+#include <SFML/Graphics.hpp>
 #include "ServerCommunicator.hpp"
 
+/*
+ * The NetworkClient class is intended to be a singleton that resides inside the
+ * Client singleton. It allows simple access to a single server. The server may
+ * be on the machine itself, on a local network, or anywhere world-wide.
+ * It also serves a side-purpose: allowing for access to the ServerCommunicator
+ * singleton.
+ */
 class NetworkClient {
 public:
     NetworkClient(ServerCommunicator& com);
     ~NetworkClient();
-    void attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort, bool waitForCompletion);
-    void sendOwnTcpServerMessageToQuit(unsigned short localTcpPort);
+    void applicationIsClosing();
+
+    void attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort);
     
-    // should be called by Client regularly to check ports
-    int update();
+    void sendOwnTcpServerMessageToQuit();
+    
+    bool networkUpdate();
     
     /*
-     0 = no connection established - we go back to 0 if we initially had a connection but it fails
-     1 = connection is either established or being established
-     2 = connection definitely established
-     -1 = if waitForCompletion is "true" in attemptConnectionToServer(), then "-1" means we failed to connect
+     0 = no connection established
+     1 = connection being established
+     2 = connection established
+     -1 = connection failed
      */
-    int getConnectionStage();
+    int getConnectionState();
+    
     void sendTcpMessage(std::string message);
+    
     unsigned short getLocalServerTcpPort();
     
+    virtual bool keyPressed(sf::Keyboard::Key keyCode) {};
+    virtual bool keyReleased(sf::Keyboard::Key keyCode) {};
+    virtual bool mouseMoved(int x, int y) {};
+    virtual bool mousePressed(sf::Mouse::Button button, int x, int y) {};
+    virtual bool mouseReleased(sf::Mouse::Button button, int x, int y) {};
+    virtual bool mouseWheeled(int delta, int x, int y) {};
+    virtual bool draw() {};
+    virtual bool update() {};
+    virtual void connectionStateChanged(int oldState, int newState) {};
 private:
-    sf::IpAddress getMyIpAddress();
-    int connectionStage = 0;
+    int connectionState = 0;
     sf::TcpSocket tcpSocket;
     unsigned short tcpPortOfServer;
     ServerCommunicator &communicator;

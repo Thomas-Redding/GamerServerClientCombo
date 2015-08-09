@@ -11,32 +11,36 @@
 
 #include <stdio.h>
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include "ResourcePath.hpp"
 #include "NetworkClient.hpp"
 
-class Client {
+class Client : public NetworkClient {
 public:
     // constructor(s)
     Client(sf::RenderWindow &myWindow, ServerCommunicator &com);
-    void applicationIsClosing(unsigned short localTcpPort);
     
     // user input events - returning anything but 0 will cause the application to close
-    int keyPressed(sf::Keyboard::Key keyCode);
-    int keyReleased(sf::Keyboard::Key keyCode);
-    int mouseMoved(int x, int y);
-    int mousePressed(sf::Mouse::Button button, int x, int y);
-    int mouseReleased(sf::Mouse::Button button, int x, int y);
-    int mouseWheeled(int delta, int x, int y);
+    bool keyPressed(sf::Keyboard::Key keyCode);
+    bool keyReleased(sf::Keyboard::Key keyCode);
+    bool mouseMoved(int x, int y);
+    bool mousePressed(sf::Mouse::Button button, int x, int y);
+    bool mouseReleased(sf::Mouse::Button button, int x, int y);
+    bool mouseWheeled(int delta, int x, int y);
     
     // per-frame cals - returning anything but 0 will cause the application to close
-    int draw(); // do all drawing here
-    int update(); // do all thinking here - drawing will be ignored
+    bool draw(); // do all drawing here
+    bool update(); // do all thinking here - drawing will be ignored
+    
+    void connectionStateChanged(int oldState, int newState);
 private:
     sf::RenderWindow &window; // all drawing uses this reference to the game window
     sf::Font font;
-    sf::Text text;
-    NetworkClient networkClient;
+    
+    sf::Text serverTcpPortText;
+    sf::Text serverLocalIpAddress;
+    sf::Text serverGlobalIpAddress;
+    sf::Text messageText;
+    
     int messageNumber = 0;
 };
 

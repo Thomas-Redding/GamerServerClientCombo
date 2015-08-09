@@ -13,21 +13,15 @@
 #include <iostream>
 #include <chrono>
 #include <SFML/Network.hpp>
-#include "ServerCommunicator.hpp"
+#include "NetworkServer.hpp"
 
-class Server {
+class Server : public NetworkServer {
 public:
     Server(ServerCommunicator &com);
     
     // return a boolean indicating whether the server should keep running
     bool update();
-private:
-    void sendTcp(std::string message, sf::TcpSocket *socket);
-    std::string readTcp();
-    bool shouldServerContinue();
-    
-    // ignore this
-    ServerCommunicator &communicator;
+    bool receivedTcp(std::string message);
 };
 
 #endif /* Server_cpp */

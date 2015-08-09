@@ -8,7 +8,8 @@ void startMainServer(ServerCommunicator *com) {
     Server server(*com);
     bool shouldContine = true;
     while (shouldContine) {
-        shouldContine = server.update();
+        shouldContine = shouldContine && server.networkUpdate();
+        shouldContine = shouldContine && server.update();
     }
 }
 
@@ -37,7 +38,7 @@ int main(int, char const**) {
     
     Client client(window, communicator);
     
-    bool shouldCloseProgram = false;
+    bool shouldProgramContinue = true;
     
     // Start the game loop
     while (window.isOpen()) {
@@ -46,71 +47,49 @@ int main(int, char const**) {
         while(window.pollEvent(event)) {
             // Close window: exit
             if(event.type == sf::Event::Closed) {
-                shouldCloseProgram = true;
+                shouldProgramContinue = false;
                 break;
             }
             else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                 // Escape pressed: exit
-                shouldCloseProgram = true;
+                shouldProgramContinue = false;
                 break;
             }
             else if(event.type == sf::Event::KeyPressed) {
-                int exitCode = client.keyPressed(event.key.code);
-                if(exitCode != 0) {
-                    shouldCloseProgram = true;
-                }
+                shouldProgramContinue = shouldProgramContinue && client.keyPressed(event.key.code);
             }
             else if(event.type == sf::Event::KeyReleased) {
-                int exitCode = client.keyReleased(event.key.code);
-                if(exitCode != 0) {
-                    shouldCloseProgram = true;
-                }
+                shouldProgramContinue = shouldProgramContinue && client.keyReleased(event.key.code);
             }
             else if(event.type == sf::Event::MouseMoved) {
-                int exitCode = client.mouseMoved(event.mouseMove.x, event.mouseMove.y);
-                if(exitCode != 0) {
-                    shouldCloseProgram = true;
-                }
+                shouldProgramContinue = shouldProgramContinue && client.mouseMoved(event.mouseMove.x, event.mouseMove.y);
             }
             else if(event.type == sf::Event::MouseButtonPressed) {
-                int exitCode = client.mousePressed(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
-                if(exitCode != 0) {
-                    shouldCloseProgram = true;
-                }
+                shouldProgramContinue = shouldProgramContinue && client.mousePressed(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
             }
             else if(event.type == sf::Event::MouseButtonReleased) {
-                int exitCode = client.mouseReleased(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
-                if(exitCode != 0) {
-                    shouldCloseProgram = true;
-                }
+                shouldProgramContinue = shouldProgramContinue && client.mouseReleased(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
             }
             else if(event.type == sf::Event::MouseWheelMoved) {
-                int exitCode = client.mouseWheeled(event.mouseWheel.delta, event.mouseButton.x, event.mouseButton.y);
-                if(exitCode != 0) {
-                    shouldCloseProgram = true;
-                }
+                shouldProgramContinue = shouldProgramContinue && client.mouseWheeled(event.mouseWheel.delta, event.mouseButton.x, event.mouseButton.y);
             }
         }
         
-        int exitCode = client.update();
-        if(exitCode != 0) {
-            shouldCloseProgram = true;
-        }
+        shouldProgramContinue = shouldProgramContinue && client.networkUpdate();
+        
+        shouldProgramContinue = shouldProgramContinue && client.update();
 
         // Clear screen
         window.clear();
         
-        client.draw();
-        if(exitCode != 0) {
-            shouldCloseProgram = true;
-        }
+        shouldProgramContinue = shouldProgramContinue && client.draw();
 
         // Update the window
         window.display();
         
-        if(shouldCloseProgram) {
+        if(!shouldProgramContinue) {
             communicator.setShouldServersContinue(false);
-            client.applicationIsClosing(communicator.getLocalTcpPort());
+            client.applicationIsClosing();
             mainServerThread.join();
             tcpServerThread.join();
             window.close();
