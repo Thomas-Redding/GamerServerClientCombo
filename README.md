@@ -1,10 +1,7 @@
 # GamerServerClientCombo
 A basic template to create a multiplayer game app using SFML
 
-The previous "feature" that caused the application to never quit is being tenatively withdrawn. TCP messages between server and client have been tested and have worked on the same laptop.
 
-Planned Updates:
-1. testing on local and global connections
-2. udp messaging
+Whenever you launch the application, it launches both a server and a client (each in a different thread). When creating your game, you should only have to look and edit the Client and Server classes (both of which are already instantiated for you as be singletons). Each consists of a bunch of helpful methods for you including many events for you to implement.
 
-That's pretty much it. The entire point of this project is to be as simple (and therefore flexible/useful) as possible.
+The Client and Server classes are unlikely to change much in the future (except for commenting). The other classes might change later to increase clarity and efficiency while solving any bugs that might show up; however, such changes shouldn't affect any implementation of Client or Server.
