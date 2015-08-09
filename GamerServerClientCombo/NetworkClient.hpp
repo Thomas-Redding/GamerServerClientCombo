@@ -54,6 +54,8 @@ public:
     virtual bool mousePressed(sf::Mouse::Button button, int x, int y) {};
     virtual bool mouseReleased(sf::Mouse::Button button, int x, int y) {};
     virtual bool mouseWheeled(int delta, int x, int y) {};
+    virtual bool resized(unsigned int width, unsigned int height) {};
+    virtual bool textEntered(sf::Uint32 character) {};
     virtual bool draw() {};
     virtual bool update() {};
     virtual void connectionStateChanged(int oldState, int newState) {};

@@ -26,18 +26,16 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
     serverGlobalIpAddress = sf::Text("---", font, 50);
     serverGlobalIpAddress.setColor(sf::Color::Red);
     serverGlobalIpAddress.setPosition(0, 80);
-    messageText = sf::Text("", font, 50);
-    messageText.setColor(sf::Color::Red);
-    messageText.setPosition(0, 120);
     
+    // connect to the server on your computer
     attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
 }
 
 bool Client::keyPressed(sf::Keyboard::Key keyCode) {
     if(keyCode == 0) {
-        // if "A" pressed
-        std::cout << "Client UDP Sent: 'A' pressed\n";
         if(getConnectionState() == 3) {
+            // if "A" is pressed and the UDP port is connected, send a message to the server
+            std::cout << "Client UDP Sent: 'A' pressed\n";
             sendUdpMessage("'A' pressed");
         }
         else {
@@ -57,6 +55,7 @@ bool Client::mouseMoved(int x, int y) {
 
 bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
     if(getConnectionState() >= 2) {
+        // if TCP port is connected, send a message to the server
         std::cout << "Client TCP Sent: Mouse Clicked\n";
         sendTcpMessage("Mouse Clicked");
     }
@@ -74,11 +73,15 @@ bool Client::mouseWheeled(int delta, int x, int y) {
     return true;
 }
 
+bool Client::resized(unsigned int width, unsigned int height) {
+    return true;
+}
+
 bool Client::draw() {
+    // draw the text
     window.draw(serverTcpPortText);
     window.draw(serverLocalIpAddress);
     window.draw(serverGlobalIpAddress);
-    window.draw(messageText);
     return true;
 }
 
@@ -99,4 +102,8 @@ void Client::tcpMessageReceived(std::string message) {
 
 void Client::udpMessageReceived(std::string message) {
     std::cout << "Client UDP Rec: " << message << "\n";
+}
+
+bool Client::textEntered(sf::Uint32 character) {
+    return true;
 }

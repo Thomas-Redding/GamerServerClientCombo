@@ -43,6 +43,8 @@
  bool mousePressed(sf::Mouse::Button button, int x, int y)
  bool mouseReleased(sf::Mouse::Button button, int x, int y)
  bool mouseWheeled(int delta, int x, int y)
+ bool resized(unsigned int width, unsigned int height)
+ bool textEntered(sf::Uint32 character)
  bool draw()
  bool update() - called once per frame prior to draw()
  void connectionStateChanged(int oldState, int newState)
@@ -58,6 +60,8 @@ public:
     bool mousePressed(sf::Mouse::Button button, int x, int y);
     bool mouseReleased(sf::Mouse::Button button, int x, int y);
     bool mouseWheeled(int delta, int x, int y);
+    bool resized(unsigned int width, unsigned int height);
+    bool textEntered(sf::Uint32 character);
     
     bool draw(); // do all drawing here
     bool update(); // do all thinking here - drawing will be ignored
@@ -71,7 +75,6 @@ private:
     sf::Text serverTcpPortText;
     sf::Text serverLocalIpAddress;
     sf::Text serverGlobalIpAddress;
-    sf::Text messageText;
 };
 
 #endif /* Client_cpp */

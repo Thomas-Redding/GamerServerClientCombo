@@ -68,6 +68,9 @@ int main(int, char const**) {
             else if(event.type == sf::Event::KeyReleased) {
                 shouldProgramContinue = shouldProgramContinue && client.keyReleased(event.key.code);
             }
+            else if(event.type == sf::Event::TextEntered) {
+                shouldProgramContinue = shouldProgramContinue && client.textEntered(event.text.unicode);
+            }
             else if(event.type == sf::Event::MouseMoved) {
                 shouldProgramContinue = shouldProgramContinue && client.mouseMoved(event.mouseMove.x, event.mouseMove.y);
             }
@@ -79,6 +82,9 @@ int main(int, char const**) {
             }
             else if(event.type == sf::Event::MouseWheelMoved) {
                 shouldProgramContinue = shouldProgramContinue && client.mouseWheeled(event.mouseWheel.delta, event.mouseButton.x, event.mouseButton.y);
+            }
+            else if(event.type == sf::Event::Resized) {
+                shouldProgramContinue = shouldProgramContinue && client.resized(event.size.width, event.size.height);
             }
         }
         
