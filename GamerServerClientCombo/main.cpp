@@ -8,7 +8,7 @@ void startMainServer(ServerCommunicator *com) {
     Server server(*com);
     bool shouldContine = true;
     while (shouldContine) {
-        shouldContine = shouldContine && server.networkUpdate();
+        server.networkUpdate();
         shouldContine = shouldContine && server.update();
     }
 }
@@ -82,7 +82,7 @@ int main(int, char const**) {
             }
         }
         
-        shouldProgramContinue = shouldProgramContinue && client.networkUpdate();
+        client.networkUpdate();
         
         shouldProgramContinue = shouldProgramContinue && client.update();
 

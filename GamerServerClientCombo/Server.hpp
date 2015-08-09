@@ -15,6 +15,20 @@
 #include <SFML/Network.hpp>
 #include "NetworkServer.hpp"
 
+/*
+ The casual user of ths Server doesn't have to look at NetworkServer. Instead, you need only know that there are some methods defined within it that may prove useful. Most of them should be self-explanatory.
+ 
+ void networkUpdate() - don't define or call this method
+ bool shouldServerContinue() - check this periodically to see if the server should continue or quit
+ 
+ void sendTcp(std::string message, sf::IpAddress ip)
+ void sendUdp(std::string message, sf::IpAddress ipAddressOfClient)
+ virtual bool receivedTcp(std::string message, sf::IpAddress ip) - event method for you to define
+ virtual bool receivedUdp(std::string message, sf::IpAddress ip) - event method for you to define
+ virtual void gotNewClient(sf::IpAddress ip) - event method for you to define
+ virtual void lostClient(sf::IpAddress ip) - event method for you to define; do NOT rely on it
+*/
+
 class Server : public NetworkServer {
 public:
     Server(ServerCommunicator &com);

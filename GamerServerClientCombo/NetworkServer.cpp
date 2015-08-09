@@ -19,8 +19,7 @@ bool NetworkServer::networkUpdate() {
     checkForNewClients();
     
     // check for TCP messages
-    // note, we will only read the first 100 messages
-    for(int i=0; i<100; i++) {
+    while(true) {
         std::string message = communicator.receiveTcpMessage();
         if(message == "") {
             break;
@@ -52,7 +51,7 @@ bool NetworkServer::networkUpdate() {
     }
     
     // check for UDP messages
-    for(int i=0; i<100; i++) {
+    while(true) {
         char buffer[1024];
         char *begin = buffer;
         char *end = begin + sizeof(buffer);

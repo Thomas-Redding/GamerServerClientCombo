@@ -24,11 +24,8 @@ public:
 class NetworkServer {
 public:
     NetworkServer(ServerCommunicator &com);
-    
-    // return a boolean indicating whether the server should keep running
     bool networkUpdate();
     void sendTcp(std::string message, sf::IpAddress ip);
-    void sendTcpBySocket(std::string message, sf::TcpSocket *socket);
     void sendUdp(std::string message, sf::IpAddress ipAddressOfClient);
     virtual bool receivedTcp(std::string message, sf::IpAddress ip) {};
     virtual bool receivedUdp(std::string message, sf::IpAddress ip) {};
@@ -41,6 +38,7 @@ private:
     void checkForNewClients();
     bool isClientInUpdatedList(sf::TcpSocket *client, std::vector<sf::TcpSocket *>&list);
     bool isInClientList(sf::TcpSocket *ip);
+    void sendTcpBySocket(std::string message, sf::TcpSocket *socket);
     sf::UdpSocket udpSocket;
     std::vector<std::string> split(const std::string s, char delim);
 };

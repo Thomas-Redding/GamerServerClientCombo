@@ -55,15 +55,15 @@
 		2823299D1B753ADF00CF7A30 /* Thomas Stuff */ = {
 			isa = PBXGroup;
 			children = (
+				282329941B75355E00CF7A30 /* NetworkClient.cpp */,
+				282329951B75355E00CF7A30 /* NetworkClient.hpp */,
+				28D9AA421B77A9500043A590 /* NetworkServer.cpp */,
+				28D9AA431B77A9500043A590 /* NetworkServer.hpp */,
 				282329A41B753EA800CF7A30 /* ServerCommunicator.cpp */,
 				282329A51B753EA800CF7A30 /* ServerCommunicator.hpp */,
 				28434D061B753036008A51AC /* main.cpp */,
 				2823299E1B753D1900CF7A30 /* TcpServer.cpp */,
 				2823299F1B753D1900CF7A30 /* TcpServer.hpp */,
-				282329941B75355E00CF7A30 /* NetworkClient.cpp */,
-				282329951B75355E00CF7A30 /* NetworkClient.hpp */,
-				28D9AA421B77A9500043A590 /* NetworkServer.cpp */,
-				28D9AA431B77A9500043A590 /* NetworkServer.hpp */,
 			);
 			name = "Thomas Stuff";
 			sourceTree = "<group>";

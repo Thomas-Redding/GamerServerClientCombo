@@ -22,7 +22,7 @@ void NetworkClient::applicationIsClosing() {
     sendOwnTcpServerMessageToQuit();
 }
 
-bool NetworkClient::networkUpdate() {
+void NetworkClient::networkUpdate() {
     // update "connectionStage"
     if(connectionState == 1) {
         if(tcpSocket.getRemoteAddress() != sf::IpAddress::None) {

@@ -30,9 +30,7 @@ public:
 
     void attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort);
     
-    void sendOwnTcpServerMessageToQuit();
-    
-    bool networkUpdate();
+    void networkUpdate();
     
     /*
      0 = no connection established
@@ -67,6 +65,7 @@ private:
     ServerCommunicator &communicator;
     sf::IpAddress ipAddressOfServer;
     unsigned short udpPortOfServer = 0;
+    void sendOwnTcpServerMessageToQuit();
 };
 
 #endif /* NetworkClient_cpp */
