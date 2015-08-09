@@ -86,3 +86,7 @@ bool Client::update() {
 void Client::connectionStateChanged(int oldState, int newState) {
     std::cout << "State Change: " << oldState << "->" << newState << "\n";
 }
+
+void Client::receivedTcpMessage(std::string message) {
+    std::cout << "Client Received: " << message << "\n";
+}

@@ -61,9 +61,11 @@ void NetworkServer::checkForNewClients() {
     }
     clients = updatedClients;
     for(int i=0; i<newClients.size(); i++) {
+        sendTcp("Welcome!", newClients[i]);
         gotNewClient(newClients[i]);
     }
     for(int i=0; i<lostClients.size(); i++) {
+        sendTcp("Good Bye!", newClients[i]);
         lostClient(lostClients[i]);
     }
 }

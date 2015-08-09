@@ -43,6 +43,7 @@ public:
     int getConnectionState();
     
     void sendTcpMessage(std::string message);
+    virtual void receivedTcpMessage(std::string message) {};
     
     unsigned short getLocalServerTcpPort();
     

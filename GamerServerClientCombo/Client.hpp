@@ -32,6 +32,7 @@ public:
     bool update(); // do all thinking here - drawing will be ignored
     
     void connectionStateChanged(int oldState, int newState);
+    void receivedTcpMessage(std::string message);
 private:
     sf::RenderWindow &window; // all drawing uses this reference to the game window
     sf::Font font;

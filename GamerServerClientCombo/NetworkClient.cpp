@@ -38,6 +38,21 @@ bool NetworkClient::networkUpdate() {
             connectionStateChanged(oldState, -1);
         }
     }
+    
+    // check for TCP messages
+    while(true) {
+        sf::Packet packet;
+        tcpSocket.receive(packet);
+        std::string message = "";
+        packet >> message;
+        if(message != "") {
+            receivedTcpMessage(message);
+        }
+        else {
+            break;
+        }
+    }
+
     return true;
 }
 
