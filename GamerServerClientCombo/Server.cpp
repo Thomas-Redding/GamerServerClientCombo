@@ -31,3 +31,11 @@ bool Server::receivedTcp(std::string message) {
     }
     return true;
 }
+
+void Server::gotNewClient(sf::TcpSocket *socket) {
+    std::cout << "New Client\n";
+}
+
+void Server::lostClient(sf::TcpSocket *socket) {
+    std::cout << "Lost Client\n";
+}

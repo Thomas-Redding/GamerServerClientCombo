@@ -41,7 +41,7 @@ void ServerCommunicator::sendTcpMessageToServer(std::string message) {
 void ServerCommunicator::setClients(std::vector<sf::TcpSocket*> *vect) {
     clients_lock.lock();
     clients.clear();
-    for(int i=0; i<clients.size(); i++) {
+    for(int i=0; i<vect->size(); i++) {
         clients.push_back(vect->at(i));
     }
     clients_lock.unlock();

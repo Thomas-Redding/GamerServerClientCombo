@@ -22,9 +22,14 @@ public:
     bool networkUpdate();
     void sendTcp(std::string message, sf::TcpSocket *socket);
     virtual bool receivedTcp(std::string message) {};
+    virtual void gotNewClient(sf::TcpSocket *socket) {};
+    virtual void lostClient(sf::TcpSocket *socket) {};
     bool shouldServerContinue();
 private:
     ServerCommunicator &communicator;
+    std::vector<sf::TcpSocket *> clients;
+    void checkForNewClients();
+    bool isClientInList(sf::TcpSocket *client, std::vector<sf::TcpSocket *>&list);
 };
 
 #endif /* NetworkServer_cpp */

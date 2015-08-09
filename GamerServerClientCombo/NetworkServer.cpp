@@ -13,13 +13,26 @@ NetworkServer::NetworkServer(ServerCommunicator &com): communicator(com) {
 }
 
 bool NetworkServer::networkUpdate() {
-    std::string message = communicator.receiveTcpMessage();
-    if(message == "") {
-        return true;
+    bool shouldContinue = true;
+    
+    // call the receivedTcp() event in Server
+    // note, we will only read the first 100 messages
+    for(int i=0; i<100; i++) {
+        std::string message = communicator.receiveTcpMessage();
+        if(message == "") {
+            break;
+        }
+        else {
+            shouldContinue = shouldContinue && receivedTcp(message);
+            if(!shouldContinue) {
+                return shouldContinue;
+            }
+        }
     }
-    else {
-        return receivedTcp(message);
-    }
+    
+    checkForNewClients();
+    
+    return shouldContinue;
 }
 
 void NetworkServer::sendTcp(std::string message, sf::TcpSocket *socket) {
@@ -31,3 +44,45 @@ void NetworkServer::sendTcp(std::string message, sf::TcpSocket *socket) {
 bool NetworkServer::shouldServerContinue() {
     return communicator.getShouldServersContinue();
 }
+
+void NetworkServer::checkForNewClients() {
+    std::vector<sf::TcpSocket *> updatedClients = communicator.getClients();
+    std::vector<sf::TcpSocket *> newClients;
+    std::vector<sf::TcpSocket *> lostClients;
+    for(int i=0; i<updatedClients.size(); i++) {
+        if(!isClientInList(updatedClients[i], clients)) {
+            newClients.push_back(updatedClients[i]);
+        }
+    }
+    for(int i=0; i<clients.size(); i++) {
+        if(!isClientInList(clients[i], updatedClients)) {
+            lostClients.push_back(clients[i]);
+        }
+    }
+    clients = updatedClients;
+    for(int i=0; i<newClients.size(); i++) {
+        gotNewClient(newClients[i]);
+    }
+    for(int i=0; i<lostClients.size(); i++) {
+        lostClient(lostClients[i]);
+    }
+}
+
+bool NetworkServer::isClientInList(sf::TcpSocket *client, std::vector<sf::TcpSocket *>&list) {
+    for(int i=0; i<list.size(); i++) {
+        if(client == list[i]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
+
+

@@ -22,6 +22,8 @@ public:
     // return a boolean indicating whether the server should keep running
     bool update();
     bool receivedTcp(std::string message);
+    void gotNewClient(sf::TcpSocket *socket);
+    void lostClient(sf::TcpSocket *socket);
 };
 
 #endif /* Server_cpp */

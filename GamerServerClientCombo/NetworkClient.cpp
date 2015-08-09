@@ -24,10 +24,11 @@ bool NetworkClient::networkUpdate() {
     // update "connectionStage"
     if(connectionState == 1) {
         if(tcpSocket.getRemoteAddress() != sf::IpAddress::None) {
-            // we connected
+            // out TCP sockets just connected
             int oldState = connectionState;
             connectionState = 2;
             connectionStateChanged(oldState, 2);
+            // now we wait for the server to send us a TCP message giving us its UDP port number
         }
     }
     else if(connectionState == 2) {
@@ -61,7 +62,7 @@ void NetworkClient::sendOwnTcpServerMessageToQuit() {
         sendTcpMessage("Quit Server");
     }
     else {
-        // connect to server
+        // connect to local server
         tcpSocket.disconnect();
         sf::Time waitTime = sf::milliseconds(3000);
         tcpSocket.setBlocking(true);
