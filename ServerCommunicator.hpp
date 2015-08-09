@@ -17,19 +17,20 @@
 #include <queue>
 #include <SFML/Network.hpp>
 
+/*
+ NOTE: If you are a casual user, just focus on the Client and Server classes (i.e. ignore this one).
+ 
+ This class is a singleton and is instantiated in main(). It allows the program's 3 threads (Client, Server, and TcpServer) to communicate. The only complexity here is the mutex locks.
+ */
+
 struct ServerCommunicator {
 public:
     bool getShouldServersContinue();
     void setShouldServersContinue(bool newValue);
-    
     void setLocalTcpPort(unsigned short newValue);
     unsigned short getLocalTcpPort();
-    
-    // used by Server
     std::string receiveTcpMessage();
     std::vector<sf::TcpSocket*> getClients();
-    
-    // used by TcpServer
     void sendTcpMessageToServer(std::string message);
     void setClients(std::vector<sf::TcpSocket*> *vect);
 private:

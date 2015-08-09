@@ -16,12 +16,11 @@
 #include "ServerCommunicator.hpp"
 
 /*
- * The NetworkClient class is intended to be a singleton that resides inside the
- * Client singleton. It allows simple access to a single server. The server may
- * be on the machine itself, on a local network, or anywhere world-wide.
- * It also serves a side-purpose: allowing for access to the ServerCommunicator
- * singleton.
+ NOTE: If you are a casual user, just focus on the Client and Server classes (i.e. ignore this one).
+ 
+ The NetworkClient class is intended to simplify interactions with the (1) Server class and (2) SFML's events.
  */
+
 class NetworkClient {
 public:
     NetworkClient(ServerCommunicator& com);

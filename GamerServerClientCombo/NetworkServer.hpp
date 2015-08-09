@@ -14,13 +14,22 @@
 #include <SFML/Network.hpp>
 #include "ServerCommunicator.hpp"
 
-class ClientInfo {
-public:
+/*
+ NOTE: If you are a casual user, just focus on the Client and Server classes (i.e. ignore this one).
+ */
+
+/*
+ The ClientInfo is only used in the NetworkServer class and just serves a container of information about an individaul client (e.g. the vector "clients" consists of ClientInfo objects)
+ */
+struct ClientInfo {
     sf::IpAddress ip;
     unsigned short udpPort = 0;
     sf::TcpSocket *tcp = nullptr;
 };
 
+/*
+ NetworkServer handles are the ugly network and thread stuff that someone implementing Server doesn't want to do.
+ */
 class NetworkServer {
 public:
     NetworkServer(ServerCommunicator &com);

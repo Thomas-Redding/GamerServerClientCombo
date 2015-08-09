@@ -52,7 +52,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2823299D1B753ADF00CF7A30 /* Thomas Stuff */ = {
+		2823299D1B753ADF00CF7A30 /* Ignore Me */ = {
 			isa = PBXGroup;
 			children = (
 				282329941B75355E00CF7A30 /* NetworkClient.cpp */,
@@ -65,7 +65,7 @@
 				2823299E1B753D1900CF7A30 /* TcpServer.cpp */,
 				2823299F1B753D1900CF7A30 /* TcpServer.hpp */,
 			);
-			name = "Thomas Stuff";
+			name = "Ignore Me";
 			sourceTree = "<group>";
 		};
 		28434CF41B753036008A51AC = {
@@ -91,7 +91,7 @@
 				282329921B75313100CF7A30 /* Client.hpp */,
 				282329971B75380A00CF7A30 /* Server.cpp */,
 				282329981B75380A00CF7A30 /* Server.hpp */,
-				2823299D1B753ADF00CF7A30 /* Thomas Stuff */,
+				2823299D1B753ADF00CF7A30 /* Ignore Me */,
 				28434D081B753036008A51AC /* Resources */,
 				28434D011B753036008A51AC /* Supporting Files */,
 			);
