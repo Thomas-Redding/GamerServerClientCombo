@@ -54,6 +54,13 @@ class Client : public NetworkClient {
 public:
     Client(sf::RenderWindow &myWindow, ServerCommunicator &com);
     
+    /*
+     These methods are triggered by events. It's worth noting that many of these could be emluated in update():
+     * sf::Mouse::getPosition()
+     * sf::Keyboard::isKeyPressed(sf::Keyboard::Left)
+     * window.getSize()
+     * sf::Mouse::isButtonPressed(sf::Mouse::Left)
+    */
     bool keyPressed(sf::Keyboard::Key keyCode);
     bool keyReleased(sf::Keyboard::Key keyCode);
     bool mouseMoved(int x, int y);
@@ -62,6 +69,8 @@ public:
     bool mouseWheeled(int delta, int x, int y);
     bool resized(unsigned int width, unsigned int height);
     bool textEntered(sf::Uint32 character);
+    bool otherEvent(sf::Event event);
+    void closing();
     
     bool draw(); // do all drawing here
     bool update(); // do all thinking here - drawing will be ignored
@@ -70,6 +79,8 @@ public:
     void tcpMessageReceived(std::string message);
     void udpMessageReceived(std::string message);
 private:
+    int mouseX;
+    int mouseY;
     sf::RenderWindow &window;
     sf::Font font;
     sf::Text serverTcpPortText;

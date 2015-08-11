@@ -47,17 +47,19 @@ public:
     
     unsigned short getLocalServerTcpPort();
     
-    virtual bool keyPressed(sf::Keyboard::Key keyCode) {};
-    virtual bool keyReleased(sf::Keyboard::Key keyCode) {};
-    virtual bool mouseMoved(int x, int y) {};
-    virtual bool mousePressed(sf::Mouse::Button button, int x, int y) {};
-    virtual bool mouseReleased(sf::Mouse::Button button, int x, int y) {};
-    virtual bool mouseWheeled(int delta, int x, int y) {};
-    virtual bool resized(unsigned int width, unsigned int height) {};
-    virtual bool textEntered(sf::Uint32 character) {};
-    virtual bool draw() {};
-    virtual bool update() {};
-    virtual void connectionStateChanged(int oldState, int newState) {};
+    bool keyPressed(sf::Keyboard::Key keyCode) {return true;};
+    bool keyReleased(sf::Keyboard::Key keyCode) {return true;};
+    bool mouseMoved(int x, int y) {return true;};
+    bool mousePressed(sf::Mouse::Button button, int x, int y) {return true;};
+    bool mouseReleased(sf::Mouse::Button button, int x, int y) {return true;};
+    bool mouseWheeled(int delta, int x, int y) {return true;};
+    bool resized(unsigned int width, unsigned int height) {return true;};
+    bool textEntered(sf::Uint32 character) {return true;};
+    bool otherEvent(sf::Event event) {return true;};
+    bool draw() {return true;};
+    bool update() {return true;};
+    void closing() {};
+    void connectionStateChanged(int oldState, int newState) {return true;};
 private:
     int connectionState = 0;
     sf::TcpSocket tcpSocket;

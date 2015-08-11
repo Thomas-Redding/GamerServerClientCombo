@@ -59,6 +59,7 @@ int main(int, char const**) {
             }
             else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
                 // Escape pressed: exit
+                client.closing();
                 shouldProgramContinue = false;
                 break;
             }
@@ -85,6 +86,9 @@ int main(int, char const**) {
             }
             else if(event.type == sf::Event::Resized) {
                 shouldProgramContinue = shouldProgramContinue && client.resized(event.size.width, event.size.height);
+            }
+            else {
+                shouldProgramContinue = shouldProgramContinue && client.otherEvent(event);
             }
         }
         

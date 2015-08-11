@@ -9,7 +9,7 @@
 #include "Client.hpp"
 
 Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), NetworkClient(com) {
-    window.setFramerateLimit(50);
+    window.setFramerateLimit(30);
 
     // Create a graphical text to display
     if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -34,6 +34,8 @@ bool Client::keyReleased(sf::Keyboard::Key keyCode) {
 }
 
 bool Client::mouseMoved(int x, int y) {
+    mouseX = x;
+    mouseY = y;
     return true;
 }
 
@@ -53,13 +55,20 @@ bool Client::resized(unsigned int width, unsigned int height) {
     return true;
 }
 
+bool Client::otherEvent(sf::Event event) {
+    return true;
+}
+
+void Client::closing() {
+}
+
 bool Client::draw() {
     window.draw(serverTcpPortText);
     return true;
 }
 
 bool Client::update() {
-    serverTcpPortText.setString("Local Server Tcp Port: " + std::to_string(getLocalServerTcpPort()));
+    serverTcpPortText.setString("Local Server Tcp Port: " + std::to_string(getLocalServerTcpPort()) + "\n(" + std::to_string(mouseX) + "," + std::to_string(mouseY) + ")");
     return true;
 }
 
