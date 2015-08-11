@@ -9,24 +9,13 @@
 #include "Server.hpp"
 
 Server::Server(ServerCommunicator &com): NetworkServer(com) {
-    unsigned numberOfCores = std::thread::hardware_concurrency();
-    if(numberOfCores >= 2) {
-        // the server and client will each get its own core
-        // we don't have to wait much at all
-    }
-    else if(numberOfCores == 1) {
-        // the server and client ahve to share a core
-    }
-    else {
-        // unknown number of cores
-    }
 }
 
 bool Server::update() {
-    // sleep for 1100 milliseconds
+    // sleep for 30 milliseconds
     struct timespec tim, tim2;
-    tim.tv_sec = 1;
-    tim.tv_nsec = 100;
+    tim.tv_sec = 0;
+    tim.tv_nsec = 30;
     tim.tv_nsec *= 1000000;
     nanosleep(&tim , &tim2);
     

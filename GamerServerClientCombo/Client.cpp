@@ -17,15 +17,9 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
     }
     
     // create the text we will be rendering
-    serverTcpPortText = sf::Text("---", font, 50);
+    serverTcpPortText = sf::Text("", font, 50);
     serverTcpPortText.setColor(sf::Color::Red);
     serverTcpPortText.setPosition(0, 0);
-    serverLocalIpAddress = sf::Text("---", font, 50);
-    serverLocalIpAddress.setColor(sf::Color::Red);
-    serverLocalIpAddress.setPosition(0, 40);
-    serverGlobalIpAddress = sf::Text("---", font, 50);
-    serverGlobalIpAddress.setColor(sf::Color::Red);
-    serverGlobalIpAddress.setPosition(0, 80);
     
     // connect to the server on your computer
     attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
@@ -60,30 +54,22 @@ bool Client::resized(unsigned int width, unsigned int height) {
 }
 
 bool Client::draw() {
-    // draw the text
     window.draw(serverTcpPortText);
-    window.draw(serverLocalIpAddress);
-    window.draw(serverGlobalIpAddress);
     return true;
 }
 
 bool Client::update() {
-    serverTcpPortText.setString("Server Tcp Port" + std::to_string(getLocalServerTcpPort()));
-    serverLocalIpAddress.setString("Server Local IP" + sf::IpAddress::getLocalAddress().toString());
-    serverGlobalIpAddress.setString("Server Global IP" + sf::IpAddress::getPublicAddress().toString());
+    serverTcpPortText.setString("Local Server Tcp Port: " + std::to_string(getLocalServerTcpPort()));
     return true;
 }
 
 void Client::connectionStateChanged(int oldState, int newState) {
-    std::cout << "State Change: " << oldState << "->" << newState << "\n";
 }
 
 void Client::tcpMessageReceived(std::string message) {
-    std::cout << "Client TCP Rec: " << message << "\n";
 }
 
 void Client::udpMessageReceived(std::string message) {
-    std::cout << "Client UDP Rec: " << message << "\n";
 }
 
 bool Client::textEntered(sf::Uint32 character) {

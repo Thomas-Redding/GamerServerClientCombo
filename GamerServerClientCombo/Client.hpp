@@ -73,8 +73,6 @@ private:
     sf::RenderWindow &window;
     sf::Font font;
     sf::Text serverTcpPortText;
-    sf::Text serverLocalIpAddress;
-    sf::Text serverGlobalIpAddress;
 };
 
 #endif /* Client_cpp */
