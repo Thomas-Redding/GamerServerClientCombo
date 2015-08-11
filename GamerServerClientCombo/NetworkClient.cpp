@@ -22,14 +22,6 @@ void NetworkClient::applicationIsClosing() {
     sendOwnTcpServerMessageToQuit();
 }
 
-void NetworkClient::startFrame() {
-    networkUpdate();
-}
-
-void NetworkClient::endFrame() {
-    networkUpdate();
-}
-
 void NetworkClient::networkUpdate() {
     // update "connectionStage"
     if(connectionState == 1) {

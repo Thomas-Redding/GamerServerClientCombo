@@ -30,8 +30,6 @@ public:
     void attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort);
     
     void networkUpdate();
-    void startFrame();
-    void endFrame();
     
     /*
      0 = no connection established
