@@ -61,16 +61,16 @@ public:
      * window.getSize()
      * sf::Mouse::isButtonPressed(sf::Mouse::Left)
     */
-    bool keyPressed(sf::Keyboard::Key keyCode);
-    bool keyReleased(sf::Keyboard::Key keyCode);
-    bool mouseMoved(int x, int y);
-    bool mousePressed(sf::Mouse::Button button, int x, int y);
-    bool mouseReleased(sf::Mouse::Button button, int x, int y);
-    bool mouseWheeled(int delta, int x, int y);
-    bool resized(unsigned int width, unsigned int height);
-    bool textEntered(sf::Uint32 character);
-    bool otherEvent(sf::Event event);
-    void closing();
+    bool keyPressed(sf::Keyboard::Key keyCode) {return true;};
+    bool keyReleased(sf::Keyboard::Key keyCode) {return true;};
+    bool mouseMoved(int x, int y) {return true;};
+    bool mousePressed(sf::Mouse::Button button, int x, int y); // defined in Client.cpp
+    bool mouseReleased(sf::Mouse::Button button, int x, int y) {return true;};
+    bool mouseWheeled(int delta, int x, int y) {return true;};
+    bool resized(unsigned int width, unsigned int height) {return true;};
+    bool textEntered(sf::Uint32 character) {return true;};
+    bool otherEvent(sf::Event event) {return true;};
+    void closing() {};
     
     bool draw(); // do all drawing here
     bool update(); // do all thinking here - drawing will be ignored

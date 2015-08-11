@@ -25,44 +25,13 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
     attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
 }
 
-bool Client::keyPressed(sf::Keyboard::Key keyCode) {
-    return true;
-}
-
-bool Client::keyReleased(sf::Keyboard::Key keyCode) {
-    return true;
-}
-
-bool Client::mouseMoved(int x, int y) {
+bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
     mouseX = x;
     mouseY = y;
     if(getConnectionState() >= 2) {
-        sendTcpMessage(std::to_string(mouseX));
+        sendTcpMessage("(" + std::to_string(mouseX) + "," + std::to_string(mouseY) + ")");
     }
     return true;
-}
-
-bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
-    return true;
-}
-
-bool Client::mouseReleased(sf::Mouse::Button button, int x, int y) {
-    return true;
-}
-
-bool Client::mouseWheeled(int delta, int x, int y) {
-    return true;
-}
-
-bool Client::resized(unsigned int width, unsigned int height) {
-    return true;
-}
-
-bool Client::otherEvent(sf::Event event) {
-    return true;
-}
-
-void Client::closing() {
 }
 
 bool Client::draw() {
@@ -82,8 +51,4 @@ void Client::tcpMessageReceived(std::string message) {
 }
 
 void Client::udpMessageReceived(std::string message) {
-}
-
-bool Client::textEntered(sf::Uint32 character) {
-    return true;
 }
