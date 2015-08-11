@@ -24,6 +24,7 @@ bool Server::update() {
 }
 
 bool Server::receivedTcp(std::string message, sf::IpAddress ip) {
+    std::cout << ip << ": " << message << "\n";
     return true;
 }
 

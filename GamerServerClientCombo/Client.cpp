@@ -36,6 +36,9 @@ bool Client::keyReleased(sf::Keyboard::Key keyCode) {
 bool Client::mouseMoved(int x, int y) {
     mouseX = x;
     mouseY = y;
+    if(getConnectionState() >= 2) {
+        sendTcpMessage(std::to_string(mouseX));
+    }
     return true;
 }
 
