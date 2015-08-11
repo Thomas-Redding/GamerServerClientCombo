@@ -88,9 +88,11 @@ int main(int, char const**) {
             }
         }
         
-        client.networkUpdate();
+        client.startFrame();
         
         shouldProgramContinue = shouldProgramContinue && client.update();
+        
+        client.networkUpdate();
 
         // Clear screen
         window.clear();
@@ -99,6 +101,8 @@ int main(int, char const**) {
 
         // Update the window
         window.display();
+        
+        client.endFrame();
         
         if(!shouldProgramContinue) {
             communicator.setShouldServersContinue(false);

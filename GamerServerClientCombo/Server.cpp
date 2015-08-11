@@ -9,7 +9,17 @@
 #include "Server.hpp"
 
 Server::Server(ServerCommunicator &com): NetworkServer(com) {
-    // do stuff
+    unsigned numberOfCores = std::thread::hardware_concurrency();
+    if(numberOfCores >= 2) {
+        // the server and client will each get its own core
+        // we don't have to wait much at all
+    }
+    else if(numberOfCores == 1) {
+        // the server and client ahve to share a core
+    }
+    else {
+        // unknown number of cores
+    }
 }
 
 bool Server::update() {
@@ -20,29 +30,20 @@ bool Server::update() {
     tim.tv_nsec *= 1000000;
     nanosleep(&tim , &tim2);
     
-    if(clients.size() > 0) {
-        sendTcp("Server TCP", clients[0]);
-        sendUdp("Server UDP", clients[0]);
-    }
-    
     bool shouldContinue = shouldServerContinue();
     return shouldContinue;
 }
 
 bool Server::receivedTcp(std::string message, sf::IpAddress ip) {
-    std::cout << "Server TCP Rec: " << message << "\n";
     return true;
 }
 
 void Server::gotNewClient(sf::IpAddress ip) {
     clients.push_back(ip);
-    std::cout << "New Client (" << ip.toString() << ")\n";
 }
 
 void Server::lostClient(sf::IpAddress ip) {
-    std::cout << "Lost Client (" << ip.toString() << ")\n";
 }
 
 bool Server::receivedUdp(std::string message, sf::IpAddress ip) {
-    std::cout << "Server UDP Rec: " << message << "\n";
 }

@@ -32,16 +32,6 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
 }
 
 bool Client::keyPressed(sf::Keyboard::Key keyCode) {
-    if(keyCode == 0) {
-        if(getConnectionState() == 3) {
-            // if "A" is pressed and the UDP port is connected, send a message to the server
-            std::cout << "Client UDP Sent: 'A' pressed\n";
-            sendUdpMessage("'A' pressed");
-        }
-        else {
-            // haven't connected UDP socket to server yet
-        }
-    }
     return true;
 }
 
@@ -54,14 +44,6 @@ bool Client::mouseMoved(int x, int y) {
 }
 
 bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
-    if(getConnectionState() >= 2) {
-        // if TCP port is connected, send a message to the server
-        std::cout << "Client TCP Sent: Mouse Clicked\n";
-        sendTcpMessage("Mouse Clicked");
-    }
-    else {
-        // haven't connected TCP socket to server yet
-    }
     return true;
 }
 
