@@ -26,11 +26,11 @@
  
  unsigned short getLocalServerTcpPort() - get the TCP port of the server on your machine; this is useful in conjunction with attemptConnectionToServer()
  
- int getConnectionState() - returns an integer between negative one and positive 3 (inclusive) indicating the state of our connection with the server:
+ int getConnectionState() - returns an integer between negative one and positive 3 indicating the state of our connection with the server:
     * 0 = no connection established
     * 1 = connection being established
-    * 2 = connection established
-    * 3 = received udp port from server
+    * 2 = can send TCP messages
+    * 3 = can send UDP messages
     * -1 = connection failed
 
  void sendTcpMessage(std::string message)
