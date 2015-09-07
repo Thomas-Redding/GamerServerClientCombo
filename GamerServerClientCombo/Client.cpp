@@ -9,10 +9,10 @@
 #include "Client.hpp"
 
 Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), NetworkClient(com) {
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(10);
 
     // Create a graphical text to display
-    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
+    if(!font.loadFromFile(resourcePath() + "sansation.ttf")) {
         return EXIT_FAILURE;
     }
     

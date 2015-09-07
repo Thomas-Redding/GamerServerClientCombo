@@ -7,38 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		280071F01B77E99D0082D1C0 /* ServerCommunicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 280071EF1B77E99D0082D1C0 /* ServerCommunicator.cpp */; };
 		282329931B75313100CF7A30 /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282329911B75313100CF7A30 /* Client.cpp */; };
-		282329961B75355E00CF7A30 /* NetworkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282329941B75355E00CF7A30 /* NetworkClient.cpp */; };
 		282329991B75380A00CF7A30 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282329971B75380A00CF7A30 /* Server.cpp */; };
-		282329A01B753D1900CF7A30 /* TcpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2823299E1B753D1900CF7A30 /* TcpServer.cpp */; };
-		28434D041B753036008A51AC /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28434D031B753036008A51AC /* ResourcePath.mm */; };
-		28434D071B753036008A51AC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28434D061B753036008A51AC /* main.cpp */; };
 		28434D0E1B753037008A51AC /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0D1B753037008A51AC /* sansation.ttf */; };
 		28434D101B753037008A51AC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0F1B753037008A51AC /* icon.png */; };
-		28D9AA441B77A9500043A590 /* NetworkServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28D9AA421B77A9500043A590 /* NetworkServer.cpp */; };
+		28CB660F1B9DD67F00833E69 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66041B9DD67F00833E69 /* main.cpp */; };
+		28CB66101B9DD67F00833E69 /* NetworkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66051B9DD67F00833E69 /* NetworkClient.cpp */; };
+		28CB66111B9DD67F00833E69 /* NetworkServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66071B9DD67F00833E69 /* NetworkServer.cpp */; };
+		28CB66131B9DD67F00833E69 /* ServerCommunicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB660B1B9DD67F00833E69 /* ServerCommunicator.cpp */; };
+		28CB66141B9DD67F00833E69 /* TcpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB660D1B9DD67F00833E69 /* TcpServer.cpp */; };
+		28CB66171B9DD6B700833E69 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66151B9DD6B700833E69 /* ResourcePath.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		280071EF1B77E99D0082D1C0 /* ServerCommunicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCommunicator.cpp; sourceTree = "<group>"; };
-		280071F11B77E9A20082D1C0 /* ServerCommunicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerCommunicator.hpp; sourceTree = "<group>"; };
 		282329911B75313100CF7A30 /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
 		282329921B75313100CF7A30 /* Client.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Client.hpp; sourceTree = "<group>"; };
-		282329941B75355E00CF7A30 /* NetworkClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkClient.cpp; sourceTree = "<group>"; };
-		282329951B75355E00CF7A30 /* NetworkClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkClient.hpp; sourceTree = "<group>"; };
 		282329971B75380A00CF7A30 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
 		282329981B75380A00CF7A30 /* Server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Server.hpp; sourceTree = "<group>"; };
-		2823299E1B753D1900CF7A30 /* TcpServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TcpServer.cpp; sourceTree = "<group>"; };
-		2823299F1B753D1900CF7A30 /* TcpServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TcpServer.hpp; sourceTree = "<group>"; };
 		28434CFE1B753036008A51AC /* GamerServerClientCombo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamerServerClientCombo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GamerServerClientCombo-Info.plist"; sourceTree = "<group>"; };
-		28434D031B753036008A51AC /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
-		28434D051B753036008A51AC /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
-		28434D061B753036008A51AC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		28434D0D1B753037008A51AC /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		28434D0F1B753037008A51AC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		28D9AA421B77A9500043A590 /* NetworkServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkServer.cpp; sourceTree = "<group>"; };
-		28D9AA431B77A9500043A590 /* NetworkServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkServer.hpp; sourceTree = "<group>"; };
+		28CB66041B9DD67F00833E69 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		28CB66051B9DD67F00833E69 /* NetworkClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkClient.cpp; sourceTree = "<group>"; };
+		28CB66061B9DD67F00833E69 /* NetworkClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkClient.hpp; sourceTree = "<group>"; };
+		28CB66071B9DD67F00833E69 /* NetworkServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkServer.cpp; sourceTree = "<group>"; };
+		28CB66081B9DD67F00833E69 /* NetworkServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkServer.hpp; sourceTree = "<group>"; };
+		28CB660B1B9DD67F00833E69 /* ServerCommunicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCommunicator.cpp; sourceTree = "<group>"; };
+		28CB660C1B9DD67F00833E69 /* ServerCommunicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerCommunicator.hpp; sourceTree = "<group>"; };
+		28CB660D1B9DD67F00833E69 /* TcpServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TcpServer.cpp; sourceTree = "<group>"; };
+		28CB660E1B9DD67F00833E69 /* TcpServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TcpServer.hpp; sourceTree = "<group>"; };
+		28CB66151B9DD6B700833E69 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
+		28CB66161B9DD6B700833E69 /* ResourcePath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,22 +52,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2823299D1B753ADF00CF7A30 /* Ignore Me */ = {
-			isa = PBXGroup;
-			children = (
-				282329941B75355E00CF7A30 /* NetworkClient.cpp */,
-				282329951B75355E00CF7A30 /* NetworkClient.hpp */,
-				28D9AA421B77A9500043A590 /* NetworkServer.cpp */,
-				28D9AA431B77A9500043A590 /* NetworkServer.hpp */,
-				28434D061B753036008A51AC /* main.cpp */,
-				2823299E1B753D1900CF7A30 /* TcpServer.cpp */,
-				2823299F1B753D1900CF7A30 /* TcpServer.hpp */,
-				280071F11B77E9A20082D1C0 /* ServerCommunicator.hpp */,
-				280071EF1B77E99D0082D1C0 /* ServerCommunicator.cpp */,
-			);
-			name = "Ignore Me";
-			sourceTree = "<group>";
-		};
 		28434CF41B753036008A51AC = {
 			isa = PBXGroup;
 			children = (
@@ -89,9 +73,11 @@
 			children = (
 				282329911B75313100CF7A30 /* Client.cpp */,
 				282329921B75313100CF7A30 /* Client.hpp */,
+				28CB66151B9DD6B700833E69 /* ResourcePath.mm */,
+				28CB66161B9DD6B700833E69 /* ResourcePath.hpp */,
 				282329971B75380A00CF7A30 /* Server.cpp */,
 				282329981B75380A00CF7A30 /* Server.hpp */,
-				2823299D1B753ADF00CF7A30 /* Ignore Me */,
+				28CB66031B9DD67F00833E69 /* Ignore Me */,
 				28434D081B753036008A51AC /* Resources */,
 				28434D011B753036008A51AC /* Supporting Files */,
 			);
@@ -111,10 +97,24 @@
 			children = (
 				28434D0D1B753037008A51AC /* sansation.ttf */,
 				28434D0F1B753037008A51AC /* icon.png */,
-				28434D031B753036008A51AC /* ResourcePath.mm */,
-				28434D051B753036008A51AC /* ResourcePath.hpp */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		28CB66031B9DD67F00833E69 /* Ignore Me */ = {
+			isa = PBXGroup;
+			children = (
+				28CB66041B9DD67F00833E69 /* main.cpp */,
+				28CB66051B9DD67F00833E69 /* NetworkClient.cpp */,
+				28CB66061B9DD67F00833E69 /* NetworkClient.hpp */,
+				28CB66071B9DD67F00833E69 /* NetworkServer.cpp */,
+				28CB66081B9DD67F00833E69 /* NetworkServer.hpp */,
+				28CB660B1B9DD67F00833E69 /* ServerCommunicator.cpp */,
+				28CB660C1B9DD67F00833E69 /* ServerCommunicator.hpp */,
+				28CB660D1B9DD67F00833E69 /* TcpServer.cpp */,
+				28CB660E1B9DD67F00833E69 /* TcpServer.hpp */,
+			);
+			path = "Ignore Me";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,14 +202,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28434D071B753036008A51AC /* main.cpp in Sources */,
-				28434D041B753036008A51AC /* ResourcePath.mm in Sources */,
-				28D9AA441B77A9500043A590 /* NetworkServer.cpp in Sources */,
-				282329A01B753D1900CF7A30 /* TcpServer.cpp in Sources */,
 				282329991B75380A00CF7A30 /* Server.cpp in Sources */,
+				28CB660F1B9DD67F00833E69 /* main.cpp in Sources */,
 				282329931B75313100CF7A30 /* Client.cpp in Sources */,
-				282329961B75355E00CF7A30 /* NetworkClient.cpp in Sources */,
-				280071F01B77E99D0082D1C0 /* ServerCommunicator.cpp in Sources */,
+				28CB66141B9DD67F00833E69 /* TcpServer.cpp in Sources */,
+				28CB66171B9DD6B700833E69 /* ResourcePath.mm in Sources */,
+				28CB66101B9DD67F00833E69 /* NetworkClient.cpp in Sources */,
+				28CB66111B9DD67F00833E69 /* NetworkServer.cpp in Sources */,
+				28CB66131B9DD67F00833E69 /* ServerCommunicator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
