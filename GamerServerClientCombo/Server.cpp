@@ -15,7 +15,7 @@ bool Server::update() {
     // sleep for 30 milliseconds
     struct timespec tim, tim2;
     tim.tv_sec = 0;
-    tim.tv_nsec = 30;
+    tim.tv_nsec = 300;
     tim.tv_nsec *= 1000000;
     nanosleep(&tim , &tim2);
     
@@ -24,7 +24,6 @@ bool Server::update() {
 }
 
 bool Server::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) {
-    std::cout << "SRtcp: " << ip << " : " << message << " : " << timeStamp << "\n";
     return true;
 }
 
@@ -36,5 +35,4 @@ void Server::lostClient(sf::IpAddress ip) {
 }
 
 bool Server::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
-    std::cout << "SRudp: " << ip << " : " << message << " : " << timeStamp << "\n";
 }

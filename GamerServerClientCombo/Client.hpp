@@ -28,7 +28,7 @@
     * 0 = no connection established
     * 1 = connection being established
     * 2 = connection established
-    * 3 = received tcp port from server
+    * 3 = received udp port from server
     * -1 = connection failed
 
  void sendTcpMessage(std::string message)

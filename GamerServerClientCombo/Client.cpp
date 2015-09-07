@@ -9,7 +9,7 @@
 #include "Client.hpp"
 
 Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), NetworkClient(com) {
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(5);
 
     // Create a graphical text to display
     if(!font.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -29,6 +29,7 @@ bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
     mouseX = x;
     mouseY = y;
     if(getConnectionState() >= 2) {
+        // If getConnectionState is less than 2, we won't be able to send TCP messages. If it is less than 3, we can't send UDP messages
         sendTcpMessage("(" + std::to_string(mouseX) + "," + std::to_string(mouseY) + ")");
     }
     return true;
