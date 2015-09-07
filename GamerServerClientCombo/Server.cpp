@@ -23,8 +23,8 @@ bool Server::update() {
     return shouldContinue;
 }
 
-bool Server::receivedTcp(std::string message, sf::IpAddress ip) {
-    std::cout << ip << ": " << message << "\n";
+bool Server::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) {
+    std::cout << "SRtcp: " << ip << " : " << message << " : " << timeStamp << "\n";
     return true;
 }
 
@@ -35,5 +35,6 @@ void Server::gotNewClient(sf::IpAddress ip) {
 void Server::lostClient(sf::IpAddress ip) {
 }
 
-bool Server::receivedUdp(std::string message, sf::IpAddress ip) {
+bool Server::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
+    std::cout << "SRudp: " << ip << " : " << message << " : " << timeStamp << "\n";
 }

@@ -36,8 +36,8 @@ public:
     
     // return a boolean indicating whether the server should keep running
     bool update();
-    bool receivedTcp(std::string message, sf::IpAddress ip);
-    bool receivedUdp(std::string message, sf::IpAddress ip);
+    bool receivedTcp(std::string message, sf::IpAddress ip, long timeStamp);
+    bool receivedUdp(std::string message, sf::IpAddress ip, long timeStamp);
     void gotNewClient(sf::IpAddress ip);
     void lostClient(sf::IpAddress ip);
 private:

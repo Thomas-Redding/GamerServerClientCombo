@@ -73,8 +73,6 @@
 			children = (
 				282329911B75313100CF7A30 /* Client.cpp */,
 				282329921B75313100CF7A30 /* Client.hpp */,
-				28CB66151B9DD6B700833E69 /* ResourcePath.mm */,
-				28CB66161B9DD6B700833E69 /* ResourcePath.hpp */,
 				282329971B75380A00CF7A30 /* Server.cpp */,
 				282329981B75380A00CF7A30 /* Server.hpp */,
 				28CB66031B9DD67F00833E69 /* Ignore Me */,
@@ -97,6 +95,8 @@
 			children = (
 				28434D0D1B753037008A51AC /* sansation.ttf */,
 				28434D0F1B753037008A51AC /* icon.png */,
+				28CB66151B9DD6B700833E69 /* ResourcePath.mm */,
+				28CB66161B9DD6B700833E69 /* ResourcePath.hpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

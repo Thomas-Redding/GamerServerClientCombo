@@ -9,7 +9,7 @@
 #include "Client.hpp"
 
 Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), NetworkClient(com) {
-    window.setFramerateLimit(10);
+    window.setFramerateLimit(30);
 
     // Create a graphical text to display
     if(!font.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -47,8 +47,8 @@ bool Client::update() {
 void Client::connectionStateChanged(int oldState, int newState) {
 }
 
-void Client::tcpMessageReceived(std::string message) {
+void Client::tcpMessageReceived(std::string message, long timeStamp) {
 }
 
-void Client::udpMessageReceived(std::string message) {
+void Client::udpMessageReceived(std::string message, long timeStamp) {
 }

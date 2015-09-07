@@ -76,8 +76,8 @@ public:
     bool update(); // do all thinking here - drawing will be ignored
     
     void connectionStateChanged(int oldState, int newState);
-    void tcpMessageReceived(std::string message);
-    void udpMessageReceived(std::string message);
+    void tcpMessageReceived(std::string message, long timeStamp);
+    void udpMessageReceived(std::string message, long timeStamp);
 private:
     int mouseX;
     int mouseY;
