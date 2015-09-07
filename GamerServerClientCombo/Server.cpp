@@ -34,4 +34,5 @@ void Server::lostClient(sf::IpAddress ip) {
 }
 
 bool Server::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
+	return true;
 }
