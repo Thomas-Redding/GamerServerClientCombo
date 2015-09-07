@@ -35,16 +35,16 @@
 
 class Server : public NetworkServer {
 public:
-    Server(ServerCommunicator &com);
-    
-    // return a boolean indicating whether the server should keep running
-    bool update();
-    bool receivedTcp(std::string message, sf::IpAddress ip, long timeStamp);
-    bool receivedUdp(std::string message, sf::IpAddress ip, long timeStamp);
-    void gotNewClient(sf::IpAddress ip);
-    void lostClient(sf::IpAddress ip);
+	Server(ServerCommunicator &com);
+	
+	// return a boolean indicating whether the server should keep running
+	bool update();
+	bool receivedTcp(std::string message, sf::IpAddress ip, long timeStamp);
+	bool receivedUdp(std::string message, sf::IpAddress ip, long timeStamp);
+	void gotNewClient(sf::IpAddress ip);
+	void lostClient(sf::IpAddress ip);
 private:
-    std::vector<sf::IpAddress> clients;
+	std::vector<sf::IpAddress> clients;
 };
 
 #endif /* Server_cpp */
