@@ -35,6 +35,8 @@
 
  void sendTcpMessage(std::string message)
  void sendUdpMessage(std::string message)
+ long getTime() - get the current time according to this machine's internal clock
+ long getServerTime() - get the current time according to the server's internal clock (this doesn't make a network call but is estimated based on previous messages between the client and server)
  
  EVENT METHODS FOR YOU TO IMPLEMENT - returning "false" causes the application to quit
  void tcpMessageReceived(std::string message)
