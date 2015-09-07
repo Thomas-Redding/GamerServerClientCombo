@@ -17,7 +17,7 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
 }
 
 bool Client::start() {
-    // Set the App's Icon
+    // Load and Set the App's Icon
     sf::Image icon;
     if (!icon.loadFromFile(resourcePath() + "icon.png")) {
         return false; // failed to load icon - quit app
@@ -29,7 +29,7 @@ bool Client::start() {
         return false; // failed to load font - quit app
     }
     
-    // create the text we will be rendering
+    // Create a Text to Later Be Rendered
     serverTcpPortText = sf::Text("", font, 50);
     serverTcpPortText.setColor(sf::Color::Red);
     serverTcpPortText.setPosition(0, 0);
@@ -41,8 +41,10 @@ bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
     mouseX = x;
     mouseY = y;
     if(getConnectionState() >= 2) {
-        // If getConnectionState is less than 2, we won't be able to send TCP messages. If it is less than 3, we can't send UDP messages
         sendTcpMessage("(" + std::to_string(mouseX) + "," + std::to_string(mouseY) + ")");
+    }
+    else {
+        // If getConnectionState is less than 2, we won't be able to send TCP messages. If it is less than 3, we can't send UDP messages
     }
     return true;
 }

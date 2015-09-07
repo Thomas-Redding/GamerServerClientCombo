@@ -19,6 +19,8 @@
 /*
  The casual user of ths Server doesn't have to look at NetworkServer. Instead, you need only know that there are some methods defined within it that may prove useful. Most of them should be self-explanatory.
  
+ NEVER start a UDP or TCP message with the underscore character. Messages starting with the underscore character are reserved for the NetworkClient and NetworkServer classes.
+ 
  void networkUpdate() - don't define or call this method
  bool shouldServerContinue() - check this periodically to see if the server should continue or quit
  
