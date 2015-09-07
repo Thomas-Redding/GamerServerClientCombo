@@ -15,7 +15,7 @@ bool Server::update() {
     // sleep for 30 milliseconds
     struct timespec tim, tim2;
     tim.tv_sec = 0;
-    tim.tv_nsec = 300;
+    tim.tv_nsec = 20;
     tim.tv_nsec *= 1000000;
     nanosleep(&tim , &tim2);
     

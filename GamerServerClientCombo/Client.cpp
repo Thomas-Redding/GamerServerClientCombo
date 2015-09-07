@@ -10,7 +10,7 @@
 
 Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), NetworkClient(com) {
     // use this to alter the default framerate limit from its default value (60fps)
-    window.setFramerateLimit(48);
+    window.setFramerateLimit(40);
     
     // connect to the server on your computer
     attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
