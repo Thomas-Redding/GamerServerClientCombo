@@ -48,12 +48,15 @@
  bool draw()
  bool update() - called once per frame prior to draw()
  void connectionStateChanged(int oldState, int newState)
+ 
+ OTHER
+bool start() - called at the beginning immediately after the constructor; returning "false" causes the application to quit
  */
 
 class Client : public NetworkClient {
 public:
     Client(sf::RenderWindow &myWindow, ServerCommunicator &com);
-    
+    bool start();
     /*
      These methods are triggered by events. It's worth noting that many of these could be emluated in update():
      * sf::Mouse::getPosition()

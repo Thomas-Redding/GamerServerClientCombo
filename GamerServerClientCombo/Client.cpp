@@ -9,11 +9,24 @@
 #include "Client.hpp"
 
 Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), NetworkClient(com) {
-    window.setFramerateLimit(5);
+    // use this to alter the default framerate limit from its default value (60fps)
+    window.setFramerateLimit(48);
+    
+    // connect to the server on your computer
+    attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
+}
 
-    // Create a graphical text to display
+bool Client::start() {
+    // Set the App's Icon
+    sf::Image icon;
+    if (!icon.loadFromFile(resourcePath() + "icon.png")) {
+        return false; // failed to load icon - quit app
+    }
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    
+    // Load a font
     if(!font.loadFromFile(resourcePath() + "sansation.ttf")) {
-        return EXIT_FAILURE;
+        return false; // failed to load font - quit app
     }
     
     // create the text we will be rendering
@@ -21,8 +34,7 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
     serverTcpPortText.setColor(sf::Color::Red);
     serverTcpPortText.setPosition(0, 0);
     
-    // connect to the server on your computer
-    attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
+    return true;
 }
 
 bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
