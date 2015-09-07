@@ -19,8 +19,7 @@ bool Server::update() {
     tim.tv_nsec *= 1000000;
     nanosleep(&tim , &tim2);
     
-    bool shouldContinue = shouldServerContinue();
-    return shouldContinue;
+    return true;
 }
 
 bool Server::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) {
