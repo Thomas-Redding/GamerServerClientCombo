@@ -1,24 +1,23 @@
 //
-//  FooPage.hpp
+//  MultiplayerPage.hpp
 //  GamerServerClientCombo
 //
-//  Created by Thomas Redding on 10/1/15.
+//  Created by Thomas Redding on 10/2/15.
 //  Copyright © 2015 Thomas Redding. All rights reserved.
 //
 
-#ifndef FooPage_cpp
-#define FooPage_cpp
-
-#include <stdio.h>
+#ifndef MultiplayerPage_cpp
+#define MultiplayerPage_cpp
 
 #include <stdio.h>
 #include <iostream>
 #include "Page.hpp"
 #include "Button.hpp"
+#include "TextBox.hpp"
 
-class FooPage : public Page {
+class MultiplayerPage : public Page {
 public:
-	FooPage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont);
+	MultiplayerPage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont);
 	bool keyPressed(sf::Keyboard::Key keyCode) {return true;};
 	bool keyReleased(sf::Keyboard::Key keyCode) {return true;};
 	bool mouseMoved(int x, int y) {return true;};
@@ -26,7 +25,7 @@ public:
 	bool mouseReleased(sf::Mouse::Button button, int x, int y);
 	bool mouseWheeled(int delta, int x, int y) {return true;};
 	bool resized(unsigned int width, unsigned int height) {return true;};
-	bool textEntered(sf::Uint32 character) {return true;};
+	bool textEntered(sf::Uint32 character);
 	bool otherEvent(sf::Event event) {return true;};
 	void closing() {};
 	bool draw();
@@ -35,6 +34,7 @@ public:
 	void udpMessageReceived(std::string message, long timeStamp) {};
 private:
 	Button fooButton;
+	TextBox textBox;
 };
 
-#endif /* FooPage_cpp */
+#endif /* MultiplayerPage_cpp */

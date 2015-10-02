@@ -28,7 +28,7 @@ bool Client::start() {
 		return false; // failed to load font - quit app
 	
 	pages.push_back(new HomePage(&currentPage, &window, &font));
-	pages.push_back(new FooPage(&currentPage, &window, &font));
+	pages.push_back(new MultiplayerPage(&currentPage, &window, &font));
 	
 	return true;
 }

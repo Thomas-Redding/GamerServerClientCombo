@@ -13,6 +13,7 @@
 #include <iostream>
 #include "Page.hpp"
 #include "Button.hpp"
+#include "TextBox.hpp"
 
 class HomePage : public Page {
 public:

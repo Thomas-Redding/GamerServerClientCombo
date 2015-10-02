@@ -10,7 +10,6 @@
 #define Button_cpp
 
 #include <stdio.h>
-#include <SFML/Network.hpp>
 #include <SFML/Graphics.hpp>
 
 class Button {
