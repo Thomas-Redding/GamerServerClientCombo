@@ -8,7 +8,7 @@
 
 #include "ServerPage.hpp"
 
-ServerPage::ServerPage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont, unsigned short port) : Page(currentPageNumber, w, myFont), backButton(window, font, "back", 0, 0, 200, 50) {
+ServerPage::ServerPage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont, unsigned short port) : Page(currentPageNumber, w, myFont), backButton(window, font, "Back", 0, 0, 200, 50) {
 	serverPort = port;
 	portLabel = sf::Text(std::to_string(port), *font, 30);
 	ipLabel = sf::Text(sf::IpAddress::getLocalAddress().toString(), *font, 30);

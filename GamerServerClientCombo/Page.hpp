@@ -29,10 +29,16 @@ public:
 	virtual bool update() {return true;};
 	virtual void tcpMessageReceived(std::string message, long timeStamp) {};
 	virtual void udpMessageReceived(std::string message, long timeStamp) {};
+	std::string getMessageForClient();
+	
+	int connectionStage = 0; // kept up-to-date by Client
 protected:
 	int *pageNum;
 	sf::RenderWindow *window;
 	sf::Font *font;
+	void sendMessageToClient(std::string str);
+private:
+	std::string messageForClient;
 };
 
 #endif /* Page_cpp */

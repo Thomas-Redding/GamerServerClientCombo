@@ -13,7 +13,7 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
 	window.setFramerateLimit(40);
 	
 	// connect to the server on your computer
-	attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
+	// attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
 }
 
 bool Client::start() {
@@ -31,6 +31,7 @@ bool Client::start() {
 	pages.push_back(new MultiplayerPage(&currentPage, &window, &font));
 	pages.push_back(new ServerPage(&currentPage, &window, &font, getLocalServerTcpPort()));
 	pages.push_back(new ClientPage(&currentPage, &window, &font));
+	pages.push_back(new ClientMatchmakingPage(&currentPage, &window, &font));
 	
 	return true;
 }
@@ -72,10 +73,24 @@ bool Client::draw() {
 	return pages[currentPage]->draw();
 }
 bool Client::update() {
+	std::string str = pages[3]->getMessageForClient();
+	if(str.length() > 0) {
+		std::vector<std::string> vect = split(str, ':');
+		if(vect.size() == 2) {
+			attemptConnectionToServer(sf::IpAddress(vect[0]), stoi(vect[1]));
+		}
+	}
+	
+	str = pages[4]->getMessageForClient();
+	if(str == "logout") {
+		disconnect();
+	}
+	
+	
+	int stage = getConnectionState();
+	for(int i=0; i<pages.size(); i++)
+		pages[i]->connectionStage = stage;
 	return pages[currentPage]->update();
-}
-
-void Client::connectionStateChanged(int oldState, int newState) {
 }
 
 void Client::tcpMessageReceived(std::string message, long timeStamp) {
@@ -84,4 +99,15 @@ void Client::tcpMessageReceived(std::string message, long timeStamp) {
 
 void Client::udpMessageReceived(std::string message, long timeStamp) {
 	return pages[currentPage]->udpMessageReceived(message, timeStamp);
+}
+
+std::vector<std::string> Client::split(const std::string &s, char delim) {
+	std::vector<std::string> elems;
+	std::stringstream ss(s);
+	std::string item;
+	while (std::getline(ss, item, delim)) {
+		elems.push_back(item);
+	}
+	return elems;
+	return elems;
 }

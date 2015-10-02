@@ -13,3 +13,13 @@ Page::Page(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) {
 	window = w;
 	pageNum = currentPageNumber;
 }
+
+void Page::sendMessageToClient(std::string str) {
+	messageForClient += str;
+}
+
+std::string Page::getMessageForClient() {
+	std::string str = messageForClient;
+	messageForClient = "";
+	return str;
+}

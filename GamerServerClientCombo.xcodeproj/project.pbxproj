@@ -26,6 +26,7 @@
 		28CB66141B9DD67F00833E69 /* TcpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB660D1B9DD67F00833E69 /* TcpServer.cpp */; };
 		28CB66171B9DD6B700833E69 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66151B9DD6B700833E69 /* ResourcePath.mm */; };
 		28F1FE731BBDCF1B0057B63E /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F1FE711BBDCF1B0057B63E /* Page.cpp */; };
+		28FAEAA61BBF240200556FAF /* ClientMatchmakingPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28FAEAA41BBF240200556FAF /* ClientMatchmakingPage.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +67,8 @@
 		28CB66161B9DD6B700833E69 /* ResourcePath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		28F1FE711BBDCF1B0057B63E /* Page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Page.cpp; sourceTree = "<group>"; };
 		28F1FE721BBDCF1B0057B63E /* Page.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Page.hpp; sourceTree = "<group>"; };
-		28FAEAA01BBF173800556FAF /* Observer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Observer.hpp; sourceTree = "<group>"; };
+		28FAEAA41BBF240200556FAF /* ClientMatchmakingPage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientMatchmakingPage.cpp; sourceTree = "<group>"; };
+		28FAEAA51BBF240200556FAF /* ClientMatchmakingPage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ClientMatchmakingPage.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,8 @@
 				28A4EA481BBE547C0080923E /* MultiplayerPage.hpp */,
 				283DF7DF1BBF004900270A69 /* ClientPage.cpp */,
 				283DF7E01BBF004900270A69 /* ClientPage.hpp */,
+				28FAEAA41BBF240200556FAF /* ClientMatchmakingPage.cpp */,
+				28FAEAA51BBF240200556FAF /* ClientMatchmakingPage.hpp */,
 				283DF7DC1BBEFD2300270A69 /* ServerPage.cpp */,
 				283DF7DD1BBEFD2300270A69 /* ServerPage.hpp */,
 				28F1FE711BBDCF1B0057B63E /* Page.cpp */,
@@ -175,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				28CB66041B9DD67F00833E69 /* main.cpp */,
-				28FAEAA01BBF173800556FAF /* Observer.hpp */,
 				28CB66051B9DD67F00833E69 /* NetworkClient.cpp */,
 				28CB66061B9DD67F00833E69 /* NetworkClient.hpp */,
 				28CB66071B9DD67F00833E69 /* NetworkServer.cpp */,
@@ -281,6 +284,7 @@
 				2828551A1BBDDE550067FDBF /* HomePage.cpp in Sources */,
 				28F1FE731BBDCF1B0057B63E /* Page.cpp in Sources */,
 				283DF7DE1BBEFD2300270A69 /* ServerPage.cpp in Sources */,
+				28FAEAA61BBF240200556FAF /* ClientMatchmakingPage.cpp in Sources */,
 				28A4EA491BBE547C0080923E /* MultiplayerPage.cpp in Sources */,
 				28CB66141B9DD67F00833E69 /* TcpServer.cpp in Sources */,
 				28CB66171B9DD6B700833E69 /* ResourcePath.mm in Sources */,

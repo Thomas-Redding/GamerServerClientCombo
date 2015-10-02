@@ -28,6 +28,7 @@ public:
 	void applicationIsClosing();
 
 	void attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort);
+	void disconnect();
 	
 	void networkUpdate();
 	
@@ -59,7 +60,6 @@ public:
 	bool draw() {return true;};
 	bool update() {return true;};
 	void closing() {};
-	void connectionStateChanged(int oldState, int newState) {return true;};
 	long getTime();
 	long getServerTime();
 private:

@@ -10,13 +10,13 @@
 #define Client_cpp
 
 #include <stdio.h>
-#include <iostream>
 #include "ResourcePath.hpp"
 #include "NetworkClient.hpp"
 #include "HomePage.hpp"
 #include "MultiplayerPage.hpp"
 #include "ServerPage.hpp"
 #include "ClientPage.hpp"
+#include "ClientMatchmakingPage.hpp"
 
 /*
  NEVER start a UDP or TCP message with the underscore character. Messages starting with the underscore character are reserved for the NetworkClient and NetworkServer classes.
@@ -86,15 +86,15 @@ public:
 	bool draw(); // do all drawing here
 	bool update(); // do all thinking here - drawing will be ignored
 	
-	void connectionStateChanged(int oldState, int newState);
 	void tcpMessageReceived(std::string message, long timeStamp);
 	void udpMessageReceived(std::string message, long timeStamp);
 private:
 	sf::RenderWindow &window;
 	sf::Font font;
-	
 	int currentPage = 0;
 	std::vector <Page*> pages;
+	
+	std::vector<std::string> split(const std::string &s, char delim);
 };
 
 #endif /* Client_cpp */

@@ -8,7 +8,7 @@
 
 #include "MultiplayerPage.hpp"
 
-MultiplayerPage::MultiplayerPage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), backButton(window, font, "back", 0, 0, 200, 50), serverButton(window, font, "Server", 100, 100, 200, 50), clientButton(window, font, "Client", 100, 200, 200, 50) {
+MultiplayerPage::MultiplayerPage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), backButton(window, font, "Back", 0, 0, 200, 50), serverButton(window, font, "Server", 100, 100, 200, 50), clientButton(window, font, "Client", 100, 200, 200, 50) {
 	// todo
 }
 
