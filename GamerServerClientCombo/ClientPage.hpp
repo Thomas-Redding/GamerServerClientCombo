@@ -33,6 +33,7 @@ public:
 	void udpMessageReceived(std::string message, long timeStamp) {};
 private:
 	Button backButton;
+	Button connectButton;
 	IpTextBox ipTextBox;
 	PortTextBox portTextBox;
 };

@@ -9,7 +9,6 @@
 #ifndef IpTextBox_cpp
 #define IpTextBox_cpp
 
-#include <iostream>
 #include "TextBox.hpp"
 
 class IpTextBox : public TextBox {
