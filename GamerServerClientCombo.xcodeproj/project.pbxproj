@@ -66,7 +66,7 @@
 		28CB66161B9DD6B700833E69 /* ResourcePath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		28F1FE711BBDCF1B0057B63E /* Page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Page.cpp; sourceTree = "<group>"; };
 		28F1FE721BBDCF1B0057B63E /* Page.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Page.hpp; sourceTree = "<group>"; };
-		28FAEA9E1BBF16D700556FAF /* Observer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Observer.hpp; path = "Ignore Me/Observer.hpp"; sourceTree = "<group>"; };
+		28FAEAA01BBF173800556FAF /* Observer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Observer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				28CB66041B9DD67F00833E69 /* main.cpp */,
-				28FAEA9E1BBF16D700556FAF /* Observer.hpp */,
+				28FAEAA01BBF173800556FAF /* Observer.hpp */,
 				28CB66051B9DD67F00833E69 /* NetworkClient.cpp */,
 				28CB66061B9DD67F00833E69 /* NetworkClient.hpp */,
 				28CB66071B9DD67F00833E69 /* NetworkServer.cpp */,
