@@ -26,8 +26,8 @@
  
  void sendTcp(std::string message, sf::IpAddress ip)
  void sendUdp(std::string message, sf::IpAddress ipAddressOfClient)
- virtual bool receivedTcp(std::string message, sf::IpAddress ip) - event method for you to define
- virtual bool receivedUdp(std::string message, sf::IpAddress ip) - event method for you to define
+ virtual bool receivedTcp(std::string message, sf::IpAddress ip, long timestamp) - event method for you to define
+ virtual bool receivedUdp(std::string message, sf::IpAddress ip, long timestamp) - event method for you to define
  virtual void gotNewClient(sf::IpAddress ip) - event method for you to define
  virtual void lostClient(sf::IpAddress ip) - event method for you to define; do NOT rely on it
  long getTime() - gets the number of milliseconds since the epoch (1970)
