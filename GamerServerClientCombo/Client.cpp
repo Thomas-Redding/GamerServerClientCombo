@@ -29,6 +29,8 @@ bool Client::start() {
 	
 	pages.push_back(new HomePage(&currentPage, &window, &font));
 	pages.push_back(new MultiplayerPage(&currentPage, &window, &font));
+	pages.push_back(new ServerPage(&currentPage, &window, &font, getLocalServerTcpPort()));
+	pages.push_back(new ClientPage(&currentPage, &window, &font));
 	
 	return true;
 }

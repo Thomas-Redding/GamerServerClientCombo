@@ -8,22 +8,22 @@
 
 #include "HomePage.hpp"
 
-HomePage::HomePage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), fooButton(window, font, "foo", 100, 100, 200, 50) {
+HomePage::HomePage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), multiplayerButton(window, font, "Multiplayer", 100, 100, 200, 50) {
 	// todo
 }
 
 bool HomePage::mousePressed(sf::Mouse::Button button, int x, int y) {
-	fooButton.mousePressed(button, x, y);
+	multiplayerButton.mousePressed(button, x, y);
 	return true;
 }
 
 bool HomePage::mouseReleased(sf::Mouse::Button button, int x, int y) {
-	if(fooButton.mouseReleased(button, x, y))
+	if(multiplayerButton.mouseReleased(button, x, y))
 		*pageNum = 1;
 	return true;
 }
 
 bool HomePage::draw() {
-	fooButton.draw();
+	multiplayerButton.draw();
 	return true;
 }

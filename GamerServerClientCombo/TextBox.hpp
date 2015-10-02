@@ -10,7 +10,7 @@
 #define TextBox_cpp
 
 #include <stdio.h>
-#include <iostream>
+#include <sstream>
 #include <SFML/Graphics.hpp>
 
 class TextBox {

@@ -1,21 +1,21 @@
 //
-//  MultiplayerPage.hpp
+//  ClientPage.hpp
 //  GamerServerClientCombo
 //
 //  Created by Thomas Redding on 10/2/15.
 //  Copyright © 2015 Thomas Redding. All rights reserved.
 //
 
-#ifndef MultiplayerPage_cpp
-#define MultiplayerPage_cpp
+#ifndef ClientPage_cpp
+#define ClientPage_cpp
 
 #include "Page.hpp"
 #include "Button.hpp"
 #include "TextBox.hpp"
 
-class MultiplayerPage : public Page {
+class ClientPage : public Page {
 public:
-	MultiplayerPage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont);
+	ClientPage(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont);
 	bool keyPressed(sf::Keyboard::Key keyCode) {return true;};
 	bool keyReleased(sf::Keyboard::Key keyCode) {return true;};
 	bool mouseMoved(int x, int y) {return true;};
@@ -32,8 +32,8 @@ public:
 	void udpMessageReceived(std::string message, long timeStamp) {};
 private:
 	Button backButton;
-	Button serverButton;
-	Button clientButton;
+	TextBox ipTextBox;
+	TextBox portTextBox;
 };
 
-#endif /* MultiplayerPage_cpp */
+#endif /* ClientPage_cpp */

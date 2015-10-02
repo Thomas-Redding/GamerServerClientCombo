@@ -15,6 +15,8 @@
 #include "NetworkClient.hpp"
 #include "HomePage.hpp"
 #include "MultiplayerPage.hpp"
+#include "ServerPage.hpp"
+#include "ClientPage.hpp"
 
 /*
  NEVER start a UDP or TCP message with the underscore character. Messages starting with the underscore character are reserved for the NetworkClient and NetworkServer classes.

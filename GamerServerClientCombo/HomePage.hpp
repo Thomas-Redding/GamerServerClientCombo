@@ -9,8 +9,6 @@
 #ifndef HomePage_cpp
 #define HomePage_cpp
 
-#include <stdio.h>
-#include <iostream>
 #include "Page.hpp"
 #include "Button.hpp"
 #include "TextBox.hpp"
@@ -33,7 +31,7 @@ public:
 	void tcpMessageReceived(std::string message, long timeStamp) {};
 	void udpMessageReceived(std::string message, long timeStamp) {};
 private:
-	Button fooButton;
+	Button multiplayerButton;
 };
 
 #endif /* HomePage_cpp */

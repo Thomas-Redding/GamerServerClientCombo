@@ -9,7 +9,8 @@
 #ifndef Page_cpp
 #define Page_cpp
 
-#include "Button.hpp"
+#include <stdio.h>
+#include <SFML/Graphics.hpp>
 
 class Page {
 public:
