@@ -27,38 +27,59 @@ bool Client::start() {
 	if(!font.loadFromFile(resourcePath() + "sansation.ttf"))
 		return false; // failed to load font - quit app
 	
-	// Create a Text to Later Be Rendered
-	serverTcpPortText = sf::Text("", font, 50);
-	serverTcpPortText.setColor(sf::Color::Red);
-	serverTcpPortText.setPosition(0, 0);
+	pages.push_back(new HomePage(&currentPage, &window, &font));
+	pages.push_back(new FooPage(&currentPage, &window, &font));
 	
 	return true;
 }
 
+bool Client::keyPressed(sf::Keyboard::Key keyCode) {
+	return pages[currentPage]->keyPressed(keyCode);
+}
+bool Client::keyReleased(sf::Keyboard::Key keyCode) {
+	return pages[currentPage]->keyReleased(keyCode);
+}
+bool Client::mouseMoved(int x, int y) {
+	return pages[currentPage]->mouseMoved(x, y);
+}
 bool Client::mousePressed(sf::Mouse::Button button, int x, int y) {
-	mouseX = x;
-	mouseY = y;
-	// If getConnectionState is less than 2, we won't be able to send TCP messages. If it is less than 3, we can't send UDP messages
-	if(getConnectionState() >= 2)
-		sendTcpMessage("(" + std::to_string(mouseX) + "," + std::to_string(mouseY) + ")");
-	return true;
+	return pages[currentPage]->mousePressed(button, x, y);
 }
-
+bool Client::mouseReleased(sf::Mouse::Button button, int x, int y) {
+	return pages[currentPage]->mouseReleased(button, x, y);
+}
+bool Client::mouseWheeled(int delta, int x, int y) {
+	return pages[currentPage]->mouseWheeled(delta, x, y);
+}
+bool Client::resized(unsigned int width, unsigned int height) {
+	return pages[currentPage]->resized(width, height);
+}
+bool Client::textEntered(sf::Uint32 character) {
+	return pages[currentPage]->textEntered(character);
+}
+bool Client::otherEvent(sf::Event event) {
+	return pages[currentPage]->otherEvent(event);
+}
+void Client::closing() {
+	pages[currentPage]->closing();
+	for(int i=0; i<pages.size(); i++) {
+		delete pages[i];
+	}
+}
 bool Client::draw() {
-	window.draw(serverTcpPortText);
-	return true;
+	return pages[currentPage]->draw();
 }
-
 bool Client::update() {
-	serverTcpPortText.setString("Local Server Tcp Port: " + std::to_string(getLocalServerTcpPort()) + "\n(" + std::to_string(mouseX) + "," + std::to_string(mouseY) + ")");
-	return true;
+	return pages[currentPage]->update();
 }
 
 void Client::connectionStateChanged(int oldState, int newState) {
 }
 
 void Client::tcpMessageReceived(std::string message, long timeStamp) {
+	return pages[currentPage]->tcpMessageReceived(message, timeStamp);
 }
 
 void Client::udpMessageReceived(std::string message, long timeStamp) {
+	return pages[currentPage]->udpMessageReceived(message, timeStamp);
 }
