@@ -13,6 +13,8 @@
 		2828551D1BBDE0AD0067FDBF /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2828551B1BBDE0AD0067FDBF /* Button.cpp */; };
 		283DF7DE1BBEFD2300270A69 /* ServerPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283DF7DC1BBEFD2300270A69 /* ServerPage.cpp */; };
 		283DF7E11BBF004900270A69 /* ClientPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283DF7DF1BBF004900270A69 /* ClientPage.cpp */; };
+		283DF7E61BBF027300270A69 /* PortTextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283DF7E41BBF027300270A69 /* PortTextBox.cpp */; };
+		283DF7E91BBF03B200270A69 /* IpTextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283DF7E71BBF03B200270A69 /* IpTextBox.cpp */; };
 		28434D0E1B753037008A51AC /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0D1B753037008A51AC /* sansation.ttf */; };
 		28434D101B753037008A51AC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0F1B753037008A51AC /* icon.png */; };
 		28A4EA461BBE4ACF0080923E /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A4EA441BBE4ACF0080923E /* TextBox.cpp */; };
@@ -39,6 +41,10 @@
 		283DF7DD1BBEFD2300270A69 /* ServerPage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerPage.hpp; sourceTree = "<group>"; };
 		283DF7DF1BBF004900270A69 /* ClientPage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientPage.cpp; sourceTree = "<group>"; };
 		283DF7E01BBF004900270A69 /* ClientPage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ClientPage.hpp; sourceTree = "<group>"; };
+		283DF7E41BBF027300270A69 /* PortTextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PortTextBox.cpp; sourceTree = "<group>"; };
+		283DF7E51BBF027300270A69 /* PortTextBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PortTextBox.hpp; sourceTree = "<group>"; };
+		283DF7E71BBF03B200270A69 /* IpTextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IpTextBox.cpp; sourceTree = "<group>"; };
+		283DF7E81BBF03B200270A69 /* IpTextBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IpTextBox.hpp; sourceTree = "<group>"; };
 		28434CFE1B753036008A51AC /* GamerServerClientCombo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamerServerClientCombo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GamerServerClientCombo-Info.plist"; sourceTree = "<group>"; };
 		28434D0D1B753037008A51AC /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
@@ -106,6 +112,10 @@
 				2828551C1BBDE0AD0067FDBF /* Button.hpp */,
 				28A4EA441BBE4ACF0080923E /* TextBox.cpp */,
 				28A4EA451BBE4ACF0080923E /* TextBox.hpp */,
+				283DF7E41BBF027300270A69 /* PortTextBox.cpp */,
+				283DF7E51BBF027300270A69 /* PortTextBox.hpp */,
+				283DF7E71BBF03B200270A69 /* IpTextBox.cpp */,
+				283DF7E81BBF03B200270A69 /* IpTextBox.hpp */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -264,6 +274,8 @@
 				282329991B75380A00CF7A30 /* Server.cpp in Sources */,
 				28CB660F1B9DD67F00833E69 /* main.cpp in Sources */,
 				282329931B75313100CF7A30 /* Client.cpp in Sources */,
+				283DF7E91BBF03B200270A69 /* IpTextBox.cpp in Sources */,
+				283DF7E61BBF027300270A69 /* PortTextBox.cpp in Sources */,
 				2828551A1BBDDE550067FDBF /* HomePage.cpp in Sources */,
 				28F1FE731BBDCF1B0057B63E /* Page.cpp in Sources */,
 				283DF7DE1BBEFD2300270A69 /* ServerPage.cpp in Sources */,

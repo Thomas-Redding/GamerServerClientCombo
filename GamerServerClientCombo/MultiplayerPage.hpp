@@ -11,7 +11,6 @@
 
 #include "Page.hpp"
 #include "Button.hpp"
-#include "TextBox.hpp"
 
 class MultiplayerPage : public Page {
 public:

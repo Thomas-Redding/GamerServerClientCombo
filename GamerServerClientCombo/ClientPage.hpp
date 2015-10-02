@@ -11,7 +11,8 @@
 
 #include "Page.hpp"
 #include "Button.hpp"
-#include "TextBox.hpp"
+#include "IpTextBox.hpp"
+#include "PortTextBox.hpp"
 
 class ClientPage : public Page {
 public:
@@ -32,8 +33,8 @@ public:
 	void udpMessageReceived(std::string message, long timeStamp) {};
 private:
 	Button backButton;
-	TextBox ipTextBox;
-	TextBox portTextBox;
+	IpTextBox ipTextBox;
+	PortTextBox portTextBox;
 };
 
 #endif /* ClientPage_cpp */

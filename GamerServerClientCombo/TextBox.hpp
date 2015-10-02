@@ -20,13 +20,15 @@ public:
 	void draw();
 	void setBounds(float x, float y, float w, float h);
 	bool textEntered(sf::Uint32 character);
-private:
+	std::string getString();
+protected:
 	bool isInFocus = false;
+	sf::Text text;
+	std::string str;
+private:
 	sf::RenderWindow *window;
 	sf::Font *font;
 	sf::RectangleShape background;
-	sf::Text text;
-	std::string str;
 };
 
 #endif /* TextBox_cpp */

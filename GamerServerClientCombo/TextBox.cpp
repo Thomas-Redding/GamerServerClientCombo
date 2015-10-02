@@ -57,3 +57,7 @@ void TextBox::setBounds(float x, float y, float w, float h) {
 	float textHeight = text.getGlobalBounds().height;
 	text.setPosition(x-textWidth/2+2, y+h/3-textHeight/2);
 }
+
+std::string TextBox::getString() {
+	return str;
+}

@@ -12,7 +12,6 @@
 #include <SFML/Network.hpp>
 #include "Page.hpp"
 #include "Button.hpp"
-#include "TextBox.hpp"
 
 class ServerPage : public Page {
 public:
