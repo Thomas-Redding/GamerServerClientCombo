@@ -8,7 +8,7 @@
 
 #include "GameClient.hpp"
 
-GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont) {
+GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), view(w) {
 	entities.push_back(Entities());
 }
 
@@ -30,10 +30,6 @@ bool GameClient::update() {
 }
 
 bool GameClient::draw() {
-	sf::RectangleShape rect;
-	rect.setSize(sf::Vector2f(100, 100));
-	rect.setPosition(0, 0);
-	rect.setFillColor(sf::Color::Red);
-	window->draw(rect);
+	view.draw();
 	return true;
 }
