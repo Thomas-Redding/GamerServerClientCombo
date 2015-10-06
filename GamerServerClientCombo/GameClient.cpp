@@ -9,6 +9,7 @@
 #include "GameClient.hpp"
 
 GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont) {
+	entities.push_back(Entities());
 }
 
 bool GameClient::mousePressed(sf::Mouse::Button button, int x, int y) {
@@ -20,6 +21,11 @@ bool GameClient::mouseReleased(sf::Mouse::Button button, int x, int y) {
 }
 
 bool GameClient::textEntered(sf::Uint32 character) {
+	return true;
+}
+
+bool GameClient::update() {
+	systemsHandler.update(&entities[0]);
 	return true;
 }
 

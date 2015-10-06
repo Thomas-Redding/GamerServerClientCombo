@@ -29,7 +29,7 @@ public:
 	bool otherEvent(sf::Event event) {return true;};
 	void closing() {};
 	bool draw();
-	bool update() {return true;};
+	bool update();
 	void tcpMessageReceived(std::string message, long timeStamp) {};
 	void udpMessageReceived(std::string message, long timeStamp) {};
 private:
