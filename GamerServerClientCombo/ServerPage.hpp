@@ -11,7 +11,6 @@
 
 #include <SFML/Network.hpp>
 #include "Page.hpp"
-#include "Button.hpp"
 
 class ServerPage : public Page {
 public:
@@ -32,6 +31,7 @@ public:
 	void udpMessageReceived(std::string message, long timeStamp) {};
 private:
 	Button backButton;
+	Button startButton;
 	sf::Text portLabel;
 	sf::Text ipLabel;
 	unsigned short serverPort;

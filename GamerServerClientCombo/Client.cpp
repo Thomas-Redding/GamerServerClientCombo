@@ -32,6 +32,7 @@ bool Client::start() {
 	pages.push_back(new ServerPage(&currentPage, &window, &font, getLocalServerTcpPort()));
 	pages.push_back(new ClientPage(&currentPage, &window, &font));
 	pages.push_back(new ClientMatchmakingPage(&currentPage, &window, &font));
+	pages.push_back(new GameClient(&currentPage, &window, &font));
 	
 	return true;
 }
@@ -86,6 +87,10 @@ bool Client::update() {
 		disconnect();
 	}
 	
+	str = pages[5]->getMessageForClient();
+	if(str == "startGame") {
+		sendTcpMessage("startGame");
+	}
 	
 	int stage = getConnectionState();
 	for(int i=0; i<pages.size(); i++)
@@ -94,6 +99,9 @@ bool Client::update() {
 }
 
 void Client::tcpMessageReceived(std::string message, long timeStamp) {
+	if(message == "startGame") {
+		currentPage = 5;
+	}
 	return pages[currentPage]->tcpMessageReceived(message, timeStamp);
 }
 

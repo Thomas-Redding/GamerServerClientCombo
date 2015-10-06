@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
+#include "Button.hpp"
+#include "TextBox.hpp"
 
 class Page {
 public:

@@ -10,7 +10,6 @@
 #define MultiplayerPage_cpp
 
 #include "Page.hpp"
-#include "Button.hpp"
 
 class MultiplayerPage : public Page {
 public:

@@ -10,7 +10,6 @@
 #define ClientPage_cpp
 
 #include "Page.hpp"
-#include "Button.hpp"
 #include "IpTextBox.hpp"
 #include "PortTextBox.hpp"
 

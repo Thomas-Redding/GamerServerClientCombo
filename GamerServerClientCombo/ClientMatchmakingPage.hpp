@@ -10,7 +10,6 @@
 #define ClientMatchmakingPage_cpp
 
 #include "Page.hpp"
-#include "Button.hpp"
 
 class ClientMatchmakingPage : public Page {
 public:
