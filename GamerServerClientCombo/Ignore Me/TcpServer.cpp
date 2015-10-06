@@ -41,7 +41,6 @@ bool TcpServer::update() {
 					if(status == sf::Socket::Done) {
 						std::string str;
 						packet >> str;
-						std::cout << "<<" << str << ">>";
 						communicator.sendTcpMessageToServer(str, client->getRemoteAddress().toString());
 					}
 					if(status == sf::Socket::Disconnected) {

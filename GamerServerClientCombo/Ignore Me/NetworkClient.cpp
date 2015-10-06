@@ -179,11 +179,8 @@ int NetworkClient::getConnectionState() {
 }
 
 void NetworkClient::sendTcpMessage(std::string message) {
-	std::cout << "{{" << message << "}}";
-	std::cout << connectionState;
 	if(connectionState >= 1) {
 		message = std::to_string(getServerTime()) + "@" + message;
-		std::cout << "{" << message << "}";
 		sf::Packet packet;
 		packet << message;
 		tcpSocket.send(packet);
