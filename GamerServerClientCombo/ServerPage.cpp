@@ -21,8 +21,10 @@ bool ServerPage::mousePressed(sf::Mouse::Button button, int x, int y) {
 }
 
 bool ServerPage::mouseReleased(sf::Mouse::Button button, int x, int y) {
-	if(backButton.mouseReleased(button, x, y))
+	if(backButton.mouseReleased(button, x, y)) {
 		*pageNum = 1;
+		sendMessageToClient("logoutOfOwnServer");
+	}
 	if(startButton.mouseReleased(button, x, y)) {
 		sendMessageToClient("startGame");
 		*pageNum = 5;

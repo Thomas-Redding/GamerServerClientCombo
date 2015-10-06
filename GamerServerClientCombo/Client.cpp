@@ -82,15 +82,24 @@ bool Client::update() {
 		}
 	}
 	
+	str = pages[1]->getMessageForClient();
+	if(str == "loginToOwnServer") {
+		attemptConnectionToServer(sf::IpAddress::getLocalAddress(), getLocalServerTcpPort());
+	}
+	
+	str = pages[2]->getMessageForClient();
+	if(str == "startGame") {
+		sendTcpMessage("startGame");
+	}
+	else if(str == "logoutOfOwnServer") {
+		disconnect();
+	}
+	
 	str = pages[4]->getMessageForClient();
 	if(str == "logout") {
 		disconnect();
 	}
-	
-	str = pages[5]->getMessageForClient();
-	if(str == "startGame") {
-		sendTcpMessage("startGame");
-	}
+
 	
 	int stage = getConnectionState();
 	for(int i=0; i<pages.size(); i++)

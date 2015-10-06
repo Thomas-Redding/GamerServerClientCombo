@@ -22,8 +22,10 @@ bool MultiplayerPage::mousePressed(sf::Mouse::Button button, int x, int y) {
 bool MultiplayerPage::mouseReleased(sf::Mouse::Button button, int x, int y) {
 	if(backButton.mouseReleased(button, x, y))
 		*pageNum = 0;
-	if(serverButton.mouseReleased(button, x, y))
+	if(serverButton.mouseReleased(button, x, y)) {
 		*pageNum = 2;
+		sendMessageToClient("loginToOwnServer");
+	}
 	if(clientButton.mouseReleased(button, x, y))
 		*pageNum = 3;
 	return true;
