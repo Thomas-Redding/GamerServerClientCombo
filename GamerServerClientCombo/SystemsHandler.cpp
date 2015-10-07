@@ -57,13 +57,13 @@ bool SystemsHandler::update(Entities *entities, std::vector<InputState> *inputSt
 	}
 	for(int i=0; i<inputStates->size(); i++) {
 		if(inputStates->at(i).left)
-			entities->boxX -= deltaTime;
+			entities->boxX -= deltaTime/10;
 		if(inputStates->at(i).right)
-			entities->boxX += deltaTime;
+			entities->boxX += deltaTime/10;
 		if(inputStates->at(i).up)
-			entities->boxY -= deltaTime;
+			entities->boxY -= deltaTime/10;
 		if(inputStates->at(i).down)
-			entities->boxY += deltaTime;
+			entities->boxY += deltaTime/10;
 	}
 	return true;
 }
@@ -134,5 +134,4 @@ std::vector<std::string> SystemsHandler::split(const std::string &s, char delim)
     return elems;
     return elems;
 }
-
 

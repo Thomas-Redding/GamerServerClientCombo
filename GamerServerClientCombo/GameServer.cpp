@@ -18,7 +18,6 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
 		systemsHandler.clearInputState(&inputStates.front()[i], getTime());
 	}
 	entities.push_front(Entities());
-	
 	// setup single item in entities at start of game
 	systemsHandler.setupEntities(&entities.front());
 	timeOfLastFrame = getTime();
@@ -33,6 +32,7 @@ void GameServer::update() {
 	}
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
+	entities.front().timeStamp = timeOfLastFrame;
 	systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
 	for(int i=0; i<players.size(); i++) {
 		udpMessagesToSend.push_back(systemsHandler.entitiesToString(&entities.front(), players[i]));
@@ -46,8 +46,18 @@ void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeSta
 void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
 	for(int i=0; i<players.size(); i++) {
 		if(ip == players[i]) {
-			systemsHandler.applyInputState(&inputStates.front()[i], message);
-			systemsHandler.update(&entities.front(), &inputStates.front(), 50);
+			InputState newInfo;
+			systemsHandler.applyInputState(&newInfo, message);
+			for(int j=0; j<inputStates.at(j).size(); j++) {
+				if(entities[j].timeStamp > newInfo.timeStamp) {
+					// apply input
+					for(int k=j; k>=0; k--) {
+						inputStates[k][i] = newInfo;
+						systemsHandler.update(&entities[k], &inputStates[k], 50);
+					}
+					break;
+				}
+			}
 		}
 	}
 }

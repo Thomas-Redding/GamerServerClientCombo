@@ -66,6 +66,7 @@ bool GameClient::update() {
 	currentInputState.right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
 	currentInputState.up = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
 	currentInputState.down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
+	
 	entities.push_front(entities.front());
 	inputStates.push_front(std::vector<InputState>());
 	inputStates.front().push_back(currentInputState);
@@ -75,6 +76,7 @@ bool GameClient::update() {
 	}
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
+	entities.front().timeStamp = timeOfLastFrame;
 	bool rtn = systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates.front()));
 	systemsHandler.clearInputState(&inputStates.front().at(0), timeOfLastFrame);
