@@ -15,6 +15,8 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
 }
 
 void GameServer::update() {
+	udpMessagesToSend.push_back("foo");
+	udpIp.push_back(sf::IpAddress::getLocalAddress());
 }
 
 void GameServer::receivedTcp(std::string message, long timeStamp) {

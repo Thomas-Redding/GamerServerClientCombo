@@ -67,7 +67,7 @@ void NetworkClient::networkUpdate() {
 				}
 			}
 			else
-				tcpMessageReceived(message, timeStamp);
+				tcpMessageReceived(message, serverToClientTime(timeStamp));
 		}
 		else
 			break;
@@ -104,7 +104,7 @@ void NetworkClient::networkUpdate() {
 					estimatedClockDifferences.erase(estimatedClockDifferences.begin(), estimatedClockDifferences.begin()+1);
 			}
 			else
-				udpMessageReceived(message, timeStamp);
+				udpMessageReceived(message, serverToClientTime(timeStamp));
 		}
 		else {
 			break;
