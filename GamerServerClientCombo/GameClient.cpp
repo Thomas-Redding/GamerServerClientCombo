@@ -89,7 +89,17 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 };
 
 void GameClient::udpMessageReceived(std::string message, long timeStamp) {
-    systemsHandler.entitiesFromString(&entities.front(), message);
+	for (int i=0; i<entities.size(); i++) {
+		if(entities[i].timeStamp > timeStamp) {
+			systemsHandler.entitiesFromString(&entities[i], message);
+			for(int j=i; j>0; j--) {
+				entities[j] = entities[j+1];
+				systemsHandler.update(&entities[j+1], &inputStates[j], 50);
+			}
+			break;
+		}
+	}
+	
 };
 
 /*** Forward to View ***/
