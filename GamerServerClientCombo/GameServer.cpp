@@ -43,6 +43,12 @@ void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeSta
 }
 
 void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
+	for(int i=0; i<players.size(); i++) {
+		if(ip == players[i]) {
+			systemsHandler.applyInputState(&inputStates.front()[i], message);
+			systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
+		}
+	}
 	std::cout << "UDP: " << message << " : " << timeStamp << "\n";
 }
 
