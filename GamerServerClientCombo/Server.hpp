@@ -45,7 +45,7 @@ public:
 	void gotNewClient(sf::IpAddress ip);
 	void lostClient(sf::IpAddress ip);
 private:
-	bool gameRunning = true;
+	bool gameRunning = false;
 	std::vector<sf::IpAddress> clients;
 	GameServer gameServer;
 };

@@ -15,7 +15,7 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
 	// put empty InputState and Entities into queues
 	inputStates.push_back(std::vector<InputState>(players.size()));
 	for(int i=0; i<players.size(); i++) {
-		systemsHandler.clearInputState(inputStates.front()[i], getTime());
+		systemsHandler.clearInputState(&inputStates.front()[i], getTime());
 	}
 	entities.push_front(Entities());
 	
@@ -46,7 +46,7 @@ void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeSta
 	for(int i=0; i<players.size(); i++) {
 		if(ip == players[i]) {
 			systemsHandler.applyInputState(&inputStates.front()[i], message);
-			systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
+			systemsHandler.update(&entities.front(), &inputStates.front(), 50);
 		}
 	}
 	std::cout << "UDP: " << message << " : " << timeStamp << "\n";
