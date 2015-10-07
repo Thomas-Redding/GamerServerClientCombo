@@ -76,7 +76,6 @@ bool GameClient::update() {
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
 	bool rtn = systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
-	std::cout << inputStateToString() << "\n";
 	clearInputState(timeOfLastFrame);
 	return rtn;
 }

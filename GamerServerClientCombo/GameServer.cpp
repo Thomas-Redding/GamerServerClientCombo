@@ -17,6 +17,14 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
 void GameServer::update() {
 }
 
+void GameServer::receivedTcp(std::string message, long timeStamp) {
+	std::cout << "UDP: " << message << " : " << timeStamp;
+}
+
+void GameServer::receivedUdp(std::string message, long timeStamp) {
+	std::cout << "UDP: " << message << " : " << timeStamp;
+}
+
 /*** Private ***/
 
 long GameServer::getTime() {

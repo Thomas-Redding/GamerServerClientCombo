@@ -10,7 +10,6 @@
 #define GameClient_cpp
 
 #include <deque>
-#include <iostream>
 
 #include "Page.hpp"
 #include "InputState.hpp"

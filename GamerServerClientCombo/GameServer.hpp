@@ -9,6 +9,7 @@
 #ifndef GameServer_cpp
 #define GameServer_cpp
 
+#include <iostream>
 #include <deque>
 #include "Entities.hpp"
 #include "InputState.hpp"
@@ -18,6 +19,8 @@ class GameServer {
 public:
 	void start(std::vector<sf::IpAddress> myPlayers);
 	void update();
+	void receivedTcp(std::string message, long timeStamp);
+	void receivedUdp(std::string message, long timeStamp);
 private:
 	std::deque<Entities> entities;
 	std::deque<std::vector<InputState>> inputStates;
