@@ -19,6 +19,18 @@ bool Server::update() {
 	tim.tv_nsec *= 1000000;
 	nanosleep(&tim , &tim2);
 	
+	if(gameRunning) {
+		gameServer.update();
+		for(int i=0; i<gameServer.udpMessagesToSend.size(); i++) {
+			sendUdp(gameServer.udpMessagesToSend[i], gameServer.udpIp[i]);
+		}
+		gameServer.udpMessagesToSend.clear();
+		for(int i=0; i<gameServer.tcpMessagesToSend.size(); i++) {
+			sendTcp(gameServer.tcpMessagesToSend[i], gameServer.tcpIp[i]);
+		}
+		gameServer.tcpMessagesToSend.clear();
+	}
+	
 	return true;
 }
 

@@ -21,6 +21,10 @@ public:
 	void update();
 	void receivedTcp(std::string message, long timeStamp);
 	void receivedUdp(std::string message, long timeStamp);
+	std::vector<std::string> udpMessagesToSend;
+	std::vector<sf::IpAddress> udpIp;
+	std::vector<std::string> tcpMessagesToSend;
+	std::vector<std::string> tcpIp;
 private:
 	std::deque<Entities> entities;
 	std::deque<std::vector<InputState>> inputStates;
