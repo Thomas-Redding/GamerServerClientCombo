@@ -29,6 +29,10 @@ public:
 	bool otherEvent(sf::Event event);
 	void closing();
 	bool update(Entities *entities, std::vector<InputState> *inputStates, long deltaTime);
+	std::string entitiesToString(sf::IpAddress ip);
+	void entitiesFromString(std::string str);
+	std::string inputStateToString();
+	void applyInputState(InputState *inputState);
 private:
 	// todo
 };

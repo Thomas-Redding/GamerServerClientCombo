@@ -46,7 +46,7 @@ void Server::lostClient(sf::IpAddress ip) {
 
 bool Server::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
 	if(gameRunning) {
-		gameServer.receivedTcp(message, timeStamp);
+		gameServer.receivedUdp(message, timeStamp);
 	}
 	return true;
 }

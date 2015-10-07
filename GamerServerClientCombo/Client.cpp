@@ -99,6 +99,11 @@ bool Client::update() {
 	if(str == "logout") {
 		disconnect();
 	}
+	
+	str = pages[5]->getMessageForClient();
+	if(str != "") {
+		sendUdpMessage(str);
+	}
 
 	
 	int stage = getConnectionState();

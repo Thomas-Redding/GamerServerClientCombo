@@ -65,5 +65,32 @@ bool SystemsHandler::update(Entities *entities, std::vector<InputState> *inputSt
 	return true;
 }
 
+std::string SystemsHandler::entitiesToString(sf::IpAddress ip) {
+	return std::to_string(entities.front().boxX) + "," + std::to_string(entities.front().boxY);
+}
+
+void SystemsHandler::entitiesFromString(std::string str) {
+	std::vector<std::string> vect = split(str, ',');
+	if(vect.size() == 2) {
+		entities.front().boxX = stof(vect[0]);
+		entities.front().boxY = stof(vect[1]);
+	}
+}
+
+std::string SystemsHandler::inputStateToString() {
+	std::string str = "";
+	str += std::to_string(inputStates.front()[0].up);
+	str += std::to_string(inputStates.front()[0].down);
+	str += std::to_string(inputStates.front()[0].left);
+	str += std::to_string(inputStates.front()[0].right);
+	return str;
+}
+
+void SystemsHandler::applyInputState(InputState *inputState) {
+	//
+}
+
 /*** Private ***/
+
+
 

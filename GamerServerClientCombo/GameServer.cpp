@@ -18,11 +18,11 @@ void GameServer::update() {
 }
 
 void GameServer::receivedTcp(std::string message, long timeStamp) {
-	std::cout << "UDP: " << message << " : " << timeStamp;
+	std::cout << "TCP: " << message << " : " << timeStamp << "\n";
 }
 
 void GameServer::receivedUdp(std::string message, long timeStamp) {
-	std::cout << "UDP: " << message << " : " << timeStamp;
+	std::cout << "UDP: " << message << " : " << timeStamp << "\n";
 }
 
 /*** Private ***/

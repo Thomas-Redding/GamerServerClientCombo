@@ -76,6 +76,7 @@ bool GameClient::update() {
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
 	bool rtn = systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
+	sendMessageToClient(inputStateToString());
 	clearInputState(timeOfLastFrame);
 	return rtn;
 }
@@ -111,31 +112,6 @@ void GameClient::clearInputState(long time) {
 
 long GameClient::getTime() {
 	return std::chrono::duration_cast< std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-}
-
-std::string GameClient::entitiesToString(sf::IpAddress ip) {
-	return std::to_string(entities.front().boxX) + "," + std::to_string(entities.front().boxY);
-}
-
-void GameClient::entitiesFromString(std::string str) {
-	std::vector<std::string> vect = split(str, ',');
-	if(vect.size() == 2) {
-		entities.front().boxX = stof(vect[0]);
-		entities.front().boxY = stof(vect[1]);
-	}
-}
-
-std::string GameClient::inputStateToString() {
-	std::string str = "";
-	str += std::to_string(inputStates.front()[0].up);
-	str += std::to_string(inputStates.front()[0].down);
-	str += std::to_string(inputStates.front()[0].left);
-	str += std::to_string(inputStates.front()[0].right);
-	return str;
-}
-
-void GameClient::applyInputState(InputState *inputState) {
-	//
 }
 
 std::vector<std::string> GameClient::split(const std::string &s, char delim) {

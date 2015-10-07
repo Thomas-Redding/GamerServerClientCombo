@@ -50,11 +50,6 @@ private:
 	long timeOfLastFrame;
 	void clearInputState(long time);
 	long getTime();
-	std::string entitiesToString(sf::IpAddress ip);
-	void entitiesFromString(std::string str);
-	std::string inputStateToString();
-	void applyInputState(InputState *inputState);
-
 	std::vector<std::string> split(const std::string &s, char delim);
 };
 
