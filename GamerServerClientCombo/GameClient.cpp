@@ -77,6 +77,7 @@ bool GameClient::update() {
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
 	entities.front().timeStamp = timeOfLastFrame;
+	inputStates.front()[0].timeStamp = timeOfLastFrame;
 	bool rtn = systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates.front()));
 	systemsHandler.clearInputState(&inputStates.front().at(0), timeOfLastFrame);

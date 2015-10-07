@@ -48,12 +48,15 @@ void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeSta
 		if(ip == players[i]) {
 			InputState newInfo;
 			systemsHandler.applyInputState(&newInfo, message);
-			for(int j=0; j<inputStates.at(j).size(); j++) {
-				if(entities[j].timeStamp > newInfo.timeStamp) {
+			for(int j=0; j<entities.size(); j++) {
+				if(newInfo.timeStamp > entities[j].timeStamp) {
 					// apply input
-					for(int k=j; k>=0; k--) {
-						inputStates[k][i] = newInfo;
-						systemsHandler.update(&entities[k], &inputStates[k], 50);
+					if(j+1 < entities.size()) {
+						for(int k=j; k>=0; k--) {
+							inputStates[k][i] = newInfo;
+							entities[k] = entities[k+1];
+							systemsHandler.update(&entities[k+1], &inputStates[k], 50);
+						}
 					}
 					break;
 				}
