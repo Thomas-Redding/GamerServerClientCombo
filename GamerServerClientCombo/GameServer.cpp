@@ -34,8 +34,10 @@ void GameServer::update() {
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
 	systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
-	udpMessagesToSend.push_back("foo");
-	udpIp.push_back(sf::IpAddress::getLocalAddress());
+	for(int i=0; i<players.size(); i++) {
+		udpMessagesToSend.push_back("foo");
+		udpIp.push_back(players[i]);
+	}
 }
 
 void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) {
