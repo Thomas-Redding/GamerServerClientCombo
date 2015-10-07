@@ -11,7 +11,7 @@
 GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), view(w) {
 	// put empty InputState and Entities into queues
 	inputStates.push_back(std::vector<InputState>());
-	clearInputState(getTime());
+    systemsHandler.clearInputState(&currentInputState, getTime());
 	inputStates.front().push_back(currentInputState);
 	entities.push_front(Entities());
 	
@@ -77,7 +77,7 @@ bool GameClient::update() {
 	timeOfLastFrame = getTime();
 	bool rtn = systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates.front()));
-	clearInputState(timeOfLastFrame);
+	systemsHandler.clearInputState(&inputStates.front().at(0), timeOfLastFrame);
 	return rtn;
 }
 
@@ -102,13 +102,7 @@ bool GameClient::draw() {
 
 /*** Private ***/
 
-void GameClient::clearInputState(long time) {
-	currentInputState.timeStamp = time;
-	currentInputState.up = false;
-	currentInputState.down = false;
-	currentInputState.left = false;
-	currentInputState.right = false;
-}
+
 
 long GameClient::getTime() {
 	return std::chrono::duration_cast< std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();

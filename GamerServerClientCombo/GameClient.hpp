@@ -48,7 +48,7 @@ private:
 	View view;
 	SystemsHandler systemsHandler;
 	long timeOfLastFrame;
-	void clearInputState(long time);
+	//void clearInputState(InputState *InputState, long time);
 	long getTime();
 	std::vector<std::string> split(const std::string &s, char delim);
 };

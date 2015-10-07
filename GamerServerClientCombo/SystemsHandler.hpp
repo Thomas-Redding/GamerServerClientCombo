@@ -32,7 +32,8 @@ public:
 	std::string entitiesToString(Entities *entities, sf::IpAddress ip);
 	void entitiesFromString(Entities *entities, std::string str);
 	std::string inputStateToString(std::vector<InputState> *inputStates);
-	void applyInputState(InputState *inputState);
+    void applyInputState(InputState *inputState, std::string str);
+    void clearInputState(InputState *inputState, long time);
 private:
     std::vector<std::string> split(const std::string &s, char delim);
 };

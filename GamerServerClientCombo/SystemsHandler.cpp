@@ -78,7 +78,7 @@ void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
 }
 
 std::string SystemsHandler::inputStateToString(std::vector<InputState> *inputStates) {
-	std::string str = "";
+    std::string str = std::to_string(inputStates->at(0).timeStamp)+":";
 	str += std::to_string(inputStates->at(0).up);
 	str += std::to_string(inputStates->at(0).down);
 	str += std::to_string(inputStates->at(0).left);
@@ -86,8 +86,16 @@ std::string SystemsHandler::inputStateToString(std::vector<InputState> *inputSta
 	return str;
 }
 
-void SystemsHandler::applyInputState(InputState *inputState) {
-	//
+void SystemsHandler::applyInputState(InputState *inputState, std::string str) {
+    std::vector<std::string> vect = split(str, ',');
+}
+
+void SystemsHandler::clearInputState(InputState *inputState, long time) {
+    inputState->timeStamp = time;
+    inputState->up = false;
+    inputState->down = false;
+    inputState->left = false;
+    inputState->right = false;
 }
 
 /*** Private ***/
@@ -102,4 +110,5 @@ std::vector<std::string> SystemsHandler::split(const std::string &s, char delim)
     return elems;
     return elems;
 }
+
 
