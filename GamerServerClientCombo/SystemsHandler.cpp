@@ -52,6 +52,9 @@ void SystemsHandler::closing() {
 
 bool SystemsHandler::update(Entities *entities, std::vector<InputState> *inputStates, long deltaTime) {
 	// apply inputs
+	if(inputStates->size() > 1) {
+		std::cout << "<" << inputStates->size() << inputStates->at(0).up << inputStates->at(1).up << ">\n";
+	}
 	for(int i=0; i<inputStates->size(); i++) {
 		if(inputStates->at(i).left)
 			entities->boxX -= deltaTime;
@@ -87,8 +90,28 @@ std::string SystemsHandler::inputStateToString(std::vector<InputState> *inputSta
 }
 
 void SystemsHandler::applyInputState(InputState *inputState, std::string str) {
-    std::vector<std::string> vect = split(str, ',');
-    
+    std::vector<std::string> vect = split(str, ':');
+	if(vect.size() != 2)
+		return;
+	inputState->timeStamp = stol(vect[0]);
+	if(vect[1].length() == 4) {
+		if(vect[1][0] == '1')
+			inputState->up = true;
+		else
+			inputState->up = false;
+		if(vect[1][1] == '1')
+			inputState->down = true;
+		else
+			inputState->down = false;
+		if(vect[1][2] == '1')
+			inputState->left = true;
+		else
+			inputState->left = false;
+		if(vect[1][3] == '1')
+			inputState->right = true;
+		else
+			inputState->right = false;
+	}
 }
 
 void SystemsHandler::clearInputState(InputState *inputState, long time) {

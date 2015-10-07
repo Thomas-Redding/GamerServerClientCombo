@@ -41,7 +41,6 @@ void GameServer::update() {
 }
 
 void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) {
-	std::cout << "TCP: " << message << " : " << timeStamp << "\n";
 }
 
 void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
@@ -51,7 +50,6 @@ void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeSta
 			systemsHandler.update(&entities.front(), &inputStates.front(), 50);
 		}
 	}
-	std::cout << "UDP: " << message << " : " << timeStamp << "\n";
 }
 
 /*** Private ***/

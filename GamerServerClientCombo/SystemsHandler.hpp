@@ -9,6 +9,7 @@
 #ifndef SystemsHandler_cpp
 #define SystemsHandler_cpp
 
+#include <iostream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
