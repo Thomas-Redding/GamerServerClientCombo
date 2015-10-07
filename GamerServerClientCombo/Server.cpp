@@ -31,6 +31,9 @@ bool Server::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) 
 			}
 		}
 	}
+	else if(gameRunning) {
+		
+	}
 	return true;
 }
 

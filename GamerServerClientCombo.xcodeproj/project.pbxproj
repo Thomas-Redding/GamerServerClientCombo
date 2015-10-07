@@ -17,6 +17,7 @@
 		283DF7E91BBF03B200270A69 /* IpTextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283DF7E71BBF03B200270A69 /* IpTextBox.cpp */; };
 		28434D0E1B753037008A51AC /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0D1B753037008A51AC /* sansation.ttf */; };
 		28434D101B753037008A51AC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0F1B753037008A51AC /* icon.png */; };
+		2844F5361BC57E4F003DAFFE /* GameServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2844F5341BC57E4F003DAFFE /* GameServer.cpp */; };
 		28A4EA461BBE4ACF0080923E /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A4EA441BBE4ACF0080923E /* TextBox.cpp */; };
 		28A4EA491BBE547C0080923E /* MultiplayerPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A4EA471BBE547C0080923E /* MultiplayerPage.cpp */; };
 		28A52A771BC40A7D001ED83C /* GameClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A751BC40A7D001ED83C /* GameClient.cpp */; };
@@ -53,6 +54,8 @@
 		28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GamerServerClientCombo-Info.plist"; sourceTree = "<group>"; };
 		28434D0D1B753037008A51AC /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		28434D0F1B753037008A51AC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		2844F5341BC57E4F003DAFFE /* GameServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameServer.cpp; sourceTree = "<group>"; };
+		2844F5351BC57E4F003DAFFE /* GameServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameServer.hpp; sourceTree = "<group>"; };
 		28A4EA441BBE4ACF0080923E /* TextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextBox.cpp; sourceTree = "<group>"; };
 		28A4EA451BBE4ACF0080923E /* TextBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextBox.hpp; sourceTree = "<group>"; };
 		28A4EA471BBE547C0080923E /* MultiplayerPage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplayerPage.cpp; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 		28A52A781BC4109F001ED83C /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				2844F5341BC57E4F003DAFFE /* GameServer.cpp */,
+				2844F5351BC57E4F003DAFFE /* GameServer.hpp */,
 				28A52A751BC40A7D001ED83C /* GameClient.cpp */,
 				28A52A761BC40A7D001ED83C /* GameClient.hpp */,
 				28A52A7A1BC410D7001ED83C /* InputState.hpp */,
@@ -321,6 +326,7 @@
 				283DF7E11BBF004900270A69 /* ClientPage.cpp in Sources */,
 				28CB66111B9DD67F00833E69 /* NetworkServer.cpp in Sources */,
 				28A52A771BC40A7D001ED83C /* GameClient.cpp in Sources */,
+				2844F5361BC57E4F003DAFFE /* GameServer.cpp in Sources */,
 				2828551D1BBDE0AD0067FDBF /* Button.cpp in Sources */,
 				28CB66131B9DD67F00833E69 /* ServerCommunicator.cpp in Sources */,
 				28A4EA461BBE4ACF0080923E /* TextBox.cpp in Sources */,

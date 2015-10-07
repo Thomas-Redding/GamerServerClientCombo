@@ -9,34 +9,54 @@
 #ifndef GameClient_cpp
 #define GameClient_cpp
 
+#include <deque>
+#include <iostream>
+
 #include "Page.hpp"
 #include "InputState.hpp"
 #include "Entities.hpp"
 #include "SystemsHandler.hpp"
 #include "View.hpp"
 
+/*
+ During a frame, the methods are called in the following order:
+ 1. event methods
+ 2. update()
+ 3. draw()
+*/
+
 class GameClient : public Page {
 public:
 	GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont);
-	bool keyPressed(sf::Keyboard::Key keyCode) {return true;};
-	bool keyReleased(sf::Keyboard::Key keyCode) {return true;};
-	bool mouseMoved(int x, int y) {return true;};
+	bool keyPressed(sf::Keyboard::Key keyCode);
+	bool keyReleased(sf::Keyboard::Key keyCode);
+	bool mouseMoved(int x, int y);
 	bool mousePressed(sf::Mouse::Button button, int x, int y);
 	bool mouseReleased(sf::Mouse::Button button, int x, int y);
-	bool mouseWheeled(int delta, int x, int y) {return true;};
-	bool resized(unsigned int width, unsigned int height) {return true;};
+	bool mouseWheeled(int delta, int x, int y);
+	bool resized(unsigned int width, unsigned int height);
 	bool textEntered(sf::Uint32 character);
-	bool otherEvent(sf::Event event) {return true;};
-	void closing() {};
+	bool otherEvent(sf::Event event);
+	void closing();
 	bool draw();
 	bool update();
-	void tcpMessageReceived(std::string message, long timeStamp) {};
-	void udpMessageReceived(std::string message, long timeStamp) {};
+	void tcpMessageReceived(std::string message, long timeStamp);
+	void udpMessageReceived(std::string message, long timeStamp);
 private:
-	std::vector<std::vector<InputState>> inputStates;
-	std::vector<Entities> entities;
+	InputState currentInputState;
+	std::deque<std::vector<InputState>> inputStates;
+	std::deque<Entities> entities;
 	View view;
 	SystemsHandler systemsHandler;
+	long timeOfLastFrame;
+	void clearInputState(long time);
+	long getTime();
+	std::string entitiesToString(sf::IpAddress ip);
+	void entitiesFromString(std::string str);
+	std::string inputStateToString();
+	void applyInputState(InputState *inputState);
+
+	std::vector<std::string> split(const std::string &s, char delim);
 };
 
 #endif /* GameClient_cpp */

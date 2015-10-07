@@ -15,6 +15,7 @@
 #include <thread>
 #include <SFML/Network.hpp>
 #include "NetworkServer.hpp"
+#include "GameServer.hpp"
 
 /*
  The casual user of ths Server doesn't have to look at NetworkServer. Instead, you need only know that there are some methods defined within it that may prove useful. Most of them should be self-explanatory.
@@ -44,7 +45,9 @@ public:
 	void gotNewClient(sf::IpAddress ip);
 	void lostClient(sf::IpAddress ip);
 private:
+	bool gameRunning = true;
 	std::vector<sf::IpAddress> clients;
+	GameServer gameServer;
 };
 
 #endif /* Server_cpp */

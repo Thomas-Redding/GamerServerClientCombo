@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 struct InputState {
+	long timeStamp;
 	bool up;
 	bool down;
 	bool left;

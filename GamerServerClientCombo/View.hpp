@@ -11,11 +11,13 @@
 
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
+#include "Entities.hpp"
 
 class View {
 public:
 	View(sf::RenderWindow *myWindow);
-	void draw();
+	bool draw(Entities *entities);
+	bool resized(unsigned int width, unsigned int height);
 private:
 	sf::RenderWindow *window;
 };

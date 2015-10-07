@@ -14,8 +14,10 @@
 class Entities {
 public:
 	long timeStamp;
-	int levelWidth;
-	int levelHeight;
+	int boxWidth = 200;
+	int boxHeight = 50;
+	int boxX = 0;
+	int boxY = 0;
 };
 
 #endif /* Entities_cpp */
