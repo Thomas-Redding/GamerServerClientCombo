@@ -88,6 +88,7 @@ std::string SystemsHandler::inputStateToString(std::vector<InputState> *inputSta
 
 void SystemsHandler::applyInputState(InputState *inputState, std::string str) {
     std::vector<std::string> vect = split(str, ',');
+    
 }
 
 void SystemsHandler::clearInputState(InputState *inputState, long time) {

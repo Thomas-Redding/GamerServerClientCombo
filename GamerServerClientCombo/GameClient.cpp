@@ -86,6 +86,7 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 };
 
 void GameClient::udpMessageReceived(std::string message, long timeStamp) {
+    systemsHandler.entitiesFromString(&entities.front(), message);
 	std::cout << message << "\n";
 };
 
