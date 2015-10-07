@@ -35,7 +35,7 @@ void GameServer::update() {
 	timeOfLastFrame = getTime();
 	systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
 	for(int i=0; i<players.size(); i++) {
-		udpMessagesToSend.push_back("foo");
+		udpMessagesToSend.push_back(systemsHandler.entitiesToString(&entities.front(), players[i]));
 		udpIp.push_back(players[i]);
 	}
 }
