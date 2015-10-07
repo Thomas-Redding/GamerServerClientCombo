@@ -29,12 +29,12 @@ public:
 	bool otherEvent(sf::Event event);
 	void closing();
 	bool update(Entities *entities, std::vector<InputState> *inputStates, long deltaTime);
-	std::string entitiesToString(sf::IpAddress ip);
-	void entitiesFromString(std::string str);
-	std::string inputStateToString();
+	std::string entitiesToString(Entities *entities, sf::IpAddress ip);
+	void entitiesFromString(Entities *entities, std::string str);
+	std::string inputStateToString(std::vector<InputState> *inputStates);
 	void applyInputState(InputState *inputState);
 private:
-	// todo
+    std::vector<std::string> split(const std::string &s, char delim);
 };
 
 #endif /* SystemsHandler_cpp */

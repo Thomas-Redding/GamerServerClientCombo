@@ -65,24 +65,24 @@ bool SystemsHandler::update(Entities *entities, std::vector<InputState> *inputSt
 	return true;
 }
 
-std::string SystemsHandler::entitiesToString(sf::IpAddress ip) {
-	return std::to_string(entities.front().boxX) + "," + std::to_string(entities.front().boxY);
+std::string SystemsHandler::entitiesToString(Entities *entities, sf::IpAddress ip) {
+	return std::to_string(entities->boxX) + "," + std::to_string(entities->boxY);
 }
 
-void SystemsHandler::entitiesFromString(std::string str) {
-	std::vector<std::string> vect = split(str, ',');
+void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
+    std::vector<std::string> vect = split(str, ',');
 	if(vect.size() == 2) {
-		entities.front().boxX = stof(vect[0]);
-		entities.front().boxY = stof(vect[1]);
+		entities->boxX = stof(vect[0]);
+		entities->boxY = stof(vect[1]);
 	}
 }
 
-std::string SystemsHandler::inputStateToString() {
+std::string SystemsHandler::inputStateToString(std::vector<InputState> *inputStates) {
 	std::string str = "";
-	str += std::to_string(inputStates.front()[0].up);
-	str += std::to_string(inputStates.front()[0].down);
-	str += std::to_string(inputStates.front()[0].left);
-	str += std::to_string(inputStates.front()[0].right);
+	str += std::to_string(inputStates->at(0).up);
+	str += std::to_string(inputStates->at(0).down);
+	str += std::to_string(inputStates->at(0).left);
+	str += std::to_string(inputStates->at(0).right);
 	return str;
 }
 
@@ -92,5 +92,14 @@ void SystemsHandler::applyInputState(InputState *inputState) {
 
 /*** Private ***/
 
-
+std::vector<std::string> SystemsHandler::split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+    return elems;
+}
 
