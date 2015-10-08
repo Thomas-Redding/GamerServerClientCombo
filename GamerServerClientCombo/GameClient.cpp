@@ -79,7 +79,7 @@ bool GameClient::update() {
 	entities.front().timeStamp = timeOfLastFrame;
 	inputStates.front()[0].timeStamp = timeOfLastFrame;
 	bool rtn = systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
-    sendMessageToClient(systemsHandler.inputStateToString(&inputStates.front()));
+    sendMessageToClient(systemsHandler.inputStateToString(&inputStates.front()[0]));
 	systemsHandler.clearInputState(&inputStates.front().at(0), timeOfLastFrame);
 	return rtn;
 }
@@ -94,12 +94,11 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 			systemsHandler.entitiesFromString(&entities[i], message);
 			for(int j=i; j>0; j--) {
 				entities[j] = entities[j+1];
-				systemsHandler.update(&entities[j+1], &inputStates[j], 50);
+				systemsHandler.update(&entities[j+1], &inputStates[j], entities[j+1].timeStamp-entities[j].timeStamp);
 			}
 			break;
 		}
 	}
-	
 };
 
 /*** Forward to View ***/

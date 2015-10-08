@@ -80,12 +80,12 @@ void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
 	}
 }
 
-std::string SystemsHandler::inputStateToString(std::vector<InputState> *inputStates) {
-    std::string str = std::to_string(inputStates->at(0).timeStamp)+":";
-	str += std::to_string(inputStates->at(0).up);
-	str += std::to_string(inputStates->at(0).down);
-	str += std::to_string(inputStates->at(0).left);
-	str += std::to_string(inputStates->at(0).right);
+std::string SystemsHandler::inputStateToString(InputState *inputStates) {
+    std::string str = std::to_string(inputStates->timeStamp)+":";
+	str += std::to_string(inputStates->up);
+	str += std::to_string(inputStates->down);
+	str += std::to_string(inputStates->left);
+	str += std::to_string(inputStates->right);
 	return str;
 }
 

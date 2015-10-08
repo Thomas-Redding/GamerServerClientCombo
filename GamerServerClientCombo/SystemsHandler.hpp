@@ -32,7 +32,7 @@ public:
 	bool update(Entities *entities, std::vector<InputState> *inputStates, long deltaTime);
 	std::string entitiesToString(Entities *entities, sf::IpAddress ip);
 	void entitiesFromString(Entities *entities, std::string str);
-	std::string inputStateToString(std::vector<InputState> *inputStates);
+	std::string inputStateToString(InputState *inputStates);
     void applyInputState(InputState *inputState, std::string str);
     void clearInputState(InputState *inputState, long time);
 private:

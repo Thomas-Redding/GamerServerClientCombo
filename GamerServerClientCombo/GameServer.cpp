@@ -35,7 +35,8 @@ void GameServer::update() {
 	entities.front().timeStamp = timeOfLastFrame;
 	systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
 	for(int i=0; i<players.size(); i++) {
-		udpMessagesToSend.push_back(systemsHandler.entitiesToString(&entities.front(), players[i]));
+		std::string str = systemsHandler.entitiesToString(&entities.front(), players[i]);
+		udpMessagesToSend.push_back(str);
 		udpIp.push_back(players[i]);
 	}
 }
@@ -50,12 +51,13 @@ void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeSta
 			systemsHandler.applyInputState(&newInfo, message);
 			for(int j=0; j<entities.size(); j++) {
 				if(newInfo.timeStamp > entities[j].timeStamp) {
-					// apply input
 					if(j+1 < entities.size()) {
 						for(int k=j; k>=0; k--) {
 							inputStates[k][i] = newInfo;
+							long oldTimeStamp = entities[k].timeStamp;
 							entities[k] = entities[k+1];
-							systemsHandler.update(&entities[k+1], &inputStates[k], 50);
+							entities[k].timeStamp = oldTimeStamp;
+							systemsHandler.update(&entities[k], &inputStates[k], entities[k].timeStamp-entities[k+1].timeStamp);
 						}
 					}
 					break;
