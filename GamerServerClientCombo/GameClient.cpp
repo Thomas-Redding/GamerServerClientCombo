@@ -93,8 +93,10 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 		if(entities[i].timeStamp > timeStamp) {
 			systemsHandler.entitiesFromString(&entities[i], message);
 			for(int j=i; j>0; j--) {
+				long oldTimeStamp = entities[j].timeStamp;
 				entities[j] = entities[j+1];
-				systemsHandler.update(&entities[j+1], &inputStates[j], entities[j+1].timeStamp-entities[j].timeStamp);
+				entities[j].timeStamp = oldTimeStamp;
+				systemsHandler.update(&entities[j+1], &inputStates[j], entities[j].timeStamp-entities[j+1].timeStamp);
 			}
 			break;
 		}
