@@ -18,16 +18,16 @@
 		28434D0E1B753037008A51AC /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0D1B753037008A51AC /* sansation.ttf */; };
 		28434D101B753037008A51AC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0F1B753037008A51AC /* icon.png */; };
 		2844F5361BC57E4F003DAFFE /* GameServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2844F5341BC57E4F003DAFFE /* GameServer.cpp */; };
+		287BE2281BCAE86F0012EDE4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE21F1BCAE86F0012EDE4 /* main.cpp */; };
+		287BE2291BCAE86F0012EDE4 /* NetworkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE2201BCAE86F0012EDE4 /* NetworkClient.cpp */; };
+		287BE22A1BCAE86F0012EDE4 /* NetworkServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE2221BCAE86F0012EDE4 /* NetworkServer.cpp */; };
+		287BE22B1BCAE86F0012EDE4 /* ServerCommunicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE2241BCAE86F0012EDE4 /* ServerCommunicator.cpp */; };
+		287BE22C1BCAE86F0012EDE4 /* TcpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE2261BCAE86F0012EDE4 /* TcpServer.cpp */; };
 		28A4EA461BBE4ACF0080923E /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A4EA441BBE4ACF0080923E /* TextBox.cpp */; };
 		28A4EA491BBE547C0080923E /* MultiplayerPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A4EA471BBE547C0080923E /* MultiplayerPage.cpp */; };
 		28A52A771BC40A7D001ED83C /* GameClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A751BC40A7D001ED83C /* GameClient.cpp */; };
 		28A52A811BC4113C001ED83C /* SystemsHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A7F1BC4113C001ED83C /* SystemsHandler.cpp */; };
 		28A52A841BC41171001ED83C /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A821BC41171001ED83C /* View.cpp */; };
-		28CB660F1B9DD67F00833E69 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66041B9DD67F00833E69 /* main.cpp */; };
-		28CB66101B9DD67F00833E69 /* NetworkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66051B9DD67F00833E69 /* NetworkClient.cpp */; };
-		28CB66111B9DD67F00833E69 /* NetworkServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66071B9DD67F00833E69 /* NetworkServer.cpp */; };
-		28CB66131B9DD67F00833E69 /* ServerCommunicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB660B1B9DD67F00833E69 /* ServerCommunicator.cpp */; };
-		28CB66141B9DD67F00833E69 /* TcpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28CB660D1B9DD67F00833E69 /* TcpServer.cpp */; };
 		28CB66171B9DD6B700833E69 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66151B9DD6B700833E69 /* ResourcePath.mm */; };
 		28F1FE731BBDCF1B0057B63E /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F1FE711BBDCF1B0057B63E /* Page.cpp */; };
 		28FAEAA61BBF240200556FAF /* ClientMatchmakingPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28FAEAA41BBF240200556FAF /* ClientMatchmakingPage.cpp */; };
@@ -56,6 +56,15 @@
 		28434D0F1B753037008A51AC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		2844F5341BC57E4F003DAFFE /* GameServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameServer.cpp; sourceTree = "<group>"; };
 		2844F5351BC57E4F003DAFFE /* GameServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameServer.hpp; sourceTree = "<group>"; };
+		287BE21F1BCAE86F0012EDE4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = GamerServerClientCombo/main.cpp; sourceTree = SOURCE_ROOT; };
+		287BE2201BCAE86F0012EDE4 /* NetworkClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NetworkClient.cpp; path = GamerServerClientCombo/NetworkClient.cpp; sourceTree = SOURCE_ROOT; };
+		287BE2211BCAE86F0012EDE4 /* NetworkClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NetworkClient.hpp; path = GamerServerClientCombo/NetworkClient.hpp; sourceTree = SOURCE_ROOT; };
+		287BE2221BCAE86F0012EDE4 /* NetworkServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NetworkServer.cpp; path = GamerServerClientCombo/NetworkServer.cpp; sourceTree = SOURCE_ROOT; };
+		287BE2231BCAE86F0012EDE4 /* NetworkServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NetworkServer.hpp; path = GamerServerClientCombo/NetworkServer.hpp; sourceTree = SOURCE_ROOT; };
+		287BE2241BCAE86F0012EDE4 /* ServerCommunicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ServerCommunicator.cpp; path = GamerServerClientCombo/ServerCommunicator.cpp; sourceTree = SOURCE_ROOT; };
+		287BE2251BCAE86F0012EDE4 /* ServerCommunicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ServerCommunicator.hpp; path = GamerServerClientCombo/ServerCommunicator.hpp; sourceTree = SOURCE_ROOT; };
+		287BE2261BCAE86F0012EDE4 /* TcpServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpServer.cpp; path = GamerServerClientCombo/TcpServer.cpp; sourceTree = SOURCE_ROOT; };
+		287BE2271BCAE86F0012EDE4 /* TcpServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpServer.hpp; path = GamerServerClientCombo/TcpServer.hpp; sourceTree = SOURCE_ROOT; };
 		28A4EA441BBE4ACF0080923E /* TextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextBox.cpp; sourceTree = "<group>"; };
 		28A4EA451BBE4ACF0080923E /* TextBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextBox.hpp; sourceTree = "<group>"; };
 		28A4EA471BBE547C0080923E /* MultiplayerPage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplayerPage.cpp; sourceTree = "<group>"; };
@@ -68,15 +77,6 @@
 		28A52A821BC41171001ED83C /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
 		28A52A831BC41171001ED83C /* View.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		28A52A861BC41270001ED83C /* Entities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entities.hpp; sourceTree = "<group>"; };
-		28CB66041B9DD67F00833E69 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		28CB66051B9DD67F00833E69 /* NetworkClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkClient.cpp; sourceTree = "<group>"; };
-		28CB66061B9DD67F00833E69 /* NetworkClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkClient.hpp; sourceTree = "<group>"; };
-		28CB66071B9DD67F00833E69 /* NetworkServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkServer.cpp; sourceTree = "<group>"; };
-		28CB66081B9DD67F00833E69 /* NetworkServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkServer.hpp; sourceTree = "<group>"; };
-		28CB660B1B9DD67F00833E69 /* ServerCommunicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCommunicator.cpp; sourceTree = "<group>"; };
-		28CB660C1B9DD67F00833E69 /* ServerCommunicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerCommunicator.hpp; sourceTree = "<group>"; };
-		28CB660D1B9DD67F00833E69 /* TcpServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TcpServer.cpp; sourceTree = "<group>"; };
-		28CB660E1B9DD67F00833E69 /* TcpServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TcpServer.hpp; sourceTree = "<group>"; };
 		28CB66151B9DD6B700833E69 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		28CB66161B9DD6B700833E69 /* ResourcePath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		28F1FE711BBDCF1B0057B63E /* Page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Page.cpp; sourceTree = "<group>"; };
@@ -210,15 +210,15 @@
 		28CB66031B9DD67F00833E69 /* Ignore Me */ = {
 			isa = PBXGroup;
 			children = (
-				28CB66041B9DD67F00833E69 /* main.cpp */,
-				28CB66051B9DD67F00833E69 /* NetworkClient.cpp */,
-				28CB66061B9DD67F00833E69 /* NetworkClient.hpp */,
-				28CB66071B9DD67F00833E69 /* NetworkServer.cpp */,
-				28CB66081B9DD67F00833E69 /* NetworkServer.hpp */,
-				28CB660B1B9DD67F00833E69 /* ServerCommunicator.cpp */,
-				28CB660C1B9DD67F00833E69 /* ServerCommunicator.hpp */,
-				28CB660D1B9DD67F00833E69 /* TcpServer.cpp */,
-				28CB660E1B9DD67F00833E69 /* TcpServer.hpp */,
+				287BE21F1BCAE86F0012EDE4 /* main.cpp */,
+				287BE2201BCAE86F0012EDE4 /* NetworkClient.cpp */,
+				287BE2211BCAE86F0012EDE4 /* NetworkClient.hpp */,
+				287BE2221BCAE86F0012EDE4 /* NetworkServer.cpp */,
+				287BE2231BCAE86F0012EDE4 /* NetworkServer.hpp */,
+				287BE2241BCAE86F0012EDE4 /* ServerCommunicator.cpp */,
+				287BE2251BCAE86F0012EDE4 /* ServerCommunicator.hpp */,
+				287BE2261BCAE86F0012EDE4 /* TcpServer.cpp */,
+				287BE2271BCAE86F0012EDE4 /* TcpServer.hpp */,
 			);
 			path = "Ignore Me";
 			sourceTree = "<group>";
@@ -308,27 +308,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				287BE2291BCAE86F0012EDE4 /* NetworkClient.cpp in Sources */,
 				28A52A841BC41171001ED83C /* View.cpp in Sources */,
 				282329991B75380A00CF7A30 /* Server.cpp in Sources */,
+				287BE2281BCAE86F0012EDE4 /* main.cpp in Sources */,
 				28A52A811BC4113C001ED83C /* SystemsHandler.cpp in Sources */,
-				28CB660F1B9DD67F00833E69 /* main.cpp in Sources */,
 				282329931B75313100CF7A30 /* Client.cpp in Sources */,
 				283DF7E91BBF03B200270A69 /* IpTextBox.cpp in Sources */,
 				283DF7E61BBF027300270A69 /* PortTextBox.cpp in Sources */,
+				287BE22C1BCAE86F0012EDE4 /* TcpServer.cpp in Sources */,
 				2828551A1BBDDE550067FDBF /* HomePage.cpp in Sources */,
 				28F1FE731BBDCF1B0057B63E /* Page.cpp in Sources */,
 				283DF7DE1BBEFD2300270A69 /* ServerPage.cpp in Sources */,
+				287BE22A1BCAE86F0012EDE4 /* NetworkServer.cpp in Sources */,
 				28FAEAA61BBF240200556FAF /* ClientMatchmakingPage.cpp in Sources */,
 				28A4EA491BBE547C0080923E /* MultiplayerPage.cpp in Sources */,
-				28CB66141B9DD67F00833E69 /* TcpServer.cpp in Sources */,
 				28CB66171B9DD6B700833E69 /* ResourcePath.mm in Sources */,
-				28CB66101B9DD67F00833E69 /* NetworkClient.cpp in Sources */,
 				283DF7E11BBF004900270A69 /* ClientPage.cpp in Sources */,
-				28CB66111B9DD67F00833E69 /* NetworkServer.cpp in Sources */,
+				287BE22B1BCAE86F0012EDE4 /* ServerCommunicator.cpp in Sources */,
 				28A52A771BC40A7D001ED83C /* GameClient.cpp in Sources */,
 				2844F5361BC57E4F003DAFFE /* GameServer.cpp in Sources */,
 				2828551D1BBDE0AD0067FDBF /* Button.cpp in Sources */,
-				28CB66131B9DD67F00833E69 /* ServerCommunicator.cpp in Sources */,
 				28A4EA461BBE4ACF0080923E /* TextBox.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
