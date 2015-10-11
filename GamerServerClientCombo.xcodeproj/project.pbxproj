@@ -28,7 +28,6 @@
 		28A52A771BC40A7D001ED83C /* GameClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A751BC40A7D001ED83C /* GameClient.cpp */; };
 		28A52A811BC4113C001ED83C /* SystemsHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A7F1BC4113C001ED83C /* SystemsHandler.cpp */; };
 		28A52A841BC41171001ED83C /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A821BC41171001ED83C /* View.cpp */; };
-		28CB66171B9DD6B700833E69 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28CB66151B9DD6B700833E69 /* ResourcePath.mm */; };
 		28F1FE731BBDCF1B0057B63E /* Page.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F1FE711BBDCF1B0057B63E /* Page.cpp */; };
 		28FAEAA61BBF240200556FAF /* ClientMatchmakingPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28FAEAA41BBF240200556FAF /* ClientMatchmakingPage.cpp */; };
 /* End PBXBuildFile section */
@@ -77,7 +76,6 @@
 		28A52A821BC41171001ED83C /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
 		28A52A831BC41171001ED83C /* View.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		28A52A861BC41270001ED83C /* Entities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entities.hpp; sourceTree = "<group>"; };
-		28CB66151B9DD6B700833E69 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		28CB66161B9DD6B700833E69 /* ResourcePath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		28F1FE711BBDCF1B0057B63E /* Page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Page.cpp; sourceTree = "<group>"; };
 		28F1FE721BBDCF1B0057B63E /* Page.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Page.hpp; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 			children = (
 				28434D0D1B753037008A51AC /* sansation.ttf */,
 				28434D0F1B753037008A51AC /* icon.png */,
-				28CB66151B9DD6B700833E69 /* ResourcePath.mm */,
 				28CB66161B9DD6B700833E69 /* ResourcePath.hpp */,
 			);
 			name = Resources;
@@ -323,7 +320,6 @@
 				287BE22A1BCAE86F0012EDE4 /* NetworkServer.cpp in Sources */,
 				28FAEAA61BBF240200556FAF /* ClientMatchmakingPage.cpp in Sources */,
 				28A4EA491BBE547C0080923E /* MultiplayerPage.cpp in Sources */,
-				28CB66171B9DD6B700833E69 /* ResourcePath.mm in Sources */,
 				283DF7E11BBF004900270A69 /* ClientPage.cpp in Sources */,
 				287BE22B1BCAE86F0012EDE4 /* ServerCommunicator.cpp in Sources */,
 				28A52A771BC40A7D001ED83C /* GameClient.cpp in Sources */,
