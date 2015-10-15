@@ -35,8 +35,9 @@ public:
 	 * @param inputStates - queue of inputStates going backwards in time
 	 * @param startTime - time at which simulation should start
 	 * @param endtime - time at which simulation should end
+	 * @param avatarId - id of avatar for whom the inputStates describe
 	 */
-	void update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime);
+	void update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime, int avatarId);
 	
 	/*
 	 * Lossless compression of the given entities into a string - indended for the given ip address (see entitiesFromString() ).
@@ -103,7 +104,7 @@ private:
 	 * @param inputState - InputState object to simulate
 	 * @param deltaTime - milliseconds to simulate
 	 */
-	void miniUpdate(Entities *entities, InputState *inputStates, long deltaTime);
+	void miniUpdate(Entities *entities, InputState *inputStates, long deltaTime, int avatarId);
 };
 
 #endif /* SystemsHandler_cpp */

@@ -21,11 +21,11 @@ void SystemsHandler::setupEntities(Entities *entities) {
 	entities->soldiers[0].y = 200;
 }
 
-void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime) {
+void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime, int avatarId) {
 	std::vector<float> weights = inputStateWeights(inputStates, startTime, endTime);
 	for(int i=0; i<weights.size(); i++) {
 		if(weights[i] != 0)
-			miniUpdate(entities, &inputStates->at(i), weights[i]);
+			miniUpdate(entities, &inputStates->at(i), weights[i], avatarId);
 	}
 	return true;
 }
@@ -136,13 +136,13 @@ long SystemsHandler::lineIntersect(long a, long b, long c, long d) {
 		return 0;
 }
 
-void SystemsHandler::miniUpdate(Entities *entities, InputState *inputStates, long deltaTime) {
+void SystemsHandler::miniUpdate(Entities *entities, InputState *inputStates, long deltaTime, int avatarId) {
 	if(inputStates->up)
-		entities->soldiers[0].y -= deltaTime;
+		entities->soldiers[avatarId].y -= deltaTime;
 	if(inputStates->down)
-		entities->soldiers[0].y += deltaTime;
+		entities->soldiers[avatarId].y += deltaTime;
 	if(inputStates->left)
-		entities->soldiers[0].x -= deltaTime;
+		entities->soldiers[avatarId].x -= deltaTime;
 	if(inputStates->right)
-		entities->soldiers[0].x += deltaTime;
+		entities->soldiers[avatarId].x += deltaTime;
 }

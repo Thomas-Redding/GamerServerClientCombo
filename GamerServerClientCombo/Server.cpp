@@ -40,9 +40,7 @@ bool Server::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) 
 		gameServer.start(clients);
 		gameRunning = true;
 		for(int i=0; i<clients.size(); i++) {
-			if(clients[i] != myIp) {
-				sendTcp(message, clients[i]);
-			}
+			sendTcp("startGame:" + std::to_string(i), clients[i]);
 		}
 	}
 	else if(gameRunning) {

@@ -48,6 +48,7 @@ private:
 	std::deque<Entities> entities;
 	std::deque<Entities> serverEntities;
 	View view;
+	int myAvatarId = -1;
 	SystemsHandler systemsHandler;
 	long timeOfLastFrame;
 	//void clearInputState(InputState *InputState, long time);

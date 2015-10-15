@@ -27,7 +27,6 @@ bool ServerPage::mouseReleased(sf::Mouse::Button button, int x, int y) {
 	}
 	if(startButton.mouseReleased(button, x, y)) {
 		sendMessageToClient("startGame");
-		*pageNum = 5;
 	}
 	return true;
 }

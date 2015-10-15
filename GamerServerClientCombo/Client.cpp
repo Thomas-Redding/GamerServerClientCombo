@@ -113,9 +113,8 @@ bool Client::update() {
 }
 
 void Client::tcpMessageReceived(std::string message, long timeStamp) {
-	if(message == "startGame") {
+	if(message.length() > 10 && message.substr(0, 10) == "startGame:")
 		currentPage = 5;
-	}
 	return pages[currentPage]->tcpMessageReceived(message, timeStamp);
 }
 

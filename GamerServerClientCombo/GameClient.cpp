@@ -9,17 +9,7 @@
 #include "GameClient.hpp"
 
 GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), view(w), systemsHandler(false) {
-	inputStates.push_back(std::deque<InputState>());
-	timeOfLastFrame = getTime();
-	systemsHandler.clearInputState(&currentInputState);
-	currentInputState.timeStamp = timeOfLastFrame;
-	
-	// put empty InputState and Entities into queues
-	inputStates[0].push_back(currentInputState);
-	entities.push_front(Entities());
-	
-	// setup single item in entities at start of game
-	systemsHandler.setupEntities(&entities.front());
+	// nothing to do
 }
 
 /*** Forward to SystemsHandler ***/
@@ -60,6 +50,9 @@ void GameClient::closing() {
 }
 
 bool GameClient::update() {
+	if(myAvatarId == -1)
+		return true;
+	
 	// set inputs, because the event methods haven't been written yet
 	currentInputState.left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
 	currentInputState.right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
@@ -101,7 +94,7 @@ bool GameClient::update() {
 				for (int j=i-1; j>=0; j--) {
 					// client-side prediction
 					entities[j] = entities[j+1];
-					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp);
+					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp, myAvatarId);
 				}
 				break;
 			}
@@ -109,7 +102,7 @@ bool GameClient::update() {
 	}
 	else {
 		// client-side prediction
-		systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame);
+		systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
 	}
 	
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
@@ -119,10 +112,26 @@ bool GameClient::update() {
 }
 
 void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
-	// do nothing
+	std::vector<std::string> vect = split(message, ':');
+	if(vect[0] == "startGame") {
+		// set up game
+		inputStates.push_back(std::deque<InputState>());
+		timeOfLastFrame = getTime();
+		systemsHandler.clearInputState(&currentInputState);
+		currentInputState.timeStamp = timeOfLastFrame;
+		
+		// put empty InputState and Entities into queues
+		inputStates[0].push_back(currentInputState);
+		entities.push_front(Entities());
+		
+		// setup single item in entities at start of game
+		systemsHandler.setupEntities(&entities.front());
+		myAvatarId = stoi(vect[1]);
+	}
 };
 
 void GameClient::udpMessageReceived(std::string message, long timeStamp) {
+	std::cout << "(" << message << ")\n";
 	return;
 	// insert server's world state into queue (store back up to 1 second)
 	Entities newEntities;
@@ -150,7 +159,9 @@ bool GameClient::resized(unsigned int width, unsigned int height) {
 }
 
 bool GameClient::draw() {
-	return view.draw(&entities.front());
+	if(entities.size() > 0)
+		return view.draw(&entities.front());
+	return true;
 }
 
 
