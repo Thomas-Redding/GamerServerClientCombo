@@ -10,8 +10,15 @@
 
 /*** Public ***/
 
+SystemsHandler::SystemsHandler(bool isServerSide) {
+	isServer = isServerSide;
+}
+
 void SystemsHandler::setupEntities(Entities *entities) {
-	// todo
+	entities->soldiers = std::vector<Soldier>(1);
+	entities->soldiers[0].id = 0;
+	entities->soldiers[0].x = 100;
+	entities->soldiers[0].y = 200;
 }
 
 bool SystemsHandler::keyPressed(sf::Keyboard::Key keyCode) {
@@ -50,33 +57,40 @@ void SystemsHandler::closing() {
 	return true;
 }
 
-bool SystemsHandler::update(Entities *entities, std::vector<InputState> *inputStates, long deltaTime) {
-	// apply inputs
-	if(inputStates->size() > 1) {
-		std::cout << "<" << inputStates->size() << inputStates->at(0).up << inputStates->at(1).up << ">\n";
-	}
-	for(int i=0; i<inputStates->size(); i++) {
-		if(inputStates->at(i).left)
-			entities->boxX -= deltaTime/10;
-		if(inputStates->at(i).right)
-			entities->boxX += deltaTime/10;
-		if(inputStates->at(i).up)
-			entities->boxY -= deltaTime/10;
-		if(inputStates->at(i).down)
-			entities->boxY += deltaTime/10;
+bool SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime) {
+	std::vector<float> weights = inputStateWeights(inputStates, startTime, endTime);
+	for(int i=0; i<weights.size(); i++) {
+		if(weights[i] != 0)
+			miniUpate(entities, &inputStates->at(i), weights[i]);
 	}
 	return true;
 }
 
 std::string SystemsHandler::entitiesToString(Entities *entities, sf::IpAddress ip) {
-	return std::to_string(entities->boxX) + "," + std::to_string(entities->boxY);
+	std::string rtn = std::to_string(entities->timeStamp);
+	for(int i=0; i<entities->soldiers.size(); i++) {
+		rtn += ";";
+		rtn += std::to_string(entities->soldiers[i].id);
+		rtn += ",";
+		rtn += std::to_string(entities->soldiers[i].x);
+		rtn += ",";
+		rtn += std::to_string(entities->soldiers[i].y);
+	}
+	return rtn;
 }
 
 void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
-    std::vector<std::string> vect = split(str, ',');
-	if(vect.size() == 2) {
-		entities->boxX = stof(vect[0]);
-		entities->boxY = stof(vect[1]);
+    std::vector<std::string> vect = split(str, ';');
+	if(vect.size() >= 1)
+		entities->timeStamp = stol(vect[0]);
+	entities->soldiers = std::vector<Soldier>(vect.size()-1);
+	for(int i=1; i<vect.size(); i++) {
+		std::vector<std::string> vect2 = split(vect[i], ',');
+		if(vect.size() == 3) {
+			entities->soldiers[i].id = stoi(vect2[0]);
+			entities->soldiers[i].x = stof(vect2[1]);
+			entities->soldiers[i].y = stof(vect2[2]);
+		}
 	}
 }
 
@@ -114,8 +128,8 @@ void SystemsHandler::applyInputState(InputState *inputState, std::string str) {
 	}
 }
 
-void SystemsHandler::clearInputState(InputState *inputState, long time) {
-    inputState->timeStamp = time;
+void SystemsHandler::clearInputState(InputState *inputState) {
+    inputState->timeStamp = 0;
     inputState->up = false;
     inputState->down = false;
     inputState->left = false;
@@ -132,6 +146,39 @@ std::vector<std::string> SystemsHandler::split(const std::string &s, char delim)
         elems.push_back(item);
     }
     return elems;
-    return elems;
 }
 
+std::vector<float> SystemsHandler::inputStateWeights(std::deque<InputState> *inputStates, long startTime, long endTime) {
+	std::vector<float> rtn(inputStates->size());
+	for(int i=0; i<rtn.size()-1; i++) {
+		rtn[i] = lineIntersect(startTime, endTime, inputStates->at(i+1).timeStamp, inputStates->at(i).timeStamp);
+	}
+	rtn[rtn.size()-1] = 0;
+	return rtn;
+}
+
+long SystemsHandler::lineIntersect(long a, long b, long c, long d) {
+	if(a <= c && d <= b)
+		return d-c; // ab contains cd
+	else if(c <= a && b <= d)
+		return b-a; // cd contains ab
+	else if(b <= c || d <= a)
+		return 0; // no overlap
+	else if(a <= c && b <= d)
+		return c-b; // staggered - cd in front
+	else if(c <= a && d <= b)
+		return d-a; // staggered - ad in front
+	else
+		return 0;
+}
+
+void SystemsHandler::miniUpate(Entities *entities, InputState *inputStates, long deltaTime) {
+	if(inputStates->up)
+		entities->soldiers[0].y -= deltaTime;
+	if(inputStates->down)
+		entities->soldiers[0].y += deltaTime;
+	if(inputStates->left)
+		entities->soldiers[0].x -= deltaTime;
+	if(inputStates->right)
+		entities->soldiers[0].x += deltaTime;
+}

@@ -17,6 +17,7 @@
 
 class GameServer {
 public:
+	GameServer();
 	void start(std::vector<sf::IpAddress> myPlayers);
 	void update();
 	void receivedTcp(std::string message, sf::IpAddress ip, long timeStamp);
@@ -27,7 +28,7 @@ public:
 	std::vector<std::string> tcpIp;
 private:
 	std::deque<Entities> entities;
-	std::deque<std::vector<InputState>> inputStates;
+	std::vector<std::deque<InputState>> inputStates;
 	SystemsHandler systemsHandler;
 	long timeOfLastFrame;
 	long getTime();

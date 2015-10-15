@@ -13,11 +13,13 @@ View::View(sf::RenderWindow *myWindow) {
 }
 
 bool View::draw(Entities *entities) {
-	sf::RectangleShape rect;
-	rect.setSize(sf::Vector2f(entities->boxWidth, entities->boxHeight));
-	rect.setPosition(entities->boxX, entities->boxY);
-	rect.setFillColor(sf::Color::Red);
-	window->draw(rect);
+	for(int i=0; i<entities->soldiers.size(); i++) {
+		sf::RectangleShape rect;
+		rect.setSize(sf::Vector2f(100, 100));
+		rect.setPosition(entities->soldiers[i].x, entities->soldiers[i].y);
+		rect.setFillColor(sf::Color::Red);
+		window->draw(rect);
+	}
 	return true;
 }
 

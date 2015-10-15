@@ -8,16 +8,18 @@
 
 #include "GameClient.hpp"
 
-GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), view(w) {
+GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *myFont) : Page(currentPageNumber, w, myFont), view(w), systemsHandler(false) {
+	inputStates.push_back(std::deque<InputState>());
+	timeOfLastFrame = getTime();
+	systemsHandler.clearInputState(&currentInputState);
+	currentInputState.timeStamp = timeOfLastFrame;
+	
 	// put empty InputState and Entities into queues
-	inputStates.push_back(std::vector<InputState>());
-    systemsHandler.clearInputState(&currentInputState, getTime());
-	inputStates.front().push_back(currentInputState);
+	inputStates[0].push_back(currentInputState);
 	entities.push_front(Entities());
 	
 	// setup single item in entities at start of game
 	systemsHandler.setupEntities(&entities.front());
-	timeOfLastFrame = getTime();
 }
 
 /*** Forward to SystemsHandler ***/
@@ -59,46 +61,87 @@ void GameClient::closing() {
 }
 
 bool GameClient::update() {
-	// push_front() and push_back() copy the value given
-	// by the time we get here, all the input events for this frame have been polled
-	// thus, currentInputState is up-to-date and we should save it
+	// set inputs, because the event methods haven't been written yet
 	currentInputState.left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
 	currentInputState.right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
 	currentInputState.up = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
 	currentInputState.down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
 	
-	entities.push_front(entities.front());
-	inputStates.push_front(std::vector<InputState>());
-	inputStates.front().push_back(currentInputState);
-	if(entities.size() > 20) {
-		entities.pop_back();
-		inputStates.pop_back();
-	}
+	// make time computations
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
+	
+	// push_front() and push_back() copy the value given
+	// by the time we get here, all the input events for this frame have been polled
+	// thus, currentInputState is up-to-date and we should save it
+	// save these back through 1000ms in history
+	long historyMaxTime = 1000;
+	entities.push_front(entities.front());
 	entities.front().timeStamp = timeOfLastFrame;
-	inputStates.front()[0].timeStamp = timeOfLastFrame;
-	bool rtn = systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
-    sendMessageToClient(systemsHandler.inputStateToString(&inputStates.front()[0]));
-	systemsHandler.clearInputState(&inputStates.front().at(0), timeOfLastFrame);
+	currentInputState.timeStamp = timeOfLastFrame;
+	inputStates[0].push_front(currentInputState);
+	
+	while(entities.back().timeStamp < timeOfLastFrame - historyMaxTime) {
+		entities.pop_back();
+		inputStates[0].pop_back();
+	}
+	
+	// client-side prediction
+	bool rtn = systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame);
+    sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
+	
+	systemsHandler.clearInputState(&currentInputState);
+	
+	debug();
+	
 	return rtn;
 }
 
 void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
-	// todo
+	// do nothing
 };
 
 void GameClient::udpMessageReceived(std::string message, long timeStamp) {
-	for (int i=0; i<entities.size(); i++) {
-		if(entities[i].timeStamp > timeStamp) {
-			systemsHandler.entitiesFromString(&entities[i], message);
-			for(int j=i; j>0; j--) {
-				long oldTimeStamp = entities[j].timeStamp;
-				entities[j] = entities[j+1];
-				entities[j].timeStamp = oldTimeStamp;
-				systemsHandler.update(&entities[j+1], &inputStates[j], entities[j].timeStamp-entities[j+1].timeStamp);
-			}
+	return;
+	// insert server's world state into queue (store back up to 1 second)
+	Entities newEntities;
+	systemsHandler.entitiesFromString(&newEntities, message);
+	int i;
+	for(i=0; i<serverEntities.size(); i++) {
+		if(newEntities.timeStamp > serverEntities[i].timeStamp) {
+			serverEntities.insert(serverEntities.begin()+i, newEntities);
 			break;
+		}
+	}
+	if(i == 0 || i == serverEntities.size())
+		serverEntities.push_back(newEntities);
+	
+	long t = getTime();
+	while(serverEntities.size() > 1 && serverEntities.back().timeStamp < t - 1000) {
+		serverEntities.pop_back();
+	}
+	
+	// interpolation with lag of 100ms
+	int serverEntityIndex = -1;
+	long artificialLag = 100;
+	for(int i=0; i<serverEntities.size(); i++) {
+		if(serverEntities[i].timeStamp < t - artificialLag) {
+			serverEntityIndex = i;
+			break;
+		}
+	}
+	
+	if(serverEntityIndex > 0) {
+		for(int i=0; i<entities.size(); i++) {
+			if(entities[i].timeStamp < t - artificialLag) {
+				entities[i] = serverEntities[serverEntityIndex];
+				for (int j=i-1; j>=0; j--) {
+					// simulate forward
+					entities[j] = entities[j+1];
+					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp);
+				}
+				break;
+			}
 		}
 	}
 };
@@ -116,8 +159,6 @@ bool GameClient::draw() {
 
 /*** Private ***/
 
-
-
 long GameClient::getTime() {
 	return std::chrono::duration_cast< std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
@@ -131,5 +172,17 @@ std::vector<std::string> GameClient::split(const std::string &s, char delim) {
 	}
 	return elems;
 	return elems;
+}
+
+void GameClient::debug() {
+//	std::cout << getTime() << ": ";
+//	std::string str = "";
+//	for(int i=0; i<inputStates[0].size(); i++) {
+//		str += "{";
+//		str += std::to_string(inputStates[0][i].timeStamp);
+//		str += std::to_string(inputStates[0][i].up);
+//		str += "}";
+//	}
+//	std::cout << str << "\n\n";
 }
 

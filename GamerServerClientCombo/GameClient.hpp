@@ -44,14 +44,16 @@ public:
 	void udpMessageReceived(std::string message, long timeStamp);
 private:
 	InputState currentInputState;
-	std::deque<std::vector<InputState>> inputStates;
+	std::vector<std::deque<InputState>> inputStates;
 	std::deque<Entities> entities;
+	std::deque<Entities> serverEntities;
 	View view;
 	SystemsHandler systemsHandler;
 	long timeOfLastFrame;
 	//void clearInputState(InputState *InputState, long time);
 	long getTime();
 	std::vector<std::string> split(const std::string &s, char delim);
+	void debug();
 };
 
 #endif /* GameClient_cpp */

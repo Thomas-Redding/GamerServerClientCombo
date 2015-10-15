@@ -10,12 +10,17 @@
 
 /*** Public ***/
 
+GameServer::GameServer() : systemsHandler(true) {
+	//
+}
+
 void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
 	players = myPlayers;
 	// put empty InputState and Entities into queues
-	inputStates.push_back(std::vector<InputState>(players.size()));
+	inputStates = std::vector<std::deque<InputState>>(players.size());
 	for(int i=0; i<players.size(); i++) {
-		systemsHandler.clearInputState(&inputStates.front()[i], getTime());
+		inputStates[i].push_back(InputState());
+		systemsHandler.clearInputState(&inputStates[i].front());
 	}
 	entities.push_front(Entities());
 	// setup single item in entities at start of game
@@ -25,15 +30,23 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
 
 void GameServer::update() {
 	entities.push_front(entities.front());
-	inputStates.push_front(std::vector<InputState>(players.size()));
-	if(entities.size() > 20) {
-		entities.pop_back();
-		inputStates.pop_back();
-	}
+	for(int i=0; i<players.size(); i++)
+		inputStates[i].push_front(InputState());
+	
+	
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
 	entities.front().timeStamp = timeOfLastFrame;
-	systemsHandler.update(&entities.front(), &inputStates.front(), deltaTime);
+	while(entities.back().timeStamp > timeOfLastFrame - 1000) {
+		entities.pop_back();
+		for(int i=0; i<inputStates.size(); i++)
+			inputStates[i].pop_back();
+	}
+	
+	for(int i=0; i<players.size(); i++) {
+		systemsHandler.update(&entities.front(), &inputStates[i], timeOfLastFrame-deltaTime, timeOfLastFrame);
+	}
+	
 	for(int i=0; i<players.size(); i++) {
 		std::string str = systemsHandler.entitiesToString(&entities.front(), players[i]);
 		udpMessagesToSend.push_back(str);
@@ -45,22 +58,30 @@ void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeSta
 }
 
 void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
+	InputState newInfo;
+	systemsHandler.applyInputState(&newInfo, message);
 	for(int i=0; i<players.size(); i++) {
 		if(ip == players[i]) {
-			InputState newInfo;
-			systemsHandler.applyInputState(&newInfo, message);
-			for(int j=0; j<entities.size(); j++) {
-				if(newInfo.timeStamp > entities[j].timeStamp) {
-					if(j+1 < entities.size()) {
-						for(int k=j; k>=0; k--) {
-							inputStates[k][i] = newInfo;
-							long oldTimeStamp = entities[k].timeStamp;
-							entities[k] = entities[k+1];
-							entities[k].timeStamp = oldTimeStamp;
-							systemsHandler.update(&entities[k], &inputStates[k], entities[k].timeStamp-entities[k+1].timeStamp);
-						}
-					}
+			// insert in correct place in player's input queue
+			long startTime = -1;
+			for(int j=0; j<inputStates[i].size(); j++) {
+				if(inputStates[i][j].timeStamp < newInfo.timeStamp) {
+					startTime = inputStates[i][j].timeStamp;
+					inputStates[i].insert(inputStates[i].begin()+j, newInfo);
 					break;
+				}
+			}
+			// todo: lag compensation
+			if(startTime == -1) {
+				inputStates[i].push_back(newInfo);
+				// simulate
+			}
+			else {
+				for(int j=0; j<inputStates[i].size(); j++) {
+					if(inputStates[i][j].timeStamp < startTime) {
+						// simulate from startTime
+						break;
+					}
 				}
 			}
 		}

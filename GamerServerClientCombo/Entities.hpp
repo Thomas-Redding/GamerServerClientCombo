@@ -10,14 +10,12 @@
 #define Entities_cpp
 
 #include <stdio.h>
+#include <vector>
+#include "Soldier.hpp"
 
-class Entities {
-public:
+struct Entities {
 	long timeStamp;
-	int boxWidth = 200;
-	int boxHeight = 50;
-	int boxX = 0;
-	int boxY = 0;
+	std::vector<Soldier> soldiers;
 };
 
 #endif /* Entities_cpp */
