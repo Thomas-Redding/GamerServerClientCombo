@@ -50,10 +50,10 @@ void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
 	entities->soldiers = std::vector<Soldier>(vect.size()-1);
 	for(int i=1; i<vect.size(); i++) {
 		std::vector<std::string> vect2 = split(vect[i], ',');
-		if(vect.size() == 3) {
-			entities->soldiers[i].id = stoi(vect2[0]);
-			entities->soldiers[i].x = stof(vect2[1]);
-			entities->soldiers[i].y = stof(vect2[2]);
+		if(vect2.size() >= 3) {
+			entities->soldiers[i-1].id = stoi(vect2[0]);
+			entities->soldiers[i-1].x = stof(vect2[1]);
+			entities->soldiers[i-1].y = stof(vect2[2]);
 		}
 	}
 }

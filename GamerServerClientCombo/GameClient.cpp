@@ -131,11 +131,11 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 };
 
 void GameClient::udpMessageReceived(std::string message, long timeStamp) {
-	std::cout << "(" << message << ")\n";
-	return;
 	// insert server's world state into queue (store back up to 1 second)
+	std::cout << "(" << message << ")\n";
 	Entities newEntities;
 	systemsHandler.entitiesFromString(&newEntities, message);
+	std::cout << "{" << systemsHandler.entitiesToString(&newEntities, sf::IpAddress::getLocalAddress()) << "}\n";
 	int i;
 	for(i=0; i<serverEntities.size(); i++) {
 		if(newEntities.timeStamp > serverEntities[i].timeStamp) {
@@ -143,6 +143,7 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 			break;
 		}
 	}
+	
 	if(i == 0 || i == serverEntities.size())
 		serverEntities.push_back(newEntities);
 	
