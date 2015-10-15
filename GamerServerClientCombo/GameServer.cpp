@@ -30,9 +30,6 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
 
 void GameServer::update() {
 	entities.push_front(entities.front());
-	for(int i=0; i<players.size(); i++)
-		inputStates[i].push_front(InputState());
-	
 	
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
@@ -49,6 +46,7 @@ void GameServer::update() {
 	
 	for(int i=0; i<players.size(); i++) {
 		std::string str = systemsHandler.entitiesToString(&entities.front(), players[i]);
+		std::cout << "{" << str << "}\n";
 		udpMessagesToSend.push_back(str);
 		udpIp.push_back(players[i]);
 	}
@@ -60,10 +58,11 @@ void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeSta
 void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
 	InputState newInfo;
 	systemsHandler.applyInputState(&newInfo, message);
+	std::cout << "(" << newInfo.timeStamp << ")";
 	for(int i=0; i<players.size(); i++) {
-		if(ip == players[i]) {
+		if(ip == players[i]) {			
 			// insert in correct place in player's input queue
-			long startTime = -1;
+			signed long startTime = -1;
 			for(int j=0; j<inputStates[i].size(); j++) {
 				if(inputStates[i][j].timeStamp < newInfo.timeStamp) {
 					startTime = inputStates[i][j].timeStamp;
@@ -71,19 +70,10 @@ void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeSta
 					break;
 				}
 			}
-			// todo: lag compensation
-			if(startTime == -1) {
+			// perform lag compensation
+			if(startTime == -1)
 				inputStates[i].push_back(newInfo);
-				// simulate
-			}
-			else {
-				for(int j=0; j<inputStates[i].size(); j++) {
-					if(inputStates[i][j].timeStamp < startTime) {
-						// simulate from startTime
-						break;
-					}
-				}
-			}
+			simulateFromTime(startTime);
 		}
 	}
 }
@@ -93,3 +83,31 @@ void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeSta
 long GameServer::getTime() {
 	return std::chrono::duration_cast< std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
+
+void GameServer::simulateFromTime(long startTime) {
+	std::cout << "[" << startTime << "]\n";
+	if(startTime == -1)
+		startTime = entities.back().timeStamp;
+	int startEntity = entities.size()-1;
+	for(int i=0; i<entities.size(); i++) {
+		if(entities[i].timeStamp < startTime) {
+			startEntity = i;
+			break;
+		}
+	}
+	if(startEntity == entities.size()-1)
+		startEntity--;
+	for(int i=startEntity; i>=0; i--) {
+		entities[i] = entities[i+1];
+		for(int j=0; j<inputStates.size(); j++) {
+			systemsHandler.update(&entities[i], &inputStates[j], entities[i+1].timeStamp, entities[i].timeStamp);
+		}
+	}
+}
+
+
+
+
+
+
+

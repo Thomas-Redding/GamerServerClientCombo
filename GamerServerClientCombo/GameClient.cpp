@@ -25,39 +25,38 @@ GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *my
 /*** Forward to SystemsHandler ***/
 
 bool GameClient::keyPressed(sf::Keyboard::Key keyCode) {
-	return systemsHandler.keyPressed(keyCode);
+	return true;
 };
 
 bool GameClient::keyReleased(sf::Keyboard::Key keyCode) {
-	return systemsHandler.keyReleased(keyCode);
+	return true;
 }
 
 bool GameClient::mouseMoved(int x, int y) {
-	return systemsHandler.mouseMoved(x, y);
+	return true;
 }
 
 bool GameClient::mousePressed(sf::Mouse::Button button, int x, int y) {
-	return systemsHandler.mousePressed(button, x, y);
+	return true;
 }
 
 bool GameClient::mouseReleased(sf::Mouse::Button button, int x, int y) {
-	return systemsHandler.mouseReleased(button, x, y);
+	return true;
 }
 
 bool GameClient::mouseWheeled(int delta, int x, int y) {
-	return systemsHandler.mouseWheeled(delta, x, y);
+	return true;
 }
 
 bool GameClient::textEntered(sf::Uint32 character) {
-	return systemsHandler.textEntered(character);
+	return true;
 }
 
 bool GameClient::otherEvent(sf::Event event) {
-	return systemsHandler.otherEvent(event);
+	return true;
 }
 
 void GameClient::closing() {
-	systemsHandler.closing();
 }
 
 bool GameClient::update() {
@@ -86,15 +85,37 @@ bool GameClient::update() {
 		inputStates[0].pop_back();
 	}
 	
-	// client-side prediction
-	bool rtn = systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame);
-    sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
+	// interpolation with lag of 100ms
+	int serverEntityIndex = -1;
+	long artificialLag = 100;
+	for(int i=0; i<serverEntities.size(); i++) {
+		if(serverEntities[i].timeStamp < timeOfLastFrame - artificialLag) {
+			serverEntityIndex = i;
+			break;
+		}
+	}
+	if(serverEntityIndex > 0) {
+		for(int i=0; i<entities.size(); i++) {
+			if(entities[i].timeStamp < timeOfLastFrame - artificialLag) {
+				entities[i] = serverEntities[serverEntityIndex];
+				for (int j=i-1; j>=0; j--) {
+					// client-side prediction
+					entities[j] = entities[j+1];
+					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp);
+				}
+				break;
+			}
+		}
+	}
+	else {
+		// client-side prediction
+		systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame);
+	}
 	
+    sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
 	systemsHandler.clearInputState(&currentInputState);
 	
-	debug();
-	
-	return rtn;
+	return true;
 }
 
 void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
@@ -119,30 +140,6 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	long t = getTime();
 	while(serverEntities.size() > 1 && serverEntities.back().timeStamp < t - 1000) {
 		serverEntities.pop_back();
-	}
-	
-	// interpolation with lag of 100ms
-	int serverEntityIndex = -1;
-	long artificialLag = 100;
-	for(int i=0; i<serverEntities.size(); i++) {
-		if(serverEntities[i].timeStamp < t - artificialLag) {
-			serverEntityIndex = i;
-			break;
-		}
-	}
-	
-	if(serverEntityIndex > 0) {
-		for(int i=0; i<entities.size(); i++) {
-			if(entities[i].timeStamp < t - artificialLag) {
-				entities[i] = serverEntities[serverEntityIndex];
-				for (int j=i-1; j>=0; j--) {
-					// simulate forward
-					entities[j] = entities[j+1];
-					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp);
-				}
-				break;
-			}
-		}
 	}
 };
 
@@ -173,16 +170,3 @@ std::vector<std::string> GameClient::split(const std::string &s, char delim) {
 	return elems;
 	return elems;
 }
-
-void GameClient::debug() {
-//	std::cout << getTime() << ": ";
-//	std::string str = "";
-//	for(int i=0; i<inputStates[0].size(); i++) {
-//		str += "{";
-//		str += std::to_string(inputStates[0][i].timeStamp);
-//		str += std::to_string(inputStates[0][i].up);
-//		str += "}";
-//	}
-//	std::cout << str << "\n\n";
-}
-

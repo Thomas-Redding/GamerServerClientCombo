@@ -53,7 +53,6 @@ private:
 	//void clearInputState(InputState *InputState, long time);
 	long getTime();
 	std::vector<std::string> split(const std::string &s, char delim);
-	void debug();
 };
 
 #endif /* GameClient_cpp */

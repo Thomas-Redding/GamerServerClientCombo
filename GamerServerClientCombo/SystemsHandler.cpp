@@ -21,47 +21,11 @@ void SystemsHandler::setupEntities(Entities *entities) {
 	entities->soldiers[0].y = 200;
 }
 
-bool SystemsHandler::keyPressed(sf::Keyboard::Key keyCode) {
-	return true;
-}
-
-bool SystemsHandler::keyReleased(sf::Keyboard::Key keyCode) {
-	return true;
-}
-
-bool SystemsHandler::mouseMoved(int x, int y) {
-	return true;
-}
-
-bool SystemsHandler::mousePressed(sf::Mouse::Button button, int x, int y) {
-	return true;
-}
-
-bool SystemsHandler::mouseReleased(sf::Mouse::Button button, int x, int y) {
-	return true;
-}
-
-bool SystemsHandler::mouseWheeled(int delta, int x, int y) {
-	return true;
-}
-
-bool SystemsHandler::textEntered(sf::Uint32 character) {
-	return true;
-}
-
-bool SystemsHandler::otherEvent(sf::Event event) {
-	return true;
-}
-
-void SystemsHandler::closing() {
-	return true;
-}
-
-bool SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime) {
+void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime) {
 	std::vector<float> weights = inputStateWeights(inputStates, startTime, endTime);
 	for(int i=0; i<weights.size(); i++) {
 		if(weights[i] != 0)
-			miniUpate(entities, &inputStates->at(i), weights[i]);
+			miniUpdate(entities, &inputStates->at(i), weights[i]);
 	}
 	return true;
 }
@@ -172,7 +136,7 @@ long SystemsHandler::lineIntersect(long a, long b, long c, long d) {
 		return 0;
 }
 
-void SystemsHandler::miniUpate(Entities *entities, InputState *inputStates, long deltaTime) {
+void SystemsHandler::miniUpdate(Entities *entities, InputState *inputStates, long deltaTime) {
 	if(inputStates->up)
 		entities->soldiers[0].y -= deltaTime;
 	if(inputStates->down)
