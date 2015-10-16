@@ -73,12 +73,42 @@ bool GameClient::update() {
 	currentInputState.timeStamp = timeOfLastFrame;
 	inputStates[0].push_front(currentInputState);
 	
-	while(entities.back().timeStamp < timeOfLastFrame - historyMaxTime) {
+	while(entities.back().timeStamp < timeOfLastFrame - historyMaxTime)
 		entities.pop_back();
+	while(inputStates[0].back().timeStamp < timeOfLastFrame - historyMaxTime)
 		inputStates[0].pop_back();
-	}
 	
-	systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
+	// interpolate
+	if(serverEntities.size() > 0)
+		entities.push_front(serverEntities.front());
+	
+	/*
+	long artificialLag = 100; // ms
+	int serverEntityIndex = -1;
+	for(int i=0; i<serverEntities.size(); i++) {
+		if(serverEntities[i].timeStamp < timeOfLastFrame - artificialLag) {
+			serverEntityIndex = i;
+			break;
+		}
+	}
+	if(serverEntityIndex == -1)
+		serverEntityIndex = serverEntities.size()-1;
+	if(serverEntityIndex != -1) {
+		for(int i=0; i<entities.size(); i++) {
+			if(entities[i].timeStamp < serverEntities[serverEntityIndex].timeStamp) {
+				entities.insert(entities.begin()+i, serverEntities[serverEntityIndex]);
+				for(int j=i-1; j>=0; j--) {
+					entities[j] = entities[j+1];
+					// todo
+				}
+				break;
+			}
+		}
+	}
+	 */
+	
+	// client-side prediction
+	// systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
 	
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
 	systemsHandler.clearInputState(&currentInputState);
@@ -110,39 +140,23 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	Entities newEntities;
 	std::vector<std::string> vect = split(message, '$');
 	systemsHandler.entitiesFromString(&newEntities, vect[1]);
+	newEntities.timeStamp = stol(vect[0]);
+	
+	
 	int i;
-	int insertSpot = -1;
 	for(i=0; i<serverEntities.size(); i++) {
 		if(newEntities.timeStamp > serverEntities[i].timeStamp) {
-			insertSpot = i;
 			serverEntities.insert(serverEntities.begin()+i, newEntities);
-			serverEntitiesTimes.insert(serverEntitiesTimes.begin()+i, stol(vect[0]));
 			break;
 		}
 	}
 	
-	if(i == 0 || i == serverEntities.size()) {
+	if(i == 0 || i == serverEntities.size())
 		serverEntities.push_back(newEntities);
-		serverEntitiesTimes.push_back(stol(vect[0]));
-	}
 	
 	long t = getTime();
 	while(serverEntities.size() > 1 && serverEntities.back().timeStamp < t - 1000) {
 		serverEntities.pop_back();
-	}
-	
-	if(insertSpot == 0) {
-		// update
-		for(int i=0; i<entities.size(); i++) {
-			if(entities[i].timeStamp < serverEntitiesTimes.front()) {
-				// update from here
-				entities[i] = serverEntities.front();
-				for(int j=i-1; j>=0; j--) {
-					entities[j] = entities[j+1];
-					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp, myAvatarId);
-				}
-			}
-		}
 	}
 };
 

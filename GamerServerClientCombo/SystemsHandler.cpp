@@ -113,7 +113,8 @@ std::vector<std::string> SystemsHandler::split(const std::string &s, char delim)
 }
 
 std::vector<float> SystemsHandler::inputStateWeights(std::deque<InputState> *inputStates, long startTime, long endTime) {
-	std::vector<float> rtn(inputStates->size());
+	long len = inputStates->size();
+	std::vector<float> rtn(len);
 	for(int i=0; i<rtn.size()-1; i++) {
 		rtn[i] = lineIntersect(startTime, endTime, inputStates->at(i+1).timeStamp, inputStates->at(i).timeStamp);
 	}
@@ -131,7 +132,7 @@ long SystemsHandler::lineIntersect(long a, long b, long c, long d) {
 	else if(a <= c && b <= d)
 		return c-b; // staggered - cd in front
 	else if(c <= a && d <= b)
-		return d-a; // staggered - ad in front
+		return b-a; // staggered - ab in front
 	else
 		return 0;
 }

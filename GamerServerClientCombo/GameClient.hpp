@@ -47,7 +47,6 @@ private:
 	std::vector<std::deque<InputState>> inputStates;
 	std::deque<Entities> entities;
 	std::deque<Entities> serverEntities;
-	std::deque<long> serverEntitiesTimes;
 	View view;
 	int myAvatarId = -1;
 	SystemsHandler systemsHandler;
