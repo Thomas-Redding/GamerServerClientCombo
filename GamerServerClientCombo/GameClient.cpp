@@ -78,32 +78,7 @@ bool GameClient::update() {
 		inputStates[0].pop_back();
 	}
 	
-	// interpolation with lag of 100ms
-	int serverEntityIndex = -1;
-	long artificialLag = 100;
-	for(int i=0; i<serverEntities.size(); i++) {
-		if(serverEntities[i].timeStamp < timeOfLastFrame - artificialLag) {
-			serverEntityIndex = i;
-			break;
-		}
-	}
-	if(serverEntityIndex > 0) {
-		for(int i=0; i<entities.size(); i++) {
-			if(entities[i].timeStamp < timeOfLastFrame - artificialLag) {
-				entities[i] = serverEntities[serverEntityIndex];
-				for (int j=i-1; j>=0; j--) {
-					// client-side prediction
-					entities[j] = entities[j+1];
-					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp, myAvatarId);
-				}
-				break;
-			}
-		}
-	}
-	else {
-		// client-side prediction
-		systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
-	}
+	systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
 	
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
 	systemsHandler.clearInputState(&currentInputState);
@@ -133,17 +108,21 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	// insert server's world state into queue (store back up to 1 second)
 	Entities newEntities;
-	systemsHandler.entitiesFromString(&newEntities, message);
+	std::vector<std::string> vect = split(message, '$');
+	systemsHandler.entitiesFromString(&newEntities, vect[1]);
 	int i;
 	for(i=0; i<serverEntities.size(); i++) {
 		if(newEntities.timeStamp > serverEntities[i].timeStamp) {
 			serverEntities.insert(serverEntities.begin()+i, newEntities);
+			serverEntitiesTimes.insert(serverEntitiesTimes.begin()+i, stol(vect[0]));
 			break;
 		}
 	}
 	
-	if(i == 0 || i == serverEntities.size())
+	if(i == 0 || i == serverEntities.size()) {
 		serverEntities.push_back(newEntities);
+		serverEntitiesTimes.push_back(stol(vect[0]));
+	}
 	
 	long t = getTime();
 	while(serverEntities.size() > 1 && serverEntities.back().timeStamp < t - 1000) {

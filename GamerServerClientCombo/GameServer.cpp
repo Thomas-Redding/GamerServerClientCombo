@@ -47,6 +47,7 @@ void GameServer::update() {
 	
 	for(int i=0; i<players.size(); i++) {
 		std::string str = systemsHandler.entitiesToString(&entities.front(), players[i]);
+		str = std::to_string(inputStates[i].front().timeStamp) + "$" + str;
 		udpMessagesToSend.push_back(str);
 		udpIp.push_back(players[i]);
 	}
