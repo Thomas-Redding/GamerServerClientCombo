@@ -78,34 +78,43 @@ bool GameClient::update() {
 	while(inputStates[0].back().timeStamp < timeOfLastFrame - historyMaxTime)
 		inputStates[0].pop_back();
 	
-	// interpolate
-	long artificialLag = 100; // ms
-	int serverEntityIndex = -1;
-	for(int i=0; i<serverEntities.size(); i++) {
-		if(serverEntities[i].timeStamp < timeOfLastFrame - artificialLag) {
-			serverEntityIndex = i;
-			break;
-		}
+	
+	if(useSimpleClient) {
+		if(serverEntities.size() > 0)
+			entities.push_front(serverEntities.front());
 	}
-	if(serverEntityIndex == -1)
-		serverEntityIndex = serverEntities.size()-1;
-	if(serverEntityIndex != -1) {
-		for(int i=0; i<entities.size(); i++) {
-			if(entities[i].timeStamp < serverEntities[serverEntityIndex].timeStamp) {
-				entities.insert(entities.begin()+i, serverEntities[serverEntityIndex]);
-				for(int j=i-1; j>=0; j--) {
-					long timeStamp = entities[j].timeStamp;
-					entities[j] = entities[j+1];
-					entities[j].timeStamp = timeStamp;
-					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp, myAvatarId);
-				}
+	else {
+		// this block is broken
+		
+		// interpolate
+		long artificialLag = 100; // ms
+		int serverEntityIndex = -1;
+		for(int i=0; i<serverEntities.size(); i++) {
+			if(serverEntities[i].timeStamp < timeOfLastFrame - artificialLag) {
+				serverEntityIndex = i;
 				break;
 			}
 		}
+		if(serverEntityIndex == -1)
+			serverEntityIndex = serverEntities.size()-1;
+		if(serverEntityIndex != -1) {
+			for(int i=0; i<entities.size(); i++) {
+				if(entities[i].timeStamp < serverEntities[serverEntityIndex].timeStamp) {
+					entities.insert(entities.begin()+i, serverEntities[serverEntityIndex]);
+					for(int j=i-1; j>=0; j--) {
+						long timeStamp = entities[j].timeStamp;
+						entities[j] = entities[j+1];
+						entities[j].timeStamp = timeStamp;
+						systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp, myAvatarId);
+					}
+					break;
+				}
+			}
+		}
+		
+		// client-side prediction
+		systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
 	}
-	
-	// client-side prediction
-	systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
 	
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
 	systemsHandler.clearInputState(&currentInputState);
