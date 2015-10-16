@@ -54,8 +54,8 @@ private:
 	//void clearInputState(InputState *InputState, long time);
 	long getTime();
 	std::vector<std::string> split(const std::string &s, char delim);
-	bool useSimpleClient = true;
-	bool useSimpleServer = true;
+	bool useSimpleClient = false;
+	bool useSimpleServer = false;
 };
 
 #endif /* GameClient_cpp */

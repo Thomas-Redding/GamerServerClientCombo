@@ -139,11 +139,11 @@ long SystemsHandler::lineIntersect(long a, long b, long c, long d) {
 
 void SystemsHandler::miniUpdate(Entities *entities, InputState *inputStates, long deltaTime, int avatarId) {
 	if(inputStates->up)
-		entities->soldiers[avatarId].y -= deltaTime;
+		entities->soldiers[avatarId].y -= deltaTime/4;
 	if(inputStates->down)
-		entities->soldiers[avatarId].y += deltaTime;
+		entities->soldiers[avatarId].y += deltaTime/4;
 	if(inputStates->left)
-		entities->soldiers[avatarId].x -= deltaTime;
+		entities->soldiers[avatarId].x -= deltaTime/4;
 	if(inputStates->right)
-		entities->soldiers[avatarId].x += deltaTime;
+		entities->soldiers[avatarId].x += deltaTime/4;
 }
