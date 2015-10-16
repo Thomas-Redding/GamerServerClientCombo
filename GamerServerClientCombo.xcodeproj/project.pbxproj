@@ -217,27 +217,43 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		28CB66031B9DD67F00833E69 /* Ignore Me */ = {
+		2849257B1BD17E6100FAC88E /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				282855171BBDDE460067FDBF /* Menu */,
 				2844F5341BC57E4F003DAFFE /* GameServer.cpp */,
 				2844F5351BC57E4F003DAFFE /* GameServer.hpp */,
+				282329971B75380A00CF7A30 /* Server.cpp */,
+				282329981B75380A00CF7A30 /* Server.hpp */,
+				287BE2221BCAE86F0012EDE4 /* NetworkServer.cpp */,
+				287BE2231BCAE86F0012EDE4 /* NetworkServer.hpp */,
+				287BE2261BCAE86F0012EDE4 /* TcpServer.cpp */,
+				287BE2271BCAE86F0012EDE4 /* TcpServer.hpp */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		2849257C1BD17E6A00FAC88E /* Client */ = {
+			isa = PBXGroup;
+			children = (
 				28A52A751BC40A7D001ED83C /* GameClient.cpp */,
 				28A52A761BC40A7D001ED83C /* GameClient.hpp */,
 				282329911B75313100CF7A30 /* Client.cpp */,
 				282329921B75313100CF7A30 /* Client.hpp */,
-				282329971B75380A00CF7A30 /* Server.cpp */,
-				282329981B75380A00CF7A30 /* Server.hpp */,
-				287BE21F1BCAE86F0012EDE4 /* main.cpp */,
 				287BE2201BCAE86F0012EDE4 /* NetworkClient.cpp */,
 				287BE2211BCAE86F0012EDE4 /* NetworkClient.hpp */,
-				287BE2221BCAE86F0012EDE4 /* NetworkServer.cpp */,
-				287BE2231BCAE86F0012EDE4 /* NetworkServer.hpp */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		28CB66031B9DD67F00833E69 /* Ignore Me */ = {
+			isa = PBXGroup;
+			children = (
+				282855171BBDDE460067FDBF /* Menu */,
+				2849257B1BD17E6100FAC88E /* Server */,
+				2849257C1BD17E6A00FAC88E /* Client */,
+				287BE21F1BCAE86F0012EDE4 /* main.cpp */,
 				287BE2241BCAE86F0012EDE4 /* ServerCommunicator.cpp */,
 				287BE2251BCAE86F0012EDE4 /* ServerCommunicator.hpp */,
-				287BE2261BCAE86F0012EDE4 /* TcpServer.cpp */,
-				287BE2271BCAE86F0012EDE4 /* TcpServer.hpp */,
 			);
 			path = "Ignore Me";
 			sourceTree = "<group>";
