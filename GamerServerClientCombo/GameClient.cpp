@@ -111,8 +111,10 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	std::vector<std::string> vect = split(message, '$');
 	systemsHandler.entitiesFromString(&newEntities, vect[1]);
 	int i;
+	int insertSpot = -1;
 	for(i=0; i<serverEntities.size(); i++) {
 		if(newEntities.timeStamp > serverEntities[i].timeStamp) {
+			insertSpot = i;
 			serverEntities.insert(serverEntities.begin()+i, newEntities);
 			serverEntitiesTimes.insert(serverEntitiesTimes.begin()+i, stol(vect[0]));
 			break;
@@ -127,6 +129,21 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	long t = getTime();
 	while(serverEntities.size() > 1 && serverEntities.back().timeStamp < t - 1000) {
 		serverEntities.pop_back();
+	}
+	return;
+	
+	if(insertSpot == 0) {
+		// update
+		for(int i=0; i<entities.size(); i++) {
+			if(entities[i].timeStamp < serverEntitiesTimes.front()) {
+				// update from here
+				entities[i] = serverEntities.front();
+				for(int j=i-1; j>=0; j--) {
+					entities[j] = entities[j-1];
+					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp, myAvatarId);
+				}
+			}
+		}
 	}
 };
 
