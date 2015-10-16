@@ -85,9 +85,7 @@ bool GameClient::update() {
 		if(serverEntities.size() > 0)
 			entities.push_front(serverEntities.front());
 	}
-	else {
-		// this block is broken
-		
+	else {		
 		// interpolate
 		long artificialLag = 100; // ms
 		int serverEntityIndex = -1;
