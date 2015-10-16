@@ -165,17 +165,8 @@
 				2849257A1BD17DE500FAC88E /* View */,
 				28434D081B753036008A51AC /* Resources */,
 				28CB66031B9DD67F00833E69 /* Ignore Me */,
-				28434D011B753036008A51AC /* Supporting Files */,
 			);
 			path = GamerServerClientCombo;
-			sourceTree = "<group>";
-		};
-		28434D011B753036008A51AC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		28434D081B753036008A51AC /* Resources */ = {
@@ -185,6 +176,7 @@
 				28434D0F1B753037008A51AC /* icon.png */,
 				28CB66161B9DD6B700833E69 /* ResourcePath.hpp */,
 				28CB38F71BCB1FFF006B1BFA /* ResourcePath.mm */,
+				28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
