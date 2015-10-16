@@ -79,7 +79,9 @@ bool GameClient::update() {
 		inputStates[0].pop_back();
 	
 	
-	if(useSimpleClient) {
+	if(useSimpleServer)
+		systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
+	else if(useSimpleClient) {
 		if(serverEntities.size() > 0)
 			entities.push_front(serverEntities.front());
 	}
