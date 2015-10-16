@@ -130,7 +130,6 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	while(serverEntities.size() > 1 && serverEntities.back().timeStamp < t - 1000) {
 		serverEntities.pop_back();
 	}
-	return;
 	
 	if(insertSpot == 0) {
 		// update
@@ -139,7 +138,7 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 				// update from here
 				entities[i] = serverEntities.front();
 				for(int j=i-1; j>=0; j--) {
-					entities[j] = entities[j-1];
+					entities[j] = entities[j+1];
 					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp, myAvatarId);
 				}
 			}
