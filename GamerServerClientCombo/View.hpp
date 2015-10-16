@@ -13,6 +13,12 @@
 #include <SFML/Graphics.hpp>
 #include "Entities.hpp"
 
+/*
+ methods to be implemented:
+ - draw()
+ - resized()
+ */
+
 class View {
 public:
 	View(sf::RenderWindow *myWindow);

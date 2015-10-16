@@ -19,6 +19,16 @@
 #include "InputState.hpp"
 #include <assert.h>
 
+/*
+ Methods to be implemented:
+ - entitiesToString()
+ - entitiesFromString()
+ - inputStateToString()
+ - applyInputState()
+ - clearInputState()
+ - miniUpdate()
+ */
+
 class SystemsHandler {
 public:
 	SystemsHandler(bool isServerSide);
@@ -103,6 +113,7 @@ private:
 	 * @param entities - Entities object
 	 * @param inputState - InputState object to simulate
 	 * @param deltaTime - milliseconds to simulate
+	 * @param avatarId - which avatar's inputs are being updated?
 	 */
 	void miniUpdate(Entities *entities, InputState *inputStates, long deltaTime, int avatarId);
 };
