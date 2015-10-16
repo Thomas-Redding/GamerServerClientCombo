@@ -79,10 +79,6 @@ bool GameClient::update() {
 		inputStates[0].pop_back();
 	
 	// interpolate
-	if(serverEntities.size() > 0)
-		entities.push_front(serverEntities.front());
-	
-	/*
 	long artificialLag = 100; // ms
 	int serverEntityIndex = -1;
 	for(int i=0; i<serverEntities.size(); i++) {
@@ -98,17 +94,18 @@ bool GameClient::update() {
 			if(entities[i].timeStamp < serverEntities[serverEntityIndex].timeStamp) {
 				entities.insert(entities.begin()+i, serverEntities[serverEntityIndex]);
 				for(int j=i-1; j>=0; j--) {
+					long timeStamp = entities[j].timeStamp;
 					entities[j] = entities[j+1];
-					// todo
+					entities[j].timeStamp = timeStamp;
+					systemsHandler.update(&entities[j], &inputStates[0], entities[j+1].timeStamp, entities[j].timeStamp, myAvatarId);
 				}
 				break;
 			}
 		}
 	}
-	 */
 	
 	// client-side prediction
-	// systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
+	systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
 	
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
 	systemsHandler.clearInputState(&currentInputState);
