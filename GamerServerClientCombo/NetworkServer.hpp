@@ -36,8 +36,12 @@ public:
 	bool networkUpdate();
 	void sendTcp(std::string message, sf::IpAddress ip);
 	void sendUdp(std::string message, sf::IpAddress ipAddressOfClient);
-	virtual bool receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) {};
-	virtual bool receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {};
+	virtual bool receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) {
+		return true;
+	};
+	virtual bool receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
+		return true;
+	};
 	virtual void gotNewClient(sf::IpAddress ip) {};
 	virtual void lostClient(sf::IpAddress ip) {};
 	bool shouldServerContinue();

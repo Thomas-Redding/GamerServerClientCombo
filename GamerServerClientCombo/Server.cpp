@@ -17,7 +17,8 @@ bool Server::update() {
 	tim.tv_sec = 0;
 	tim.tv_nsec = 25;
 	tim.tv_nsec *= 1000000;
-	nanosleep(&tim , &tim2);
+	//nanosleep(&tim , &tim2);
+	std::this_thread::sleep_for(std::chrono::nanoseconds(25));
 	
 	if(gameRunning) {
 		gameServer.update();

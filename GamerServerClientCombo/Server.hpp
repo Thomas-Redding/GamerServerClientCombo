@@ -10,6 +10,7 @@
 #define Server_cpp
 
 #include <stdio.h>
+#include <time.h>
 #include <iostream>
 #include <chrono>
 #include <thread>

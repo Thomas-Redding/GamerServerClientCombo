@@ -19,12 +19,15 @@ Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myW
 bool Client::start() {
 	// Load and Set the App's Icon
 	sf::Image icon;
-	if (!icon.loadFromFile(resourcePath() + "icon.png"))
+	if (!icon.loadFromFile(resourcePath() + std::string("icon.png")))
 		return false; // failed to load icon - quit app
-	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+	else {
+		window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+	}
+	
 	
 	// Load a font
-	if(!font.loadFromFile(resourcePath() + "sansation.ttf"))
+	if(!font.loadFromFile(resourcePath() + std::string("sansation.ttf")))
 		return false; // failed to load font - quit app
 	
 	pages.push_back(new HomePage(&currentPage, &window, &font));
