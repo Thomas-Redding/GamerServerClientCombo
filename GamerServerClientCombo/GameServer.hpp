@@ -18,7 +18,7 @@
 class GameServer {
 public:
 	GameServer();
-	void start(std::vector<sf::IpAddress> myPlayers);
+	void start(std::vector<sf::IpAddress> myPlayers, std::string startDetails);
 	void update();
 	void receivedTcp(std::string message, sf::IpAddress ip, long timeStamp);
 	void receivedUdp(std::string message, sf::IpAddress ip, long timeStamp);

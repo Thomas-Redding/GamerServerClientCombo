@@ -53,7 +53,7 @@ private:
 	long timeOfLastFrame;
 	//void clearInputState(InputState *InputState, long time);
 	long getTime();
-	std::vector<std::string> split(const std::string &s, char delim);
+	std::vector<std::string> split(std::string s, char delim);
 	bool useSimpleClient = false;
 	bool useSimpleServer = false;
 };

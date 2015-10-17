@@ -9,24 +9,22 @@
 #ifndef SystemsHandler_cpp
 #define SystemsHandler_cpp
 
-#include <iostream>
-#include <sstream>
+#include <fstream>
 #include <deque>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+#include "ResourcePath.hpp"
 
-#include "Entities.hpp"
-#include "InputState.hpp"
-#include <assert.h>
+#include "AvatarSystem.hpp"
+#include "MapSystem.hpp"
 
 /*
  Methods to be implemented:
  - entitiesToString()
  - entitiesFromString()
  - inputStateToString()
- - applyInputState()
+ - inputStateFromString()
  - clearInputState()
- - miniUpdate()
  */
 
 class SystemsHandler {
@@ -37,7 +35,7 @@ public:
 	 * Called at beginning of game
 	 * @param entities - struct to be edited to have starting conditions
 	 */
-	void setupEntities(Entities *entities);
+	void setupEntities(Entities *entities, std::string launchDetails);
 	
 	/*
 	 * Apply the given InputState-history to the world from startTime to endTime
@@ -74,7 +72,7 @@ public:
 	 * @param inputState - InputState object to be decompressed
 	 * @param str - string to be decompressed
 	 */
-    void applyInputState(InputState *inputState, std::string str);
+    void inputStateFromString(InputState *inputState, std::string str);
 	
 	/*
 	 * Sets the given InputState object to default values
@@ -83,13 +81,14 @@ public:
     void clearInputState(InputState *inputState);
 private:
 	bool isServer;
+	AvatarSystem avatarSystem;
 	
 	/*
 	 * splits a string into a vector of strings based on some deliminating character
 	 * @param s - string to be split
 	 * @param delim - deliminator to split along
 	 */
-    std::vector<std::string> split(const std::string &s, char delim);
+    std::vector<std::string> split(std::string str, char delim);
 	
 	/*
 	 * @inputStates - computes the deltaTime of each inputState
@@ -107,15 +106,6 @@ private:
 	 * @param d - ending point of second line
 	 */
 	long lineIntersect(long a, long b, long c, long d);
-	
-	/*
-	 * applies the given InputState to the given Entities with the given deltaTime
-	 * @param entities - Entities object
-	 * @param inputState - InputState object to simulate
-	 * @param deltaTime - milliseconds to simulate
-	 * @param avatarId - which avatar's inputs are being updated?
-	 */
-	void miniUpdate(Entities *entities, InputState *inputStates, long deltaTime, int avatarId);
 };
 
 #endif /* SystemsHandler_cpp */

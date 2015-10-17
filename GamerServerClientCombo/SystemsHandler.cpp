@@ -14,18 +14,36 @@ SystemsHandler::SystemsHandler(bool isServerSide) {
 	isServer = isServerSide;
 }
 
-void SystemsHandler::setupEntities(Entities *entities) {
+void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails) {
 	entities->soldiers = std::vector<Soldier>(1);
 	entities->soldiers[0].id = 0;
 	entities->soldiers[0].x = 100;
 	entities->soldiers[0].y = 200;
+	
+	std::string line;
+	std::string contents;
+	std::ifstream myfile (resourcePath() + launchDetails + ".txt");
+	if (myfile.is_open()) {
+		while(getline(myfile,line)) {
+			contents += line;
+			contents += '\n';
+		}
+		myfile.close();
+	}
+	else {
+		std::cout << "Unable to open map file\n";
+		return;
+	}
+	
+	MapSystem mapSystem = MapSystem();
+	mapSystem.loadFromString(&entities->map, contents);
 }
 
 void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime, int avatarId) {
 	std::vector<float> weights = inputStateWeights(inputStates, startTime, endTime);
 	for(int i=0; i<weights.size(); i++) {
 		if(weights[i] != 0)
-			miniUpdate(entities, &inputStates->at(i), weights[i], avatarId);
+			avatarSystem.update(entities, &inputStates->at(i), weights[i], avatarId);
 	}
 	return true;
 }
@@ -67,7 +85,7 @@ std::string SystemsHandler::inputStateToString(InputState *inputStates) {
 	return str;
 }
 
-void SystemsHandler::applyInputState(InputState *inputState, std::string str) {
+void SystemsHandler::inputStateFromString(InputState *inputState, std::string str) {
     std::vector<std::string> vect = split(str, ':');
 	if(vect.size() != 2)
 		return;
@@ -102,14 +120,20 @@ void SystemsHandler::clearInputState(InputState *inputState) {
 
 /*** Private ***/
 
-std::vector<std::string> SystemsHandler::split(const std::string &s, char delim) {
-    std::vector<std::string> elems;
-    std::stringstream ss(s);
-    std::string item;
-    while (std::getline(ss, item, delim)) {
-        elems.push_back(item);
-    }
-    return elems;
+std::vector<std::string> SystemsHandler::split(std::string str, char delim) {
+	std::vector<std::string> elems;
+	std::string item;
+	while(true) {
+		int index = str.find(delim);
+		if(index == -1) {
+			elems.push_back(str);
+			return elems;
+		}
+		elems.push_back(str.substr(0, index));
+		if(index+1 == str.length())
+			return elems;
+		str = str.substr(index+1);
+	}
 }
 
 std::vector<float> SystemsHandler::inputStateWeights(std::deque<InputState> *inputStates, long startTime, long endTime) {
@@ -135,15 +159,4 @@ long SystemsHandler::lineIntersect(long a, long b, long c, long d) {
 		return b-a; // staggered - ab in front
 	else
 		return 0;
-}
-
-void SystemsHandler::miniUpdate(Entities *entities, InputState *inputStates, long deltaTime, int avatarId) {
-	if(inputStates->up)
-		entities->soldiers[avatarId].y -= deltaTime/4;
-	if(inputStates->down)
-		entities->soldiers[avatarId].y += deltaTime/4;
-	if(inputStates->left)
-		entities->soldiers[avatarId].x -= deltaTime/4;
-	if(inputStates->right)
-		entities->soldiers[avatarId].x += deltaTime/4;
 }

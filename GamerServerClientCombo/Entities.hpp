@@ -12,10 +12,12 @@
 #include <stdio.h>
 #include <vector>
 #include "Soldier.hpp"
+#include "Map.hpp"
 
 struct Entities {
 	long timeStamp;
 	std::vector<Soldier> soldiers;
+	Map map;
 };
 
 #endif /* Entities_cpp */

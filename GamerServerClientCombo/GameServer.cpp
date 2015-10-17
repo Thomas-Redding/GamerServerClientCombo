@@ -14,7 +14,7 @@ GameServer::GameServer() : systemsHandler(true) {
 	//
 }
 
-void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
+void GameServer::start(std::vector<sf::IpAddress> myPlayers, std::string startDetails) {
 	players = myPlayers;
 	// put empty InputState and Entities into queues
 	inputStates = std::vector<std::deque<InputState>>(players.size());
@@ -24,7 +24,8 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers) {
 	}
 	entities.push_front(Entities());
 	// setup single item in entities at start of game
-	systemsHandler.setupEntities(&entities.front());
+	
+	systemsHandler.setupEntities(&entities.front(), startDetails);
 	timeOfLastFrame = getTime();
 }
 
@@ -58,7 +59,7 @@ void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeSta
 
 void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
 	InputState newInfo;
-	systemsHandler.applyInputState(&newInfo, message);
+	systemsHandler.inputStateFromString(&newInfo, message);
 	for(int i=0; i<players.size(); i++) {
 		if(ip == players[i]) {			
 			// insert in correct place in player's input queue

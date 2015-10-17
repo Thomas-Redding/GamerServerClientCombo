@@ -15,10 +15,26 @@ GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *my
 /*** Forward to SystemsHandler ***/
 
 bool GameClient::keyPressed(sf::Keyboard::Key keyCode) {
+	if(keyCode == sf::Keyboard::Up)
+		currentInputState.up = true;
+	if(keyCode == sf::Keyboard::Down)
+		currentInputState.down = true;
+	if(keyCode == sf::Keyboard::Left)
+		currentInputState.left = true;
+	if(keyCode == sf::Keyboard::Right)
+		currentInputState.right = true;
 	return true;
 };
 
 bool GameClient::keyReleased(sf::Keyboard::Key keyCode) {
+	if(keyCode == sf::Keyboard::Up)
+		currentInputState.up = false;
+	if(keyCode == sf::Keyboard::Down)
+		currentInputState.down = false;
+	if(keyCode == sf::Keyboard::Left)
+		currentInputState.left = false;
+	if(keyCode == sf::Keyboard::Right)
+		currentInputState.right = false;
 	return true;
 }
 
@@ -53,12 +69,6 @@ bool GameClient::update() {
 	if(myAvatarId == -1)
 		return true;
 	
-	// set inputs, because the event methods haven't been written yet
-	currentInputState.left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
-	currentInputState.right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
-	currentInputState.up = sf::Keyboard::isKeyPressed(sf::Keyboard::Up);
-	currentInputState.down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
-	
 	// make time computations
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
@@ -85,7 +95,7 @@ bool GameClient::update() {
 		if(serverEntities.size() > 0)
 			entities.push_front(serverEntities.front());
 	}
-	else {		
+	else {
 		// interpolate
 		long artificialLag = 100; // ms
 		int serverEntityIndex = -1;
@@ -117,7 +127,7 @@ bool GameClient::update() {
 	}
 	
     sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
-	systemsHandler.clearInputState(&currentInputState);
+	// systemsHandler.clearInputState(&currentInputState);
 	
 	return true;
 }
@@ -136,7 +146,7 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 		entities.push_front(Entities());
 		
 		// setup single item in entities at start of game
-		systemsHandler.setupEntities(&entities.front());
+		systemsHandler.setupEntities(&entities.front(), vect[2]);
 		myAvatarId = stoi(vect[1]);
 	}
 };
@@ -185,13 +195,18 @@ long GameClient::getTime() {
 	return std::chrono::duration_cast< std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
-std::vector<std::string> GameClient::split(const std::string &s, char delim) {
+std::vector<std::string> GameClient::split(std::string str, char delim) {
 	std::vector<std::string> elems;
-	std::stringstream ss(s);
 	std::string item;
-	while (std::getline(ss, item, delim)) {
-		elems.push_back(item);
+	while(true) {
+		int index = str.find(delim);
+		if(index == -1) {
+			elems.push_back(str);
+			return elems;
+		}
+		elems.push_back(str.substr(0, index));
+		if(index+1 == str.length())
+			return elems;
+		str = str.substr(index+1);
 	}
-	return elems;
-	return elems;
 }
