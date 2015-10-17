@@ -21,14 +21,12 @@ bool View::draw(Entities *entities) {
 		window->draw(rect);
 	}
 	
-	sf::VertexArray lines(sf::LinesStrip, 2*entities->map.walls.size());
 	for(int i=0; i<entities->map.walls.size(); i++) {
-		lines[2*i] = sf::Vector2f(entities->map.walls[i].x1, entities->map.walls[i].y1);
-		lines[2*i+1] = sf::Vector2f(entities->map.walls[i].x2, entities->map.walls[i].y2);
-		lines[2*i].color = sf::Color::Red;
-		lines[2*i+1].color = sf::Color::Blue;
+		sf::VertexArray lines(sf::LinesStrip, 2);
+		lines[0].position = sf::Vector2f(entities->map.walls[i].x1, entities->map.walls[i].y1);
+		lines[1].position = sf::Vector2f(entities->map.walls[i].x2, entities->map.walls[i].y2);
+		window->draw(lines);
 	}
-	window->draw(lines);
 	
 	return true;
 }

@@ -157,7 +157,7 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	std::vector<std::string> vect = split(message, '$');
 	systemsHandler.entitiesFromString(&newEntities, vect[1]);
 	newEntities.timeStamp = stol(vect[0]);
-	
+	newEntities.map = entities.front().map;
 	
 	int i;
 	for(i=0; i<serverEntities.size(); i++) {
