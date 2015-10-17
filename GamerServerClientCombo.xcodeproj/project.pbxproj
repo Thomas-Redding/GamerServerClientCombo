@@ -122,6 +122,32 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		28316C211BD2FB2700CBFE63 /* Dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				28316C1B1BD2F69F00CBFE63 /* PlayerSystem.cpp */,
+				28316C1C1BD2F69F00CBFE63 /* PlayerSystem.hpp */,
+				28316C1E1BD2F70D00CBFE63 /* BotSoldierSystem.cpp */,
+				28316C1F1BD2F70D00CBFE63 /* BotSoldierSystem.hpp */,
+				28A52A7A1BC410D7001ED83C /* InputState.hpp */,
+				28316C191BD2F56400CBFE63 /* BotSoldier.hpp */,
+				28316C131BD2EC8500CBFE63 /* Player.hpp */,
+			);
+			name = Dynamic;
+			sourceTree = "<group>";
+		};
+		28316C221BD2FB3700CBFE63 /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				28316C0F1BD2A62200CBFE63 /* MapSystem.cpp */,
+				28316C101BD2A62200CBFE63 /* MapSystem.hpp */,
+				28316C081BD2A0FF00CBFE63 /* Map.hpp */,
+				28316C051BD2A03200CBFE63 /* Wall.hpp */,
+				28316C161BD2F3E300CBFE63 /* Waypoint.hpp */,
+			);
+			name = Static;
+			sourceTree = "<group>";
+		};
 		283DF7E21BBF01DF00270A69 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,9 +201,9 @@
 		28434D001B753036008A51AC /* GamerServerClientCombo */ = {
 			isa = PBXGroup;
 			children = (
-				284925771BD17D9F00FAC88E /* Structs */,
-				284925781BD17DBA00FAC88E /* Systems */,
-				2849257A1BD17DE500FAC88E /* View */,
+				284925771BD17D9F00FAC88E /* Big-Picture */,
+				28316C211BD2FB2700CBFE63 /* Dynamic */,
+				28316C221BD2FB3700CBFE63 /* Static */,
 				28434D081B753036008A51AC /* Resources */,
 				28CB66031B9DD67F00833E69 /* Ignore Me */,
 			);
@@ -197,42 +223,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		284925771BD17D9F00FAC88E /* Structs */ = {
-			isa = PBXGroup;
-			children = (
-				28A52A7A1BC410D7001ED83C /* InputState.hpp */,
-				28A52A861BC41270001ED83C /* Entities.hpp */,
-				28316C191BD2F56400CBFE63 /* BotSoldier.hpp */,
-				28316C131BD2EC8500CBFE63 /* Player.hpp */,
-				28316C081BD2A0FF00CBFE63 /* Map.hpp */,
-				28316C051BD2A03200CBFE63 /* Wall.hpp */,
-				28316C161BD2F3E300CBFE63 /* Waypoint.hpp */,
-			);
-			name = Structs;
-			sourceTree = "<group>";
-		};
-		284925781BD17DBA00FAC88E /* Systems */ = {
-			isa = PBXGroup;
-			children = (
-				28A52A7F1BC4113C001ED83C /* SystemsHandler.cpp */,
-				28A52A801BC4113C001ED83C /* SystemsHandler.hpp */,
-				28316C1B1BD2F69F00CBFE63 /* PlayerSystem.cpp */,
-				28316C1C1BD2F69F00CBFE63 /* PlayerSystem.hpp */,
-				28316C1E1BD2F70D00CBFE63 /* BotSoldierSystem.cpp */,
-				28316C1F1BD2F70D00CBFE63 /* BotSoldierSystem.hpp */,
-				28316C0F1BD2A62200CBFE63 /* MapSystem.cpp */,
-				28316C101BD2A62200CBFE63 /* MapSystem.hpp */,
-			);
-			name = Systems;
-			sourceTree = "<group>";
-		};
-		2849257A1BD17DE500FAC88E /* View */ = {
+		284925771BD17D9F00FAC88E /* Big-Picture */ = {
 			isa = PBXGroup;
 			children = (
 				28A52A821BC41171001ED83C /* View.cpp */,
 				28A52A831BC41171001ED83C /* View.hpp */,
+				28A52A861BC41270001ED83C /* Entities.hpp */,
+				28A52A7F1BC4113C001ED83C /* SystemsHandler.cpp */,
+				28A52A801BC4113C001ED83C /* SystemsHandler.hpp */,
 			);
-			name = View;
+			name = "Big-Picture";
 			sourceTree = "<group>";
 		};
 		2849257B1BD17E6100FAC88E /* Server */ = {

@@ -18,7 +18,7 @@
 struct Entities {
 	long timeStamp;
 	std::vector<Player> players;
-	std::vector<BotSoldier> followers;
+	std::vector<BotSoldier> botSoldiers;
 	Map map;
 };
 

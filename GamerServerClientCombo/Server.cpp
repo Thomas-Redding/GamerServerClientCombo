@@ -12,13 +12,8 @@ Server::Server(ServerCommunicator &com): NetworkServer(com) {
 }
 
 bool Server::update() {
-	// sleep for 1000 milliseconds
-	struct timespec tim, tim2;
-	tim.tv_sec = 0;
-	tim.tv_nsec = 25;
-	tim.tv_nsec *= 1000000;
-	//nanosleep(&tim , &tim2);
-	std::this_thread::sleep_for(std::chrono::nanoseconds(25));
+	// sleep for 25 milliseconds
+	std::this_thread::sleep_for(std::chrono::nanoseconds(25000000));
 	
 	if(gameRunning) {
 		gameServer.update();

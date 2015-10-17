@@ -15,6 +15,8 @@ struct BotSoldier {
 	int id;
 	double x;
 	double y;
+	double goalX = 1000;
+	double goalY = 0;
 };
 
 #endif /* BotSoldier_cpp */

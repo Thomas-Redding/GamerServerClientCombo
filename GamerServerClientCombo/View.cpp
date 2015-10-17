@@ -21,10 +21,10 @@ bool View::draw(Entities *entities) {
 		window->draw(circ);
 	}
 	
-	for(int i=0; i<entities->followers.size(); i++) {
+	for(int i=0; i<entities->botSoldiers.size(); i++) {
 		sf::CircleShape circ;
 		circ.setRadius(100);
-		circ.setPosition(entities->followers[i].x-100, entities->followers[i].y-100);
+		circ.setPosition(entities->botSoldiers[i].x-100, entities->botSoldiers[i].y-100);
 		circ.setFillColor(sf::Color::Blue);
 		window->draw(circ);
 	}

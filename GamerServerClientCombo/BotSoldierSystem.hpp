@@ -9,6 +9,8 @@
 #ifndef BotSoldierSystem_cpp
 #define BotSoldierSystem_cpp
 
+#include <cmath>
+
 #include "Entities.hpp"
 
 class BotSoldierSystem {

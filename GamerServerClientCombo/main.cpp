@@ -32,13 +32,8 @@ int main(int, char const**) {
 	std::thread mainServerThread(startMainServer, &communicator);
 	std::thread tcpServerThread(startTcpServer, &communicator);
 	
-	// sleep for 100 ms to give the server time to set up
-	struct timespec tim, tim2;
-	tim.tv_sec = 0;
-	tim.tv_nsec = 100;
-	tim.tv_nsec *= 1000000;
-	//nanosleep(&tim , &tim2);
-	std::this_thread::sleep_for(std::chrono::nanoseconds(100));
+	// sleep for 10 ms to give the server time to set up
+	std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
 	
 	Client client(window, communicator);
 	
