@@ -13,9 +13,11 @@
 #include <vector>
 
 #include "Wall.hpp"
+#include "WayPoint.hpp"
 
 struct Map {
 	std::vector<Wall> walls;
+	std::vector<Waypoint> waypoints;
 };
 
 #endif /* Map_cpp */

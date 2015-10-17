@@ -15,7 +15,7 @@
 #include <SFML/Network.hpp>
 #include "ResourcePath.hpp"
 
-#include "AvatarSystem.hpp"
+#include "PlayerSystem.hpp"
 #include "MapSystem.hpp"
 
 /*
@@ -56,6 +56,7 @@ public:
 	
 	/*
 	 * Lossless decompression from a string into an Entities object (see entitiesToString() )
+	 * The only exception is that the Map can be ignored
 	 * @param entities - entities that results should be written to
 	 * @param std::string - string to decompress from
 	 */
@@ -81,7 +82,7 @@ public:
     void clearInputState(InputState *inputState);
 private:
 	bool isServer;
-	AvatarSystem avatarSystem;
+	PlayerSystem playerSystem;
 	
 	/*
 	 * splits a string into a vector of strings based on some deliminating character

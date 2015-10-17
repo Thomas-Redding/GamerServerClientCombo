@@ -15,10 +15,10 @@ SystemsHandler::SystemsHandler(bool isServerSide) {
 }
 
 void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails) {
-	entities->soldiers = std::vector<Soldier>(1);
-	entities->soldiers[0].id = 0;
-	entities->soldiers[0].x = 100;
-	entities->soldiers[0].y = 200;
+	entities->players = std::vector<Player>(1);
+	entities->players[0].id = 0;
+	entities->players[0].x = 100;
+	entities->players[0].y = 200;
 	
 	std::string line;
 	std::string contents;
@@ -43,20 +43,20 @@ void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputSta
 	std::vector<float> weights = inputStateWeights(inputStates, startTime, endTime);
 	for(int i=0; i<weights.size(); i++) {
 		if(weights[i] != 0)
-			avatarSystem.update(entities, &inputStates->at(i), weights[i], avatarId);
+			playerSystem.update(entities, &inputStates->at(i), weights[i], avatarId);
 	}
 	return true;
 }
 
 std::string SystemsHandler::entitiesToString(Entities *entities, sf::IpAddress ip) {
 	std::string rtn = std::to_string(entities->timeStamp);
-	for(int i=0; i<entities->soldiers.size(); i++) {
+	for(int i=0; i<entities->players.size(); i++) {
 		rtn += ";";
-		rtn += std::to_string(entities->soldiers[i].id);
+		rtn += std::to_string(entities->players[i].id);
 		rtn += ",";
-		rtn += std::to_string(entities->soldiers[i].x);
+		rtn += std::to_string(entities->players[i].x);
 		rtn += ",";
-		rtn += std::to_string(entities->soldiers[i].y);
+		rtn += std::to_string(entities->players[i].y);
 	}
 	return rtn;
 }
@@ -65,13 +65,13 @@ void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
     std::vector<std::string> vect = split(str, ';');
 	if(vect.size() >= 1)
 		entities->timeStamp = stol(vect[0]);
-	entities->soldiers = std::vector<Soldier>(vect.size()-1);
+	entities->players = std::vector<Player>(vect.size()-1);
 	for(int i=1; i<vect.size(); i++) {
 		std::vector<std::string> vect2 = split(vect[i], ',');
 		if(vect2.size() >= 3) {
-			entities->soldiers[i-1].id = stoi(vect2[0]);
-			entities->soldiers[i-1].x = stof(vect2[1]);
-			entities->soldiers[i-1].y = stof(vect2[2]);
+			entities->players[i-1].id = stoi(vect2[0]);
+			entities->players[i-1].x = stof(vect2[1]);
+			entities->players[i-1].y = stof(vect2[2]);
 		}
 	}
 }

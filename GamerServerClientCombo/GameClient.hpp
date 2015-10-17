@@ -51,11 +51,10 @@ private:
 	int myAvatarId = -1;
 	SystemsHandler systemsHandler;
 	long timeOfLastFrame;
-	//void clearInputState(InputState *InputState, long time);
 	long getTime();
 	std::vector<std::string> split(std::string s, char delim);
 	bool useSimpleClient = false;
-	bool useSimpleServer = false;
+	bool useSimpleServer = true;
 };
 
 #endif /* GameClient_cpp */

@@ -13,11 +13,27 @@ View::View(sf::RenderWindow *myWindow) {
 }
 
 bool View::draw(Entities *entities) {
-	for(int i=0; i<entities->soldiers.size(); i++) {
+	for(int i=0; i<entities->players.size(); i++) {
 		sf::CircleShape circ;
 		circ.setRadius(100);
-		circ.setPosition(entities->soldiers[i].x, entities->soldiers[i].y);
+		circ.setPosition(entities->players[i].x-100, entities->players[i].y-100);
 		circ.setFillColor(sf::Color::Red);
+		window->draw(circ);
+	}
+	
+	for(int i=0; i<entities->followers.size(); i++) {
+		sf::CircleShape circ;
+		circ.setRadius(100);
+		circ.setPosition(entities->followers[i].x-100, entities->followers[i].y-100);
+		circ.setFillColor(sf::Color::Blue);
+		window->draw(circ);
+	}
+	
+	for(int i=0; i<entities->map.waypoints.size(); i++) {
+		sf::CircleShape circ;
+		circ.setRadius(10);
+		circ.setPosition(entities->map.waypoints[i].x-10, entities->map.waypoints[i].y-10);
+		circ.setFillColor(sf::Color::Green);
 		window->draw(circ);
 	}
 	

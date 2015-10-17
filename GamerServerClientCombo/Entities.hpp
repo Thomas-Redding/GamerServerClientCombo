@@ -11,12 +11,14 @@
 
 #include <stdio.h>
 #include <vector>
-#include "Soldier.hpp"
+#include "Player.hpp"
 #include "Map.hpp"
+#include "BotSoldier.hpp"
 
 struct Entities {
 	long timeStamp;
-	std::vector<Soldier> soldiers;
+	std::vector<Player> players;
+	std::vector<BotSoldier> followers;
 	Map map;
 };
 

@@ -12,7 +12,21 @@ void MapSystem::loadFromString(Map* map, std::string str) {
 	clearMap(map);
 	
 	std::vector<std::string> sections = split(str, ':');
-	std::vector<std::string> walls = split(sections[0], ';');
+	if(sections.size() >= 2) {
+		addWallsToMap(map, sections[0]);
+		addWaypointsToMap(map, sections[1]);
+	}
+	else {
+		std::cout << "Poorly Formatted Map File";
+	}
+}
+
+void MapSystem::clearMap(Map* map) {
+	map->walls.clear();
+}
+
+void MapSystem::addWallsToMap(Map* map, std::string str) {
+	std::vector<std::string> walls = split(str, ';');
 	for(int i=0; i<walls.size(); i++) {
 		std::vector<std::string> wall = split(walls[i], ',');
 		if(wall.size() >= 4) {
@@ -25,8 +39,16 @@ void MapSystem::loadFromString(Map* map, std::string str) {
 	}
 }
 
-void MapSystem::clearMap(Map* map) {
-	map->walls.clear();
+void MapSystem::addWaypointsToMap(Map* map, std::string str) {
+	std::vector<std::string> waypoints = split(str, ';');
+	for(int i=0; i<waypoints.size(); i++) {
+		std::vector<std::string> waypoint = split(waypoints[i], ',');
+		if(waypoint.size() >= 2) {
+			map->waypoints.push_back(Waypoint());
+			map->waypoints[map->waypoints.size()-1].x = stof(waypoint[0]);
+			map->waypoints[map->waypoints.size()-1].y = stof(waypoint[1]);
+		}
+	}
 }
 
 std::vector<std::string> MapSystem::split(std::string str, char delim) {

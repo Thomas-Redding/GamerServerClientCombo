@@ -12,8 +12,9 @@
 		2828551A1BBDDE550067FDBF /* HomePage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282855181BBDDE550067FDBF /* HomePage.cpp */; };
 		2828551D1BBDE0AD0067FDBF /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2828551B1BBDE0AD0067FDBF /* Button.cpp */; };
 		28316C0B1BD2A36300CBFE63 /* alpha.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28316C0A1BD2A36300CBFE63 /* alpha.txt */; };
-		28316C0E1BD2A58900CBFE63 /* AvatarSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28316C0C1BD2A58900CBFE63 /* AvatarSystem.cpp */; };
 		28316C111BD2A62200CBFE63 /* MapSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28316C0F1BD2A62200CBFE63 /* MapSystem.cpp */; };
+		28316C1D1BD2F69F00CBFE63 /* PlayerSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28316C1B1BD2F69F00CBFE63 /* PlayerSystem.cpp */; };
+		28316C201BD2F70D00CBFE63 /* BotSoldierSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28316C1E1BD2F70D00CBFE63 /* BotSoldierSystem.cpp */; };
 		283DF7DE1BBEFD2300270A69 /* ServerPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283DF7DC1BBEFD2300270A69 /* ServerPage.cpp */; };
 		283DF7E11BBF004900270A69 /* ClientPage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283DF7DF1BBF004900270A69 /* ClientPage.cpp */; };
 		283DF7E61BBF027300270A69 /* PortTextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283DF7E41BBF027300270A69 /* PortTextBox.cpp */; };
@@ -48,10 +49,15 @@
 		28316C051BD2A03200CBFE63 /* Wall.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Wall.hpp; sourceTree = "<group>"; };
 		28316C081BD2A0FF00CBFE63 /* Map.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		28316C0A1BD2A36300CBFE63 /* alpha.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = alpha.txt; sourceTree = "<group>"; };
-		28316C0C1BD2A58900CBFE63 /* AvatarSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AvatarSystem.cpp; sourceTree = "<group>"; };
-		28316C0D1BD2A58900CBFE63 /* AvatarSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AvatarSystem.hpp; sourceTree = "<group>"; };
 		28316C0F1BD2A62200CBFE63 /* MapSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MapSystem.cpp; sourceTree = "<group>"; };
 		28316C101BD2A62200CBFE63 /* MapSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MapSystem.hpp; sourceTree = "<group>"; };
+		28316C131BD2EC8500CBFE63 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		28316C161BD2F3E300CBFE63 /* Waypoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Waypoint.hpp; sourceTree = "<group>"; };
+		28316C191BD2F56400CBFE63 /* BotSoldier.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BotSoldier.hpp; sourceTree = "<group>"; };
+		28316C1B1BD2F69F00CBFE63 /* PlayerSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerSystem.cpp; sourceTree = "<group>"; };
+		28316C1C1BD2F69F00CBFE63 /* PlayerSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerSystem.hpp; sourceTree = "<group>"; };
+		28316C1E1BD2F70D00CBFE63 /* BotSoldierSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BotSoldierSystem.cpp; sourceTree = "<group>"; };
+		28316C1F1BD2F70D00CBFE63 /* BotSoldierSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BotSoldierSystem.hpp; sourceTree = "<group>"; };
 		283DF7DC1BBEFD2300270A69 /* ServerPage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerPage.cpp; sourceTree = "<group>"; };
 		283DF7DD1BBEFD2300270A69 /* ServerPage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerPage.hpp; sourceTree = "<group>"; };
 		283DF7DF1BBF004900270A69 /* ClientPage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientPage.cpp; sourceTree = "<group>"; };
@@ -88,7 +94,6 @@
 		28A52A831BC41171001ED83C /* View.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		28A52A861BC41270001ED83C /* Entities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entities.hpp; sourceTree = "<group>"; };
 		28CB38F71BCB1FFF006B1BFA /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
-		28CB38FA1BCB2035006B1BFA /* Soldier.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Soldier.hpp; sourceTree = "<group>"; };
 		28CB66161B9DD6B700833E69 /* ResourcePath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		28F1FE711BBDCF1B0057B63E /* Page.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Page.cpp; sourceTree = "<group>"; };
 		28F1FE721BBDCF1B0057B63E /* Page.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Page.hpp; sourceTree = "<group>"; };
@@ -197,9 +202,11 @@
 			children = (
 				28A52A7A1BC410D7001ED83C /* InputState.hpp */,
 				28A52A861BC41270001ED83C /* Entities.hpp */,
-				28CB38FA1BCB2035006B1BFA /* Soldier.hpp */,
-				28316C051BD2A03200CBFE63 /* Wall.hpp */,
+				28316C191BD2F56400CBFE63 /* BotSoldier.hpp */,
+				28316C131BD2EC8500CBFE63 /* Player.hpp */,
 				28316C081BD2A0FF00CBFE63 /* Map.hpp */,
+				28316C051BD2A03200CBFE63 /* Wall.hpp */,
+				28316C161BD2F3E300CBFE63 /* Waypoint.hpp */,
 			);
 			name = Structs;
 			sourceTree = "<group>";
@@ -209,8 +216,10 @@
 			children = (
 				28A52A7F1BC4113C001ED83C /* SystemsHandler.cpp */,
 				28A52A801BC4113C001ED83C /* SystemsHandler.hpp */,
-				28316C0C1BD2A58900CBFE63 /* AvatarSystem.cpp */,
-				28316C0D1BD2A58900CBFE63 /* AvatarSystem.hpp */,
+				28316C1B1BD2F69F00CBFE63 /* PlayerSystem.cpp */,
+				28316C1C1BD2F69F00CBFE63 /* PlayerSystem.hpp */,
+				28316C1E1BD2F70D00CBFE63 /* BotSoldierSystem.cpp */,
+				28316C1F1BD2F70D00CBFE63 /* BotSoldierSystem.hpp */,
 				28316C0F1BD2A62200CBFE63 /* MapSystem.cpp */,
 				28316C101BD2A62200CBFE63 /* MapSystem.hpp */,
 			);
@@ -357,12 +366,13 @@
 				28A52A841BC41171001ED83C /* View.cpp in Sources */,
 				282329991B75380A00CF7A30 /* Server.cpp in Sources */,
 				287BE2281BCAE86F0012EDE4 /* main.cpp in Sources */,
+				28316C201BD2F70D00CBFE63 /* BotSoldierSystem.cpp in Sources */,
 				28A52A811BC4113C001ED83C /* SystemsHandler.cpp in Sources */,
 				282329931B75313100CF7A30 /* Client.cpp in Sources */,
 				283DF7E91BBF03B200270A69 /* IpTextBox.cpp in Sources */,
 				283DF7E61BBF027300270A69 /* PortTextBox.cpp in Sources */,
 				287BE22C1BCAE86F0012EDE4 /* TcpServer.cpp in Sources */,
-				28316C0E1BD2A58900CBFE63 /* AvatarSystem.cpp in Sources */,
+				28316C1D1BD2F69F00CBFE63 /* PlayerSystem.cpp in Sources */,
 				2828551A1BBDDE550067FDBF /* HomePage.cpp in Sources */,
 				28CB38F81BCB1FFF006B1BFA /* ResourcePath.mm in Sources */,
 				28F1FE731BBDCF1B0057B63E /* Page.cpp in Sources */,

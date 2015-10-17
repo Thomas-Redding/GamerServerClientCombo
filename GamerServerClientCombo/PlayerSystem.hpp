@@ -1,20 +1,20 @@
 //
-//  AvatarSystem.hpp
+//  PlayerSystem.hpp
 //  GamerServerClientCombo
 //
 //  Created by Thomas Redding on 10/17/15.
 //  Copyright © 2015 Thomas Redding. All rights reserved.
 //
 
-#ifndef AvatarSystem_cpp
-#define AvatarSystem_cpp
+#ifndef PlayerSystem_cpp
+#define PlayerSystem_cpp
 
 #include <stdio.h>
 
 #include "Entities.hpp"
 #include "InputState.hpp"
 
-class AvatarSystem {
+class PlayerSystem {
 public:
 	/*
 	 * applies the given InputState to the given Entities with the given deltaTime
@@ -26,4 +26,5 @@ public:
 	void update(Entities *entities, InputState *inputStates, long deltaTime, int avatarId);
 };
 
-#endif /* AvatarSystem_cpp */
+
+#endif /* PlayerSystem_cpp */
