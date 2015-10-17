@@ -11,6 +11,8 @@
 
 #include <fstream>
 #include <deque>
+#include <string>
+#include <string.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include "ResourcePath.hpp"

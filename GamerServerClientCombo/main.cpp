@@ -1,6 +1,7 @@
 
 #include <thread>
 #include <chrono>
+#include <time.h>
 #include "Client.hpp"
 #include "Server.hpp"
 #include "TcpServer.hpp"
@@ -36,7 +37,8 @@ int main(int, char const**) {
 	tim.tv_sec = 0;
 	tim.tv_nsec = 100;
 	tim.tv_nsec *= 1000000;
-	nanosleep(&tim , &tim2);
+	//nanosleep(&tim , &tim2);
+	std::this_thread::sleep_for(std::chrono::nanoseconds(100));
 	
 	Client client(window, communicator);
 	
@@ -48,11 +50,7 @@ int main(int, char const**) {
 		sf::Event event;
 		while(window.pollEvent(event)) {
 			// Close window: exit
-			if(event.type == sf::Event::Closed) {
-				shouldProgramContinue = false;
-				break;
-			}
-			else if(event.type == sf::Event::KeyPressed)
+			if(event.type == sf::Event::KeyPressed)
 				shouldProgramContinue = shouldProgramContinue && client.keyPressed(event.key.code);
 			else if(event.type == sf::Event::KeyReleased)
 				shouldProgramContinue = shouldProgramContinue && client.keyReleased(event.key.code);

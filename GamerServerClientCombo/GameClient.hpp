@@ -11,6 +11,7 @@
 
 #include <deque>
 #include <iostream>
+#include <chrono>
 
 #include "Page.hpp"
 #include "InputState.hpp"

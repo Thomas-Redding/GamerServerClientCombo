@@ -10,6 +10,8 @@
 #define Client_cpp
 
 #include <stdio.h>
+#include <string>
+#include <string.h>
 #include "ResourcePath.hpp"
 #include "NetworkClient.hpp"
 #include "HomePage.hpp"

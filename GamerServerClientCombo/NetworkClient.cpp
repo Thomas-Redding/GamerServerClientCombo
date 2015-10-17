@@ -121,7 +121,7 @@ void NetworkClient::networkUpdate() {
 			timeLastPingSent = currentTime;
 		}
 	}
-	return true;
+	//return true;
 }
 
 void NetworkClient::attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort) {

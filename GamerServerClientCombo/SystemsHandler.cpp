@@ -45,7 +45,7 @@ void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputSta
 		if(weights[i] != 0)
 			playerSystem.update(entities, &inputStates->at(i), weights[i], avatarId);
 	}
-	return true;
+	//return true;
 }
 
 std::string SystemsHandler::entitiesToString(Entities *entities, sf::IpAddress ip) {

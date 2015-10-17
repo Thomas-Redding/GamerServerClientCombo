@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <deque>
+#include <chrono>
 #include "Entities.hpp"
 #include "InputState.hpp"
 #include "SystemsHandler.hpp"
