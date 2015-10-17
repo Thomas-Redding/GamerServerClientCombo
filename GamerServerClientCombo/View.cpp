@@ -14,11 +14,11 @@ View::View(sf::RenderWindow *myWindow) {
 
 bool View::draw(Entities *entities) {
 	for(int i=0; i<entities->soldiers.size(); i++) {
-		sf::RectangleShape rect;
-		rect.setSize(sf::Vector2f(100, 100));
-		rect.setPosition(entities->soldiers[i].x, entities->soldiers[i].y);
-		rect.setFillColor(sf::Color::Red);
-		window->draw(rect);
+		sf::CircleShape circ;
+		circ.setRadius(100);
+		circ.setPosition(entities->soldiers[i].x, entities->soldiers[i].y);
+		circ.setFillColor(sf::Color::Red);
+		window->draw(circ);
 	}
 	
 	for(int i=0; i<entities->map.walls.size(); i++) {
