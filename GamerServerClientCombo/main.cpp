@@ -50,7 +50,9 @@ int main(int, char const**) {
 		sf::Event event;
 		while(window.pollEvent(event)) {
 			// Close window: exit
-			if(event.type == sf::Event::KeyPressed)
+			if (event.type == sf::Event::Closed)
+				shouldProgramContinue = false;
+			else if(event.type == sf::Event::KeyPressed)
 				shouldProgramContinue = shouldProgramContinue && client.keyPressed(event.key.code);
 			else if(event.type == sf::Event::KeyReleased)
 				shouldProgramContinue = shouldProgramContinue && client.keyReleased(event.key.code);
