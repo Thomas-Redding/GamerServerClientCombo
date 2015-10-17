@@ -52,12 +52,6 @@ int main(int, char const**) {
 				shouldProgramContinue = false;
 				break;
 			}
-			else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-				// Escape pressed: exit
-				client.closing();
-				shouldProgramContinue = false;
-				break;
-			}
 			else if(event.type == sf::Event::KeyPressed)
 				shouldProgramContinue = shouldProgramContinue && client.keyPressed(event.key.code);
 			else if(event.type == sf::Event::KeyReleased)
