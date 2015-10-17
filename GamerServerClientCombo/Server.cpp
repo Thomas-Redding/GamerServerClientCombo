@@ -33,7 +33,7 @@ bool Server::update() {
 bool Server::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) {
 	sf::IpAddress myIp = sf::IpAddress::getLocalAddress();
 	if(message == "startGame" &&  myIp == ip) {
-		std::string startMessage = "alpha";
+		std::string startMessage = "alpha;" + std::to_string(clients.size());
 		gameServer.start(clients, startMessage);
 		gameRunning = true;
 		for(int i=0; i<clients.size(); i++) {

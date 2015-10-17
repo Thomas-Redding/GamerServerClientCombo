@@ -54,8 +54,8 @@ private:
 	long timeOfLastFrame;
 	long getTime();
 	std::vector<std::string> split(std::string s, char delim);
-	bool useSimpleClient = false;
-	bool useSimpleServer = true;
+	bool useSimpleClient = true;
+	bool useSimpleServer = false;
 };
 
 #endif /* GameClient_cpp */

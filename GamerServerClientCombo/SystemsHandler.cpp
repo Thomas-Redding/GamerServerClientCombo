@@ -15,14 +15,22 @@ SystemsHandler::SystemsHandler(bool isServerSide) {
 }
 
 void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails) {
-	entities->players = std::vector<Player>(1);
-	entities->players[0].id = 0;
-	entities->players[0].x = 100;
-	entities->players[0].y = 200;
+	std::vector<std::string> launchDetailsVector = split(launchDetails, ';');
+	if(launchDetailsVector.size() < 2) {
+		std::cout << "Launch Details From Server Ill-Formated\n";
+		return;
+	}
+	int numberOfPlayers = stoi(launchDetailsVector[1]);
+	entities->players = std::vector<Player>(numberOfPlayers);
+	for(int i=0; i<entities->players.size(); i++) {
+		entities->players[i].id = 0;
+		entities->players[i].x = 100;
+		entities->players[i].y = 200;
+	}
 	
 	std::string line;
 	std::string contents;
-	std::ifstream myfile (resourcePath() + launchDetails + ".txt");
+	std::ifstream myfile (resourcePath() + launchDetailsVector[0] + ".txt");
 	if (myfile.is_open()) {
 		while(getline(myfile,line)) {
 			contents += line;
