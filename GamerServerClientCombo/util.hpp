@@ -13,7 +13,7 @@
 #include <string>
 #include <cmath>
 
-namespace utility {
+namespace util {
 	/*
 	 * splits a string into a vector of substrings based on a character
 	 * Ex: split("alpha-beta-gamma", '-') --> ["alpha", "beta", "gamma"]

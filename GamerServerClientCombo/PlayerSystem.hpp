@@ -14,7 +14,7 @@
 
 #include "Entities.hpp"
 #include "InputState.hpp"
-#include "utility.hpp"
+#include "util.hpp"
 
 class PlayerSystem {
 public:

@@ -55,7 +55,7 @@ void PlayerSystem::shoot(Entities *entities, int avatarId, double x, double y) {
 	for(int i=0; i<entities->players.size(); i++) {
 		if(i != avatarId) {
 			Player *they = &entities->players[i];
-			bool didHit = utility::rayCircleIntersect(theta, they->x - me->x, they->y - me->y, they->health);
+			bool didHit = util::rayCircleIntersect(theta, they->x - me->x, they->y - me->y, they->health);
 			if(didHit)
 				they->health -= 10;
 		}

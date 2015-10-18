@@ -6,9 +6,9 @@
 //  Copyright © 2015 Thomas Redding. All rights reserved.
 //
 
-#include "utility.hpp"
+#include "util.hpp"
 
-std::vector<std::string> utility::split(std::string str, char delim) {
+std::vector<std::string> util::split(std::string str, char delim) {
 	std::vector<std::string> elems;
 	std::string item;
 	while(true) {
@@ -24,7 +24,7 @@ std::vector<std::string> utility::split(std::string str, char delim) {
 	}
 }
 
-double utility::rayLineIntersect(double theta, double x1, double y1, double x2, double y2) {
+double util::rayLineIntersect(double theta, double x1, double y1, double x2, double y2) {
 	double sin = std::sin(theta);
 	double cos = std::cos(theta);
 	if((x1 == 0 && y1 == 0) || (x2 == 0 && y2 == 0))
@@ -56,7 +56,7 @@ double utility::rayLineIntersect(double theta, double x1, double y1, double x2, 
 	}
 }
 
-bool utility::rayCircleIntersect(double theta, double x, double y, double r) {
+bool util::rayCircleIntersect(double theta, double x, double y, double r) {
 	double cos = std::cos(theta);
 	double sin = std::sin(theta);
 	double t = cos*x + sin*y;
