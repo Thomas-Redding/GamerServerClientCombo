@@ -19,7 +19,7 @@
 
 #include "PlayerSystem.hpp"
 #include "MapSystem.hpp"
-#include "Utility.hpp"
+#include "utility.hpp"
 
 /*
  Methods to be implemented:

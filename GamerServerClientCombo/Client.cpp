@@ -79,7 +79,7 @@ bool Client::draw() {
 bool Client::update() {
 	std::string str = pages[3]->getMessageForClient();
 	if(str.length() > 0) {
-		std::vector<std::string> vect = split(str, ':');
+		std::vector<std::string> vect = utility::split(str, ':');
 		if(vect.size() == 2) {
 			attemptConnectionToServer(sf::IpAddress(vect[0]), stoi(vect[1]));
 		}

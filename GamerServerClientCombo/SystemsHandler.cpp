@@ -15,7 +15,7 @@ SystemsHandler::SystemsHandler(bool isServerSide) {
 }
 
 void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails) {
-	std::vector<std::string> launchDetailsVector = split(launchDetails, ';');
+	std::vector<std::string> launchDetailsVector = utility::split(launchDetails, ';');
 	if(launchDetailsVector.size() < 2) {
 		std::cout << "Launch Details From Server Ill-Formated\n";
 		return;
@@ -72,12 +72,12 @@ std::string SystemsHandler::entitiesToString(Entities *entities, sf::IpAddress i
 }
 
 void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
-    std::vector<std::string> vect = split(str, ';');
+    std::vector<std::string> vect = utility::split(str, ';');
 	if(vect.size() >= 1)
 		entities->timeStamp = stol(vect[0]);
 	entities->players = std::vector<Player>(vect.size()-1);
 	for(int i=1; i<vect.size(); i++) {
-		std::vector<std::string> vect2 = split(vect[i], ',');
+		std::vector<std::string> vect2 = utility::split(vect[i], ',');
 		if(vect2.size() >= 4) {
 			entities->players[i-1].id = stoi(vect2[0]);
 			entities->players[i-1].x = stof(vect2[1]);
@@ -103,12 +103,12 @@ std::string SystemsHandler::inputStateToString(InputState *inputState) {
 
 void SystemsHandler::inputStateFromString(InputState *inputState, std::string str) {
 	// {timeStamp}:{mouseClicked},{mouseDown},{mouseX},{mouseY}:{up}{down}{left}{right}
-    std::vector<std::string> vect = split(str, ':');
+    std::vector<std::string> vect = utility::split(str, ':');
 	if(vect.size() != 3)
 		return;
 	inputState->timeStamp = stol(vect[0]);
 	
-	std::vector<std::string> vect2 = split(vect[1], ',');
+	std::vector<std::string> vect2 = utility::split(vect[1], ',');
 	if(vect2.size() == 4) {
 		if(vect2[0] == "1")
 			inputState->mouseClicked = true;

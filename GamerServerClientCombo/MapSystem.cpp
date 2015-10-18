@@ -11,7 +11,7 @@
 void MapSystem::loadFromString(Map* map, std::string str) {
 	clearMap(map);
 	
-	std::vector<std::string> sections = split(str, ':');
+	std::vector<std::string> sections = utility::split(str, ':');
 	if(sections.size() >= 2) {
 		addWallsToMap(map, sections[0]);
 		addWaypointsToMap(map, sections[1]);
@@ -26,9 +26,9 @@ void MapSystem::clearMap(Map* map) {
 }
 
 void MapSystem::addWallsToMap(Map* map, std::string str) {
-	std::vector<std::string> walls = split(str, ';');
+	std::vector<std::string> walls = utility::split(str, ';');
 	for(int i=0; i<walls.size(); i++) {
-		std::vector<std::string> wall = split(walls[i], ',');
+		std::vector<std::string> wall = utility::split(walls[i], ',');
 		if(wall.size() >= 4) {
 			map->walls.push_back(Wall());
 			map->walls[map->walls.size()-1].x1 = stof(wall[0]);
@@ -40,9 +40,9 @@ void MapSystem::addWallsToMap(Map* map, std::string str) {
 }
 
 void MapSystem::addWaypointsToMap(Map* map, std::string str) {
-	std::vector<std::string> waypoints = split(str, ';');
+	std::vector<std::string> waypoints = utility::split(str, ';');
 	for(int i=0; i<waypoints.size(); i++) {
-		std::vector<std::string> waypoint = split(waypoints[i], ',');
+		std::vector<std::string> waypoint = utility::split(waypoints[i], ',');
 		if(waypoint.size() >= 2) {
 			map->waypoints.push_back(Waypoint());
 			map->waypoints[map->waypoints.size()-1].x = stof(waypoint[0]);

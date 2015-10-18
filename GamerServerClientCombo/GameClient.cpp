@@ -156,7 +156,7 @@ bool GameClient::update() {
 }
 
 void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
-	std::vector<std::string> vect = split(message, ':');
+	std::vector<std::string> vect = utility::split(message, ':');
 	if(vect[0] == "startGame") {
 		// set up game
 		inputStates.push_back(std::deque<InputState>());
@@ -176,7 +176,7 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	// insert server's world state into queue (store back up to 1 second)
 	Entities newEntities;
-	std::vector<std::string> vect = split(message, '$');
+	std::vector<std::string> vect = utility::split(message, '$');
 	systemsHandler.entitiesFromString(&newEntities, vect[1]);
 	newEntities.timeStamp = stol(vect[0]);
 	newEntities.map = entities.front().map;

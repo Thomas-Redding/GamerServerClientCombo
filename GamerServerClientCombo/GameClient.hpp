@@ -18,7 +18,7 @@
 #include "Entities.hpp"
 #include "SystemsHandler.hpp"
 #include "View.hpp"
-#include "Utility.hpp"
+#include "utility.hpp"
 
 /*
  During a frame, the methods are called in the following order:

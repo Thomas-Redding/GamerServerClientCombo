@@ -14,7 +14,7 @@
 #include <iostream>
 
 #include "Map.hpp"
-#include "Utility.hpp"
+#include "utility.hpp"
 
 class MapSystem {
 public:
