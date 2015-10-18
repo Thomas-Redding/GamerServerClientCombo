@@ -13,8 +13,8 @@
 
 struct Player {
 	int id;
-	float x;
-	float y;
+	double x;
+	double y;
 	std::vector<int> followerIds;
 };
 

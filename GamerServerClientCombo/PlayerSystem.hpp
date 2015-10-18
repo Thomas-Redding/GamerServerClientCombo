@@ -10,6 +10,7 @@
 #define PlayerSystem_cpp
 
 #include <stdio.h>
+#include <cmath>
 
 #include "Entities.hpp"
 #include "InputState.hpp"
@@ -23,7 +24,7 @@ public:
 	 * @param deltaTime - milliseconds to simulate
 	 * @param avatarId - which avatar's inputs are being updated?
 	 */
-	void update(Entities *entities, InputState *inputStates, long deltaTime, int avatarId);
+	void update(Entities *entities, InputState *inputState, long deltaTime, int avatarId);
 };
 
 

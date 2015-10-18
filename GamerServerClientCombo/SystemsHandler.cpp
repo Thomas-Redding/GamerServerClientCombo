@@ -84,34 +84,45 @@ void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
 	}
 }
 
-std::string SystemsHandler::inputStateToString(InputState *inputStates) {
-    std::string str = std::to_string(inputStates->timeStamp)+":";
-	str += std::to_string(inputStates->up);
-	str += std::to_string(inputStates->down);
-	str += std::to_string(inputStates->left);
-	str += std::to_string(inputStates->right);
+std::string SystemsHandler::inputStateToString(InputState *inputState) {
+	// {timeStamp}:{mouseX},{mouseY}:{up}{down}{left}{right}
+    std::string str = std::to_string(inputState->timeStamp) + ":";
+	str += std::to_string(inputState->mouseX) + ",";
+	str += std::to_string(inputState->mouseY) + ":";
+	str += std::to_string(inputState->up);
+	str += std::to_string(inputState->down);
+	str += std::to_string(inputState->left);
+	str += std::to_string(inputState->right);
 	return str;
 }
 
 void SystemsHandler::inputStateFromString(InputState *inputState, std::string str) {
+	// {timeStamp}:{mouseX},{mouseY}:{up}{down}{left}{right}
     std::vector<std::string> vect = split(str, ':');
-	if(vect.size() != 2)
+	if(vect.size() != 3)
 		return;
 	inputState->timeStamp = stol(vect[0]);
-	if(vect[1].length() == 4) {
-		if(vect[1][0] == '1')
+	
+	std::vector<std::string> vect2 = split(vect[1], ',');
+	if(vect2.size() == 2) {
+		inputState->mouseX = stof(vect2[0]);
+		inputState->mouseY = stof(vect2[1]);
+	}
+	
+	if(vect[2].length() == 4) {
+		if(vect[2][0] == '1')
 			inputState->up = true;
 		else
 			inputState->up = false;
-		if(vect[1][1] == '1')
+		if(vect[2][1] == '1')
 			inputState->down = true;
 		else
 			inputState->down = false;
-		if(vect[1][2] == '1')
+		if(vect[2][2] == '1')
 			inputState->left = true;
 		else
 			inputState->left = false;
-		if(vect[1][3] == '1')
+		if(vect[2][3] == '1')
 			inputState->right = true;
 		else
 			inputState->right = false;
@@ -124,6 +135,8 @@ void SystemsHandler::clearInputState(InputState *inputState) {
     inputState->down = false;
     inputState->left = false;
     inputState->right = false;
+	inputState->mouseX = 0;
+	inputState->mouseY = 0;
 }
 
 /*** Private ***/

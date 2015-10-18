@@ -39,6 +39,8 @@ bool GameClient::keyReleased(sf::Keyboard::Key keyCode) {
 }
 
 bool GameClient::mouseMoved(int x, int y) {
+	currentInputState.mouseX = x;
+	currentInputState.mouseY = y;
 	return true;
 }
 

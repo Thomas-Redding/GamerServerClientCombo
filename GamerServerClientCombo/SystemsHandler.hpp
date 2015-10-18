@@ -68,7 +68,7 @@ public:
 	 * Compress given InputState object into string
 	 * @param inputStates - InputState object to be compressed
 	 */
-	std::string inputStateToString(InputState *inputStates);
+	std::string inputStateToString(InputState *inputState);
 	
 	/*
 	 * Decompresses the given string into the given InputState object
