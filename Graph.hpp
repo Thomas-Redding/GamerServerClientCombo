@@ -10,39 +10,42 @@
 #define Graph_cpp
 
 #include <iostream>
-#include <string>
 #include <vector>
 
-class Vertex; 
-class Edge {
+ 
+template <class T> class Vertex;
+
+
+template <class T> class Edge {
 public:
-	Edge(Vertex *org, Vertex *dest);
+	Edge(Vertex<T> *org, Vertex<T> *dest);
 	Vertex* getOrigin();
-	Vertex* getDestination;
+	Vertex* getDestination();
 private:
-	Vertex* origin;
-	Vertex* destination;
+	Vertex<T>* origin;
+	Vertex<T>* destination;
 
 };
 
-class Vertex {
+template <class T> class Vertex {
 public:
-	Vertex(std::string point);
-	void addEdge(Vertex *v);
-	std::string getName();
-	std::vector<Edge> getEdges();
+	Vertex(T point);
+	void addEdge(Vertex<T> *v);
+	T getName();
+	std::vector<T> getEdges();
 
 private:
-	std::string name;
-	std::vector<Edge> edges;
+	T name;
+	std::vector<Edge<T>> edges;
 };
 
-class Graph {
+
+template <class T> class Graph {
 public:
 	Graph();
-	void insert(Vertex *v);
+	void insert(Vertex<T> *v);
 private:
-	std::vector<Vertex*> vertices;
+	std::vector<Vertex<T>*> vertices;
 };
 	
 

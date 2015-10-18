@@ -1,48 +1,49 @@
 #include "Graph.hpp"
 
-/*
- * Creates a new edge with an orgin Vertex and a destination Vertex 
- */
-Edge::Edge(Vertex *org, Vertex *dest) {
-	origin = org;
-	destination = dest;
+template <class T>
+
+Edge<T>::Edge(Vertex<T> *org, Vertex<T> *dest) {
+	 origin = *org;
+	 destination = *dest;
 }
 
-/*
- * Creates a vertex with an id as a String
- */
+template <class T>
+Vertex<T>* Edge<T>::getOrigin() {
+	return origin;
+}
 
-Vertex::Vertex(std::string id) {
+template <class T>
+Vertex<T>* Edge<T>::getDestination() {
+	return destination;
+}
+
+template <class T>
+Vertex<T>::Vertex(T id) {
 	name = id;
 }
 
-/*
- * Adds an edge between this Vertex and the given vertex
- */
-void Vertex::addEdge(Vertex *v) {
-	Edge newEdge(this, v);
+template <class T>
+void Vertex<T>::addEdge(Vertex *v) {
+	Edge<T> newEdge(this, v);
 	edges.push_back(newEdge);
 }
 
-/*
- * Returns the name of the Vertex
- */
-std::string Vertex::getName() {
+template <class T>
+T Vertex<T>::getName() {
 	return name;
 }
 
-/*
- * Returns a list off all the edges in the Graph
- */
-std::vector<Edge> Vertex::getEdges() {
+template <class T>
+std::vector<T> Vertex<T>::getEdges() {
 	return edges;
 }
 
-Graph::Graph() {} // creates a new empty Graph
+template <class T>
+Graph<T>::Graph() {
 
-/*
- * Adds vertex to the list of vertices in the Graph
- */
-void Graph::insert(Vertex *v) {
+}
+
+template <class T>
+void Graph<T>::insert(Vertex<T> *v) {
 	vertices.push_back(v);
 }
