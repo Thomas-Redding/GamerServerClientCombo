@@ -21,14 +21,10 @@ TextBox::TextBox(sf::RenderWindow *w, sf::Font *myFont, std::string label, float
 }
 
 void TextBox::mousePressed(sf::Mouse::Button button, int x, int y) {
-	if(background.getPosition().x < x && x < background.getPosition().x+background.getSize().x && background.getPosition().y < y && y < background.getPosition().y+background.getSize().y) {
-		isInFocus = true;
-		background.setOutlineThickness(2);
-	}
-	else {
-		isInFocus = false;
-		background.setOutlineThickness(0);
-	}
+	if(background.getPosition().x < x && x < background.getPosition().x+background.getSize().x && background.getPosition().y < y && y < background.getPosition().y+background.getSize().y)
+		setFocus(true);
+	else
+		setFocus(false);
 }
 
 bool TextBox::textEntered(sf::Uint32 character) {
@@ -42,6 +38,18 @@ bool TextBox::textEntered(sf::Uint32 character) {
 		str += character;
 	text.setString(str);
 	return false;
+}
+
+void TextBox::setFocus(bool newFocus) {
+	isInFocus = newFocus;
+	if(newFocus)
+		background.setOutlineThickness(2);
+	else
+		background.setOutlineThickness(0);
+}
+
+bool TextBox::getFocus() {
+	return isInFocus;
 }
 
 void TextBox::draw() {

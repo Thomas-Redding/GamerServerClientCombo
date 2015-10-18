@@ -20,6 +20,8 @@ public:
 	void draw();
 	void setBounds(float x, float y, float w, float h);
 	bool textEntered(sf::Uint32 character);
+	void setFocus(bool newFocus);
+	bool getFocus();
 	std::string getString();
 protected:
 	bool isInFocus = false;

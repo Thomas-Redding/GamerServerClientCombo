@@ -33,6 +33,18 @@ bool ClientPage::mouseReleased(sf::Mouse::Button button, int x, int y) {
 }
 
 bool ClientPage::textEntered(sf::Uint32 character) {
+	if(character == 9) {
+		// tab
+		if(ipTextBox.getFocus()) {
+			ipTextBox.setFocus(false);
+			portTextBox.setFocus(true);
+		}
+		else {
+			ipTextBox.setFocus(true);
+			portTextBox.setFocus(false);
+		}
+		return true;
+	}
 	bool didReturn = ipTextBox.textEntered(character);
 	didReturn = didReturn || portTextBox.textEntered(character);
 	if(didReturn)
