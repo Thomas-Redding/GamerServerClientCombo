@@ -39,8 +39,6 @@ bool GameClient::keyReleased(sf::Keyboard::Key keyCode) {
 }
 
 bool GameClient::mouseMoved(int x, int y) {
-	currentInputState.mouseX = x;
-	currentInputState.mouseY = y;
 	return true;
 }
 
@@ -70,6 +68,21 @@ void GameClient::closing() {
 bool GameClient::update() {
 	if(myAvatarId == -1)
 		return true;
+	
+	// move view
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+		view.screenY -= 10;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+		view.screenY += 10;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+		view.screenX -= 10;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+		view.screenX += 10;
+	
+	// get mouse position
+	sf::Vector2i mousePosition = sf::Mouse::getPosition() - window->getPosition();
+	currentInputState.mouseX = mousePosition.x + view.screenX;
+	currentInputState.mouseY = mousePosition.y + view.screenY;
 	
 	// make time computations
 	long deltaTime = getTime() - timeOfLastFrame;

@@ -15,16 +15,16 @@ View::View(sf::RenderWindow *myWindow) {
 bool View::draw(Entities *entities) {
 	for(int i=0; i<entities->players.size(); i++) {
 		sf::CircleShape circ;
-		circ.setRadius(100);
-		circ.setPosition(entities->players[i].x-100, entities->players[i].y-100);
+		circ.setRadius(100 * screenScale);
+		circ.setPosition((entities->players[i].x - screenX - 100) * screenScale, (entities->players[i].y - screenY - 100) * screenScale);
 		circ.setFillColor(sf::Color::Red);
 		window->draw(circ);
 	}
 	
 	for(int i=0; i<entities->botSoldiers.size(); i++) {
 		sf::CircleShape circ;
-		circ.setRadius(100);
-		circ.setPosition(entities->botSoldiers[i].x-100, entities->botSoldiers[i].y-100);
+		circ.setRadius(100 * screenScale);
+		circ.setPosition((entities->botSoldiers[i].x - screenX - 100) * screenScale, (entities->botSoldiers[i].y - screenY - 100) * screenScale);
 		circ.setFillColor(sf::Color::Blue);
 		window->draw(circ);
 	}
@@ -32,15 +32,15 @@ bool View::draw(Entities *entities) {
 	for(int i=0; i<entities->map.waypoints.size(); i++) {
 		sf::CircleShape circ;
 		circ.setRadius(10);
-		circ.setPosition(entities->map.waypoints[i].x-10, entities->map.waypoints[i].y-10);
+		circ.setPosition((entities->map.waypoints[i].x - screenX)*screenScale - 10, (entities->map.waypoints[i].y - screenY)*screenScale - 10);
 		circ.setFillColor(sf::Color::Green);
 		window->draw(circ);
 	}
 	
 	for(int i=0; i<entities->map.walls.size(); i++) {
 		sf::VertexArray lines(sf::LinesStrip, 2);
-		lines[0].position = sf::Vector2f(entities->map.walls[i].x1, entities->map.walls[i].y1);
-		lines[1].position = sf::Vector2f(entities->map.walls[i].x2, entities->map.walls[i].y2);
+		lines[0].position = sf::Vector2f((entities->map.walls[i].x1 - screenX) * screenScale, (entities->map.walls[i].y1 - screenY) * screenScale);
+		lines[1].position = sf::Vector2f((entities->map.walls[i].x2 - screenX) * screenScale, (entities->map.walls[i].y2 - screenY) * screenScale);
 		window->draw(lines);
 	}
 	

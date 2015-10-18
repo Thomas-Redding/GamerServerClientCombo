@@ -26,6 +26,9 @@ public:
 	View(sf::RenderWindow *myWindow);
 	bool draw(Entities *entities);
 	bool resized(unsigned int width, unsigned int height);
+	double screenX = 0;
+	double screenY = 0;
+	double screenScale = 1;
 private:
 	sf::RenderWindow *window;
 };
