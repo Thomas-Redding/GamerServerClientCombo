@@ -10,11 +10,11 @@
 #define PlayerSystem_cpp
 
 #include <stdio.h>
-#include <cmath>
 #include <iostream>
 
 #include "Entities.hpp"
 #include "InputState.hpp"
+#include "utility.hpp"
 
 class PlayerSystem {
 public:
@@ -28,8 +28,6 @@ public:
 	void update(Entities *entities, InputState *inputState, long deltaTime, int avatarId);
 private:
 	void shoot(Entities *entities, int avatarId, double x, double y);
-	double lineSegmentIntersect(double a, double b, double c, double d, double e, double f, double g, double h);
-	inline bool isPointOnLine(double x, double y, double a, double b, double c, double d);
 };
 
 
