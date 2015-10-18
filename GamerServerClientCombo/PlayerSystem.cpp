@@ -12,14 +12,19 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 	Player *me = &entities->players[avatarId];
 	double deltaX = inputState->mouseX - me->x;
 	double deltaY = inputState->mouseY - me->y;
-	double len = std::sqrt(deltaX*deltaX + deltaY*deltaY);
-	deltaX *= deltaTime/len/4;
-	deltaY *= deltaTime/len/4;
-	double len2 = std::sqrt(deltaX*deltaX + deltaY*deltaY);
-	if(len2 > len) {
-		deltaX *= len/len2;
-		deltaY *= len/len2;
+	double distanceToMouse = std::sqrt(deltaX*deltaX + deltaY*deltaY);
+	deltaX *= deltaTime/distanceToMouse/4;
+	deltaY *= deltaTime/distanceToMouse/4;
+	double distanceToTravel = std::sqrt(deltaX*deltaX + deltaY*deltaY);
+	if(distanceToMouse == 0) {
+		deltaX = 0;
+		deltaY = 0;
 	}
+	else if(distanceToTravel > distanceToMouse) {
+		deltaX *= distanceToMouse/distanceToTravel;
+		deltaY *= distanceToMouse/distanceToTravel;
+	}
+	
 	if(inputState->up) {
 		me->x += deltaX;
 		me->y += deltaY;
@@ -44,7 +49,4 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 	
 	if(inputState->mouseDown && me->health > 10)
 		me->health -= deltaTime/10;
-		
-	
-	std::cout << me->health << "\n";
 }
