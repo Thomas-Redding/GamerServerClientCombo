@@ -124,19 +124,3 @@ void Client::tcpMessageReceived(std::string message, long timeStamp) {
 void Client::udpMessageReceived(std::string message, long timeStamp) {
 	return pages[currentPage]->udpMessageReceived(message, timeStamp);
 }
-
-std::vector<std::string> Client::split(std::string str, char delim) {
-	std::vector<std::string> elems;
-	std::string item;
-	while(true) {
-		int index = str.find(delim);
-		if(index == -1) {
-			elems.push_back(str);
-			return elems;
-		}
-		elems.push_back(str.substr(0, index));
-		if(index+1 == str.length())
-			return elems;
-		str = str.substr(index+1);
-	}
-}

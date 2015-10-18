@@ -26,6 +26,10 @@ public:
 	 * @param avatarId - which avatar's inputs are being updated?
 	 */
 	void update(Entities *entities, InputState *inputState, long deltaTime, int avatarId);
+private:
+	void shoot(Entities *entities, int avatarId, double x, double y);
+	double lineSegmentIntersect(double a, double b, double c, double d, double e, double f, double g, double h);
+	inline bool isPointOnLine(double x, double y, double a, double b, double c, double d);
 };
 
 

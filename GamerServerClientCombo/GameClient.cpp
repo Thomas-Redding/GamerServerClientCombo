@@ -216,19 +216,3 @@ bool GameClient::draw() {
 long GameClient::getTime() {
 	return std::chrono::duration_cast< std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
-
-std::vector<std::string> GameClient::split(std::string str, char delim) {
-	std::vector<std::string> elems;
-	std::string item;
-	while(true) {
-		int index = str.find(delim);
-		if(index == -1) {
-			elems.push_back(str);
-			return elems;
-		}
-		elems.push_back(str.substr(0, index));
-		if(index+1 == str.length())
-			return elems;
-		str = str.substr(index+1);
-	}
-}

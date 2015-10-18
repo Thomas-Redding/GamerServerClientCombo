@@ -18,6 +18,7 @@
 #include "Entities.hpp"
 #include "SystemsHandler.hpp"
 #include "View.hpp"
+#include "Utility.hpp"
 
 /*
  During a frame, the methods are called in the following order:
@@ -53,7 +54,6 @@ private:
 	SystemsHandler systemsHandler;
 	long timeOfLastFrame;
 	long getTime();
-	std::vector<std::string> split(std::string s, char delim);
 	bool useSimpleClient = true;
 	bool useSimpleServer = false;
 };

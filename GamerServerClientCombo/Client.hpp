@@ -20,6 +20,7 @@
 #include "ClientPage.hpp"
 #include "ClientMatchmakingPage.hpp"
 #include "GameClient.hpp"
+#include "Utility.hpp"
 
 /*
  NEVER start a UDP or TCP message with the underscore character. Messages starting with the underscore character are reserved for the NetworkClient and NetworkServer classes.
@@ -96,8 +97,6 @@ private:
 	sf::Font font;
 	int currentPage = 0;
 	std::vector <Page*> pages;
-	
-	std::vector<std::string> split(std::string str, char delim);
 };
 
 #endif /* Client_cpp */

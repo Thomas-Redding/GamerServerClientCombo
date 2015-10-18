@@ -19,6 +19,7 @@
 
 #include "PlayerSystem.hpp"
 #include "MapSystem.hpp"
+#include "Utility.hpp"
 
 /*
  Methods to be implemented:
@@ -80,13 +81,6 @@ public:
 private:
 	bool isServer;
 	PlayerSystem playerSystem;
-	
-	/*
-	 * splits a string into a vector of strings based on some deliminating character
-	 * @param s - string to be split
-	 * @param delim - deliminator to split along
-	 */
-    std::vector<std::string> split(std::string str, char delim);
 	
 	/*
 	 * @inputStates - computes the deltaTime of each inputState

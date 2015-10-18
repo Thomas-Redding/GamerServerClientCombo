@@ -50,19 +50,3 @@ void MapSystem::addWaypointsToMap(Map* map, std::string str) {
 		}
 	}
 }
-
-std::vector<std::string> MapSystem::split(std::string str, char delim) {
-	std::vector<std::string> elems;
-	std::string item;
-	while(true) {
-		int index = str.find(delim);
-		if(index == -1) {
-			elems.push_back(str);
-			return elems;
-		}
-		elems.push_back(str.substr(0, index));
-		if(index+1 == str.length())
-			return elems;
-		str = str.substr(index+1);
-	}
-}

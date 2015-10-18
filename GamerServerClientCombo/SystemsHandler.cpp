@@ -140,22 +140,6 @@ void SystemsHandler::inputStateFromString(InputState *inputState, std::string st
 
 /*** Private ***/
 
-std::vector<std::string> SystemsHandler::split(std::string str, char delim) {
-	std::vector<std::string> elems;
-	std::string item;
-	while(true) {
-		int index = str.find(delim);
-		if(index == -1) {
-			elems.push_back(str);
-			return elems;
-		}
-		elems.push_back(str.substr(0, index));
-		if(index+1 == str.length())
-			return elems;
-		str = str.substr(index+1);
-	}
-}
-
 std::vector<float> SystemsHandler::inputStateWeights(std::deque<InputState> *inputStates, long startTime, long endTime) {
 	long len = inputStates->size();
 	std::vector<float> rtn(len);

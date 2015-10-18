@@ -14,6 +14,7 @@
 #include <iostream>
 
 #include "Map.hpp"
+#include "Utility.hpp"
 
 class MapSystem {
 public:
@@ -28,7 +29,6 @@ private:
 	void clearMap(Map* map);
 	void addWallsToMap(Map* map, std::string str);
 	void addWaypointsToMap(Map* map, std::string str);
-	std::vector<std::string> split(std::string s, char delim);
 };
 
 /*

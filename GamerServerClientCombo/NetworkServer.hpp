@@ -54,7 +54,6 @@ private:
 	bool isInClientList(sf::TcpSocket *ip);
 	void sendTcpBySocket(std::string message, sf::TcpSocket *socket);
 	sf::UdpSocket udpSocket;
-	std::vector<std::string> split(std::string str, char delim);
 };
 
 #endif /* NetworkServer_cpp */
