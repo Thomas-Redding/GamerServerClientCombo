@@ -15,6 +15,7 @@ struct Player {
 	int id;
 	double x;
 	double y;
+	double health = 100;
 	std::vector<int> followerIds;
 };
 

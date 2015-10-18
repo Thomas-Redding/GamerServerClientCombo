@@ -44,10 +44,12 @@ bool GameClient::mouseMoved(int x, int y) {
 
 bool GameClient::mousePressed(sf::Mouse::Button button, int x, int y) {
 	currentInputState.mouseClicked = true;
+	currentInputState.mouseDown = true;
 	return true;
 }
 
 bool GameClient::mouseReleased(sf::Mouse::Button button, int x, int y) {
+	currentInputState.mouseDown = false;
 	return true;
 }
 

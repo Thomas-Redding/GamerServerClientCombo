@@ -36,9 +36,15 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 		me->x -= deltaY;
 		me->y += deltaX;
 	}
-		
+	
 	if(inputState->mouseClicked) {
 		me->x = inputState->mouseX;
 		me->y = inputState->mouseY;
 	}
+	
+	if(inputState->mouseDown && me->health > 10)
+		me->health -= deltaTime/10;
+		
+	
+	std::cout << me->health << "\n";
 }

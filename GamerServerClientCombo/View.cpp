@@ -14,9 +14,10 @@ View::View(sf::RenderWindow *myWindow) {
 
 bool View::draw(Entities *entities) {
 	for(int i=0; i<entities->players.size(); i++) {
+		Player *me = &entities->players[i];
 		sf::CircleShape circ;
-		circ.setRadius(100 * screenScale);
-		circ.setPosition((entities->players[i].x - screenX - 100) * screenScale, (entities->players[i].y - screenY - 100) * screenScale);
+		circ.setRadius(me->health * screenScale);
+		circ.setPosition((me->x - screenX - 100) * screenScale, (me->y - screenY - 100) * screenScale);
 		circ.setFillColor(sf::Color::Red);
 		window->draw(circ);
 	}
