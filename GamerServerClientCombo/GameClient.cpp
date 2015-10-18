@@ -81,11 +81,15 @@ bool GameClient::update() {
 		view.screenX -= 10;
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		view.screenX += 10;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+		view.screenScale *= 1.01;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
+		view.screenScale /= 1.01;
 	
 	// get mouse position
 	sf::Vector2i mousePosition = sf::Mouse::getPosition() - window->getPosition();
-	currentInputState.mouseX = mousePosition.x + view.screenX;
-	currentInputState.mouseY = mousePosition.y + view.screenY;
+	currentInputState.mouseX = (mousePosition.x + view.screenX) / view.screenScale;
+	currentInputState.mouseY = (mousePosition.y + view.screenY) / view.screenScale;
 	
 	// make time computations
 	long deltaTime = getTime() - timeOfLastFrame;
