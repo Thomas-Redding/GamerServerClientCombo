@@ -132,6 +132,7 @@
     <ClCompile Include="gamerserverclientcombo\TcpServer.cpp" />
     <ClCompile Include="gamerserverclientcombo\TextBox.cpp" />
     <ClCompile Include="gamerserverclientcombo\View.cpp" />
+    <ClCompile Include="Graph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gamerserverclientcombo\AvatarSystem.hpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="gamerserverclientcombo\TextBox.hpp" />
     <ClInclude Include="gamerserverclientcombo\View.hpp" />
     <ClInclude Include="gamerserverclientcombo\Wall.hpp" />
+    <ClInclude Include="Graph.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="useful info\1. Overview.html" />
