@@ -19,6 +19,7 @@ struct InputState {
 	bool right = false;
 	double mouseX = 0;
 	double mouseY = 0;
+	bool mouseClicked = false;
 };
 
 #endif /* InputState_cpp */

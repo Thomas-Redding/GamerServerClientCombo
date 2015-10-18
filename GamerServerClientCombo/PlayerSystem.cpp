@@ -15,6 +15,11 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 	double len = std::sqrt(deltaX*deltaX + deltaY*deltaY);
 	deltaX *= deltaTime/len/4;
 	deltaY *= deltaTime/len/4;
+	double len2 = std::sqrt(deltaX*deltaX + deltaY*deltaY);
+	if(len2 > len) {
+		deltaX *= len/len2;
+		deltaY *= len/len2;
+	}
 	if(inputState->up) {
 		me->x += deltaX;
 		me->y += deltaY;
@@ -30,5 +35,10 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 	if(inputState->right) {
 		me->x -= deltaY;
 		me->y += deltaX;
+	}
+		
+	if(inputState->mouseClicked) {
+		me->x = inputState->mouseX;
+		me->y = inputState->mouseY;
 	}
 }

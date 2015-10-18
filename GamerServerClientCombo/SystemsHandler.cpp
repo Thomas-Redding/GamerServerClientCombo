@@ -85,8 +85,9 @@ void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
 }
 
 std::string SystemsHandler::inputStateToString(InputState *inputState) {
-	// {timeStamp}:{mouseX},{mouseY}:{up}{down}{left}{right}
+	// {timeStamp}:{mouseClicked},{mouseX},{mouseY}:{up}{down}{left}{right}
     std::string str = std::to_string(inputState->timeStamp) + ":";
+	str += std::to_string(inputState->mouseClicked) + ",";
 	str += std::to_string(inputState->mouseX) + ",";
 	str += std::to_string(inputState->mouseY) + ":";
 	str += std::to_string(inputState->up);
@@ -97,16 +98,18 @@ std::string SystemsHandler::inputStateToString(InputState *inputState) {
 }
 
 void SystemsHandler::inputStateFromString(InputState *inputState, std::string str) {
-	// {timeStamp}:{mouseX},{mouseY}:{up}{down}{left}{right}
+	// {timeStamp}:{mouseDown},{mouseX},{mouseY}:{up}{down}{left}{right}
     std::vector<std::string> vect = split(str, ':');
 	if(vect.size() != 3)
 		return;
 	inputState->timeStamp = stol(vect[0]);
 	
 	std::vector<std::string> vect2 = split(vect[1], ',');
-	if(vect2.size() == 2) {
-		inputState->mouseX = stof(vect2[0]);
-		inputState->mouseY = stof(vect2[1]);
+	if(vect2.size() == 3) {
+		if(vect2[0] == "1")
+			inputState->mouseClicked = true;
+		inputState->mouseX = stof(vect2[1]);
+		inputState->mouseY = stof(vect2[2]);
 	}
 	
 	if(vect[2].length() == 4) {
@@ -127,16 +130,6 @@ void SystemsHandler::inputStateFromString(InputState *inputState, std::string st
 		else
 			inputState->right = false;
 	}
-}
-
-void SystemsHandler::clearInputState(InputState *inputState) {
-    inputState->timeStamp = 0;
-    inputState->up = false;
-    inputState->down = false;
-    inputState->left = false;
-    inputState->right = false;
-	inputState->mouseX = 0;
-	inputState->mouseY = 0;
 }
 
 /*** Private ***/

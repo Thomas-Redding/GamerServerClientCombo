@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <cmath>
+#include <iostream>
 
 #include "Entities.hpp"
 #include "InputState.hpp"

@@ -77,11 +77,6 @@ public:
 	 */
     void inputStateFromString(InputState *inputState, std::string str);
 	
-	/*
-	 * Sets the given InputState object to default values
-	 * @param inputState - InputState object to be cleared
-	 */
-    void clearInputState(InputState *inputState);
 private:
 	bool isServer;
 	PlayerSystem playerSystem;

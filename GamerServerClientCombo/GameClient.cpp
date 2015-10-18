@@ -43,6 +43,7 @@ bool GameClient::mouseMoved(int x, int y) {
 }
 
 bool GameClient::mousePressed(sf::Mouse::Button button, int x, int y) {
+	currentInputState.mouseClicked = true;
 	return true;
 }
 
@@ -141,8 +142,9 @@ bool GameClient::update() {
 		systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
 	}
 	
-    sendMessageToClient(systemsHandler.inputStateToString(&inputStates[0].front()));
-	// systemsHandler.clearInputState(&currentInputState);
+	std::string stringToSendToServer = systemsHandler.inputStateToString(&inputStates[0].front());
+    sendMessageToClient(stringToSendToServer);
+	currentInputState.mouseClicked = false;
 	
 	return true;
 }
@@ -153,7 +155,6 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 		// set up game
 		inputStates.push_back(std::deque<InputState>());
 		timeOfLastFrame = getTime();
-		systemsHandler.clearInputState(&currentInputState);
 		currentInputState.timeStamp = timeOfLastFrame;
 		
 		// put empty InputState and Entities into queues

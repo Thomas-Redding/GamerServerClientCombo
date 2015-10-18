@@ -20,7 +20,6 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers, std::string startDe
 	inputStates = std::vector<std::deque<InputState>>(players.size());
 	for(int i=0; i<players.size(); i++) {
 		inputStates[i].push_back(InputState());
-		systemsHandler.clearInputState(&inputStates[i].front());
 	}
 	entities.push_front(Entities());
 	// setup single item in entities at start of game
