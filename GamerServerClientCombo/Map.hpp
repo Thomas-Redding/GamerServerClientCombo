@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "Wall.hpp"
-#include "WayPoint.hpp"
+#include "Waypoint.hpp"
 
 struct Map {
 	std::vector<Wall> walls;
