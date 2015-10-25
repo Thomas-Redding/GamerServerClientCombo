@@ -97,7 +97,7 @@ void GameServer::simulateFromTime(long startTime) {
 	}
 	if(startEntity == entities.size()-1)
 		startEntity--;
-	for(int i=startEntity; i>=0; i--) {
+	for(int i=startEntity-1; i>=0; i--) {
 		long timeStamp = entities[i].timeStamp;
 		entities[i] = entities[i+1];
 		entities[i].timeStamp = timeStamp;
@@ -106,10 +106,3 @@ void GameServer::simulateFromTime(long startTime) {
 		}
 	}
 }
-
-
-
-
-
-
-

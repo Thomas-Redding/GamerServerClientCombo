@@ -53,7 +53,6 @@ void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputSta
 		if(weights[i] != 0)
 			playerSystem.update(entities, &inputStates->at(i), weights[i], avatarId);
 	}
-	//return true;
 }
 
 std::string SystemsHandler::entitiesToString(Entities *entities, sf::IpAddress ip) {
@@ -211,9 +210,9 @@ long SystemsHandler::lineIntersect(long a, long b, long c, long d) {
 	else if(b <= c || d <= a)
 		return 0; // no overlap
 	else if(a <= c && b <= d)
-		return c-b; // staggered - cd in front
+		return b-c; // staggered - cd in front
 	else if(c <= a && d <= b)
-		return b-a; // staggered - ab in front
+		return d-a; // staggered - ab in front
 	else
 		return 0;
 }

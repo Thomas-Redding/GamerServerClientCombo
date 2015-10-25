@@ -9,7 +9,13 @@
 #include "PlayerSystem.hpp"
 
 void PlayerSystem::update(Entities *entities, InputState *inputState, long deltaTime, int avatarId) {
-	Player *me = &entities->players[avatarId];
+	Player *me;
+	for(int i=0; i<entities->players.size(); i++) {
+		if(entities->players[i].id == avatarId) {
+			me = &entities->players[avatarId];
+			break;
+		}
+	}
 	double deltaX = inputState->mouseX - me->x;
 	double deltaY = inputState->mouseY - me->y;
 	double distanceToMouse = std::sqrt(deltaX*deltaX + deltaY*deltaY);

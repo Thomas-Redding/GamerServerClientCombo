@@ -207,6 +207,7 @@ long NetworkClient::serverToClientTime(long serverTime) {
 }
 
 signed long NetworkClient::estimateClockDiff() {
+	return 0; // delete-me
 	signed long avg = 0;
 	if(estimatedClockDifferences.size() > 0) {
 		std::vector<long> vect = estimatedClockDifferences;
