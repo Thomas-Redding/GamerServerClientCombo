@@ -127,9 +127,11 @@ bool GameClient::update() {
 				break;
 			}
 		}
+		
 		if(serverEntityIndex == -1)
 			serverEntityIndex = serverEntities.size()-1;
 		if(serverEntityIndex != -1) {
+			// if we have data from the server that is less than 1 second old
 			for(int i=0; i<entities.size(); i++) {
 				if(entities[i].timeStamp < serverEntities[serverEntityIndex].timeStamp) {
 					entities.insert(entities.begin()+i, serverEntities[serverEntityIndex]);

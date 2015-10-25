@@ -13,7 +13,7 @@ Server::Server(ServerCommunicator &com): NetworkServer(com) {
 
 bool Server::update() {
 	// sleep for 25 milliseconds
-	std::this_thread::sleep_for(std::chrono::nanoseconds(25000000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(25));
 	
 	if(gameRunning) {
 		gameServer.update();

@@ -212,7 +212,7 @@ signed long NetworkClient::estimateClockDiff() {
 		std::vector<long> vect = estimatedClockDifferences;
 		std::sort(vect.begin(), vect.begin()+vect.size());
 		int middleIndex = vect.size()/2;
-		return vect[middleIndex]+6; // "6" correction based on numeric tests
+		return vect[middleIndex];
 	}
 	else
 		return 0;

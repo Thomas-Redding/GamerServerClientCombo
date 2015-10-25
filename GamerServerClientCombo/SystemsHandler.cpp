@@ -138,6 +138,59 @@ void SystemsHandler::inputStateFromString(InputState *inputState, std::string st
 	}
 }
 
+Entities SystemsHandler::interpolate(Entities *from, Entities *to, double t) {
+	// todo
+	Entities rtn;
+	
+	// interpolate between timeStamps
+	rtn.timeStamp = from->timeStamp * (1-t) + to->timeStamp * t;
+	
+	// interpolate between players
+	if(t < 0.5) {
+		rtn.players = std::vector<Player>(from->players.size());
+		for(int i=0; i<from->players.size(); i++) {
+			rtn.players[i].id = from->players[i].id;
+			rtn.players[i].followerIds = std::vector<int>(from->players[i].followerIds.size());
+			int j;
+			for(j=0; j<to->players.size(); j++) {
+				if(to->players[j].id == rtn.players[i].id) {
+					rtn.players[i].x = from->players[i].x * (1-t) + to->players[i].x * t;
+					rtn.players[i].y = from->players[i].y * (1-t) + to->players[i].y * t;
+					rtn.players[i].health = from->players[i].health * (1-t) + to->players[i].health * t;
+					break;
+				}
+			}
+			if(j == to->players.size()) {
+				rtn.players[i].x = from->players[i].x;
+				rtn.players[i].y = from->players[i].y;
+				rtn.players[i].health = from->players[i].health;
+			}
+		}
+	}
+	else {
+		rtn.players = std::vector<Player>(to->players.size());
+		for(int i=0; i<to->players.size(); i++) {
+			rtn.players[i].id = to->players[i].id;
+			rtn.players[i].followerIds = std::vector<int>(to->players[i].followerIds.size());
+			int j;
+			for(j=0; j<from->players.size(); j++) {
+				if(from->players[j].id == rtn.players[i].id) {
+					rtn.players[i].x = from->players[i].x * (1-t) + to->players[i].x * t;
+					rtn.players[i].y = from->players[i].y * (1-t) + to->players[i].y * t;
+					rtn.players[i].health = from->players[i].health * (1-t) + to->players[i].health * t;
+					break;
+				}
+			}
+			if(j == from->players.size()) {
+				rtn.players[i].x = to->players[i].x;
+				rtn.players[i].y = to->players[i].y;
+				rtn.players[i].health = to->players[i].health;
+			}
+		}
+	}
+	return rtn;
+}
+
 /*** Private ***/
 
 std::vector<float> SystemsHandler::inputStateWeights(std::deque<InputState> *inputStates, long startTime, long endTime) {
