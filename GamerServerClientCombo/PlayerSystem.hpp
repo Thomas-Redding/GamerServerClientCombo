@@ -27,6 +27,12 @@ public:
 	 */
 	void update(Entities *entities, InputState *inputState, long deltaTime, int avatarId);
 private:
+	/*
+	 * @param entities - current state of the world
+	 * @param avatarId - id of the shooter
+	 * @param x - x position of crosshairs
+	 * @param y - y position of crosshairs
+	 */
 	void shoot(Entities *entities, int avatarId, double x, double y);
 };
 

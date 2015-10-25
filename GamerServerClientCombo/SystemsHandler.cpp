@@ -138,7 +138,6 @@ void SystemsHandler::inputStateFromString(InputState *inputState, std::string st
 }
 
 Entities SystemsHandler::interpolate(Entities *from, Entities *to, double t) {
-	// todo
 	Entities rtn;
 	
 	// interpolate between timeStamps

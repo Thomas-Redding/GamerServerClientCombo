@@ -15,6 +15,12 @@
 
 class BotSoldierSystem {
 public:
+	/*
+	 * Function called once per frame during which all actions of the given BotSoldier should occur
+	 * @param entities - current world state
+	 * @param deltaTime - time over which actions take place
+	 * @param botSoldierId - id of soldier who is acting
+	 */
 	void update(Entities *entities, long deltaTime, int botSoldierId);
 };
 
