@@ -14,7 +14,6 @@ class HeaderFile:
         txt = txt[firstNewLine:]
         txt = txt.replace('\t', "&nbsp;&nbsp;&nbsp;&nbsp;")
         txt = txt.replace('\n', "<br/>")
-        
         self.str = txt
 
 pathToCode = "../GamerServerClientCombo"

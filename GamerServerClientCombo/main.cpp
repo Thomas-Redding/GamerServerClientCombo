@@ -61,8 +61,11 @@ int main(int, char const**) {
 				shouldProgramContinue = shouldProgramContinue && client.mouseReleased(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
 			else if(event.type == sf::Event::MouseWheelMoved)
 				shouldProgramContinue = shouldProgramContinue && client.mouseWheeled(event.mouseWheel.delta, event.mouseButton.x, event.mouseButton.y);
-			else if(event.type == sf::Event::Resized)
+			else if(event.type == sf::Event::Resized) {
+				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+				window.setView(sf::View(visibleArea));
 				shouldProgramContinue = shouldProgramContinue && client.resized(event.size.width, event.size.height);
+			}
 			else
 				shouldProgramContinue = shouldProgramContinue && client.otherEvent(event);
 		}
