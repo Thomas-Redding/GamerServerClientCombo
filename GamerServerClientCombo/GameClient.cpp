@@ -15,26 +15,10 @@ GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *my
 /*** Forward to SystemsHandler ***/
 
 bool GameClient::keyPressed(sf::Keyboard::Key keyCode) {
-	if(keyCode == sf::Keyboard::Up)
-		currentInputState.up = true;
-	if(keyCode == sf::Keyboard::Down)
-		currentInputState.down = true;
-	if(keyCode == sf::Keyboard::Left)
-		currentInputState.left = true;
-	if(keyCode == sf::Keyboard::Right)
-		currentInputState.right = true;
 	return true;
 };
 
 bool GameClient::keyReleased(sf::Keyboard::Key keyCode) {
-	if(keyCode == sf::Keyboard::Up)
-		currentInputState.up = false;
-	if(keyCode == sf::Keyboard::Down)
-		currentInputState.down = false;
-	if(keyCode == sf::Keyboard::Left)
-		currentInputState.left = false;
-	if(keyCode == sf::Keyboard::Right)
-		currentInputState.right = false;
 	return true;
 }
 
@@ -90,6 +74,22 @@ bool GameClient::update() {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition() - window->getPosition();
 	currentInputState.mouseX = (mousePosition.x + view.screenX) / view.screenScale;
 	currentInputState.mouseY = (mousePosition.y + view.screenY) / view.screenScale;
+	
+	currentInputState.moveX = 0;
+	currentInputState.moveY = 0;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+		currentInputState.moveY--;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+		currentInputState.moveY++;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		currentInputState.moveX--;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+		currentInputState.moveX++;
+	double len = sqrt(currentInputState.moveX*currentInputState.moveX + currentInputState.moveY*currentInputState.moveY);
+	if(len != 0) {
+		currentInputState.moveX /= len;
+		currentInputState.moveY /= len;
+	}
 	
 	// make time computations
 	long deltaTime = getTime() - timeOfLastFrame;

@@ -13,6 +13,7 @@
 #include <sstream>
 #include <queue>
 #include <mutex>
+#include <iostream>
 
 class ClientServerCommunicator {
 public:
