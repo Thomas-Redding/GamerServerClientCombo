@@ -8,7 +8,7 @@
 
 #include "Client.hpp"
 
-Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com) : window(myWindow), NetworkClient(com) {
+Client::Client(sf::RenderWindow &myWindow, ServerCommunicator &com, ClientServerCommunicator &comB) : window(myWindow), NetworkClient(com, comB) {
 	// use this to alter the default framerate limit from its default value (60fps)
 	window.setFramerateLimit(40);
 	

@@ -9,38 +9,16 @@
 #include "PlayerSystem.hpp"
 
 void PlayerSystem::update(Entities *entities, InputState *inputState, long deltaTime, int avatarId) {
-	Player *me = &entities->players[avatarId];
-	double deltaX = inputState->mouseX - me->x;
-	double deltaY = inputState->mouseY - me->y;
-	double distanceToMouse = std::sqrt(deltaX*deltaX + deltaY*deltaY);
-	deltaX *= deltaTime/distanceToMouse/4;
-	deltaY *= deltaTime/distanceToMouse/4;
-	double distanceToTravel = std::sqrt(deltaX*deltaX + deltaY*deltaY);
-	if(distanceToMouse == 0) {
-		deltaX = 0;
-		deltaY = 0;
-	}
-	else if(distanceToTravel > distanceToMouse) {
-		deltaX *= distanceToMouse/distanceToTravel;
-		deltaY *= distanceToMouse/distanceToTravel;
+	Player *me;
+	for(int i=0; i<entities->players.size(); i++) {
+		if(entities->players[i].id == avatarId) {
+			me = &entities->players[avatarId];
+			break;
+		}
 	}
 	
-	if(inputState->up) {
-		me->x += deltaX;
-		me->y += deltaY;
-	}
-	if(inputState->down) {
-		me->x -= deltaX;
-		me->y -= deltaY;
-	}
-	if(inputState->left) {
-		me->x += deltaY;
-		me->y -= deltaX;
-	}
-	if(inputState->right) {
-		me->x -= deltaY;
-		me->y += deltaX;
-	}
+	me->x += inputState->moveX * deltaTime;
+	me->y += inputState->moveY * deltaTime;
 	
 	if(inputState->mouseClicked)
 		shoot(entities, avatarId, inputState->mouseX, inputState->mouseY);

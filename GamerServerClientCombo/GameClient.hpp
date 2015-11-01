@@ -54,7 +54,7 @@ private:
 	SystemsHandler systemsHandler;
 	long timeOfLastFrame;
 	long getTime();
-	bool useSimpleClient = true;
+	bool useSimpleClient = false;
 	bool useSimpleServer = false;
 };
 

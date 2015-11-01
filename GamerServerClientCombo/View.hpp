@@ -18,7 +18,20 @@
 class View {
 public:
 	View(sf::RenderWindow *myWindow);
+	
+	/*
+	 * Called once per frame to draw to the screen.
+	 * @param entities - current state of the world for us to draw
+	 * @return boolean indicating whether the application should quit or not
+	 */
 	bool draw(Entities *entities);
+	
+	/*
+	 * Called whenever the window is resized.
+	 * @param width - the window's new width
+	 * @param height - the window's new height
+	 * @return boolean indicating whether the application should quit or not
+	 */
 	bool resized(unsigned int width, unsigned int height);
 	double screenX = 0;
 	double screenY = 0;

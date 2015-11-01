@@ -15,26 +15,10 @@ GameClient::GameClient(int *currentPageNumber, sf::RenderWindow *w, sf::Font *my
 /*** Forward to SystemsHandler ***/
 
 bool GameClient::keyPressed(sf::Keyboard::Key keyCode) {
-	if(keyCode == sf::Keyboard::Up)
-		currentInputState.up = true;
-	if(keyCode == sf::Keyboard::Down)
-		currentInputState.down = true;
-	if(keyCode == sf::Keyboard::Left)
-		currentInputState.left = true;
-	if(keyCode == sf::Keyboard::Right)
-		currentInputState.right = true;
 	return true;
 };
 
 bool GameClient::keyReleased(sf::Keyboard::Key keyCode) {
-	if(keyCode == sf::Keyboard::Up)
-		currentInputState.up = false;
-	if(keyCode == sf::Keyboard::Down)
-		currentInputState.down = false;
-	if(keyCode == sf::Keyboard::Left)
-		currentInputState.left = false;
-	if(keyCode == sf::Keyboard::Right)
-		currentInputState.right = false;
 	return true;
 }
 
@@ -91,6 +75,22 @@ bool GameClient::update() {
 	currentInputState.mouseX = (mousePosition.x + view.screenX) / view.screenScale;
 	currentInputState.mouseY = (mousePosition.y + view.screenY) / view.screenScale;
 	
+	currentInputState.moveX = 0;
+	currentInputState.moveY = 0;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+		currentInputState.moveY--;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+		currentInputState.moveY++;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		currentInputState.moveX--;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+		currentInputState.moveX++;
+	double len = sqrt(currentInputState.moveX*currentInputState.moveX + currentInputState.moveY*currentInputState.moveY);
+	if(len != 0) {
+		currentInputState.moveX /= len;
+		currentInputState.moveY /= len;
+	}
+	
 	// make time computations
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
@@ -127,9 +127,11 @@ bool GameClient::update() {
 				break;
 			}
 		}
+		
 		if(serverEntityIndex == -1)
 			serverEntityIndex = serverEntities.size()-1;
 		if(serverEntityIndex != -1) {
+			// if we have data from the server that is less than 1 second old
 			for(int i=0; i<entities.size(); i++) {
 				if(entities[i].timeStamp < serverEntities[serverEntityIndex].timeStamp) {
 					entities.insert(entities.begin()+i, serverEntities[serverEntityIndex]);

@@ -58,7 +58,6 @@ void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputSta
 		if(weights[i] != 0)
 			playerSystem.update(entities, &inputStates->at(i), weights[i], avatarId);
 	}
-	//return true;
 }
 
 std::string SystemsHandler::entitiesToString(Entities *entities, sf::IpAddress ip) {
@@ -93,21 +92,19 @@ void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
 }
 
 std::string SystemsHandler::inputStateToString(InputState *inputState) {
-	// {timeStamp}:{mouseClicked},{mouseDown},{mouseX},{mouseY}:{up}{down}{left}{right}
+	// {timeStamp}:{mouseClicked},{mouseDown},{mouseX},{mouseY}:{moveX}{moveY}
     std::string str = std::to_string(inputState->timeStamp) + ":";
 	str += std::to_string(inputState->mouseClicked) + ",";
 	str += std::to_string(inputState->mouseDown) + ",";
 	str += std::to_string(inputState->mouseX) + ",";
 	str += std::to_string(inputState->mouseY) + ":";
-	str += std::to_string(inputState->up);
-	str += std::to_string(inputState->down);
-	str += std::to_string(inputState->left);
-	str += std::to_string(inputState->right);
+	str += std::to_string(inputState->moveX) + ",";
+	str += std::to_string(inputState->moveY);
 	return str;
 }
 
 void SystemsHandler::inputStateFromString(InputState *inputState, std::string str) {
-	// {timeStamp}:{mouseClicked},{mouseDown},{mouseX},{mouseY}:{up}{down}{left}{right}
+	// {timeStamp}:{mouseClicked},{mouseDown},{mouseX},{mouseY}:{moveX}{moveY}
     std::vector<std::string> vect = util::split(str, ':');
 	if(vect.size() != 3)
 		return;
@@ -123,24 +120,63 @@ void SystemsHandler::inputStateFromString(InputState *inputState, std::string st
 		inputState->mouseY = stof(vect2[3]);
 	}
 	
-	if(vect[2].length() == 4) {
-		if(vect[2][0] == '1')
-			inputState->up = true;
-		else
-			inputState->up = false;
-		if(vect[2][1] == '1')
-			inputState->down = true;
-		else
-			inputState->down = false;
-		if(vect[2][2] == '1')
-			inputState->left = true;
-		else
-			inputState->left = false;
-		if(vect[2][3] == '1')
-			inputState->right = true;
-		else
-			inputState->right = false;
+	vect2 = util::split(vect[2], ',');
+	if(vect2.size() == 2) {
+		inputState->moveX = stof(vect2[0]);
+		inputState->moveY = stof(vect2[1]);
 	}
+}
+
+Entities SystemsHandler::interpolate(Entities *from, Entities *to, double t) {
+	Entities rtn;
+	
+	// interpolate between timeStamps
+	rtn.timeStamp = from->timeStamp * (1-t) + to->timeStamp * t;
+	
+	// interpolate between players
+	if(t < 0.5) {
+		rtn.players = std::vector<Player>(from->players.size());
+		for(int i=0; i<from->players.size(); i++) {
+			rtn.players[i].id = from->players[i].id;
+			rtn.players[i].followerIds = std::vector<int>(from->players[i].followerIds.size());
+			int j;
+			for(j=0; j<to->players.size(); j++) {
+				if(to->players[j].id == rtn.players[i].id) {
+					rtn.players[i].x = from->players[i].x * (1-t) + to->players[i].x * t;
+					rtn.players[i].y = from->players[i].y * (1-t) + to->players[i].y * t;
+					rtn.players[i].health = from->players[i].health * (1-t) + to->players[i].health * t;
+					break;
+				}
+			}
+			if(j == to->players.size()) {
+				rtn.players[i].x = from->players[i].x;
+				rtn.players[i].y = from->players[i].y;
+				rtn.players[i].health = from->players[i].health;
+			}
+		}
+	}
+	else {
+		rtn.players = std::vector<Player>(to->players.size());
+		for(int i=0; i<to->players.size(); i++) {
+			rtn.players[i].id = to->players[i].id;
+			rtn.players[i].followerIds = std::vector<int>(to->players[i].followerIds.size());
+			int j;
+			for(j=0; j<from->players.size(); j++) {
+				if(from->players[j].id == rtn.players[i].id) {
+					rtn.players[i].x = from->players[i].x * (1-t) + to->players[i].x * t;
+					rtn.players[i].y = from->players[i].y * (1-t) + to->players[i].y * t;
+					rtn.players[i].health = from->players[i].health * (1-t) + to->players[i].health * t;
+					break;
+				}
+			}
+			if(j == from->players.size()) {
+				rtn.players[i].x = to->players[i].x;
+				rtn.players[i].y = to->players[i].y;
+				rtn.players[i].health = to->players[i].health;
+			}
+		}
+	}
+	return rtn;
 }
 
 /*** Private ***/
@@ -163,9 +199,9 @@ long SystemsHandler::lineIntersect(long a, long b, long c, long d) {
 	else if(b <= c || d <= a)
 		return 0; // no overlap
 	else if(a <= c && b <= d)
-		return c-b; // staggered - cd in front
+		return b-c; // staggered - cd in front
 	else if(c <= a && d <= b)
-		return b-a; // staggered - ab in front
+		return d-a; // staggered - ab in front
 	else
 		return 0;
 }

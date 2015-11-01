@@ -14,6 +14,7 @@
 #include <SFML/Network.hpp>
 #include <SFML/Graphics.hpp>
 #include "ServerCommunicator.hpp"
+#include "ClientServerCommunicator.hpp"
 
 /*
  NOTE: If you are a casual user, just focus on the Client and Server classes (i.e. ignore this one).
@@ -23,7 +24,7 @@
 
 class NetworkClient {
 public:
-	NetworkClient(ServerCommunicator& com);
+	NetworkClient(ServerCommunicator& com, ClientServerCommunicator &comB);
 	~NetworkClient();
 	void applicationIsClosing();
 
@@ -68,6 +69,7 @@ private:
 	sf::UdpSocket udpSocket;
 	unsigned short tcpPortOfServer;
 	ServerCommunicator &communicator;
+	ClientServerCommunicator &offlineCommunicator;
 	sf::IpAddress ipAddressOfServer;
 	unsigned short udpPortOfServer = 0;
 	void sendOwnTcpServerMessageToQuit();

@@ -8,7 +8,7 @@
 
 #include "NetworkServer.hpp"
 
-NetworkServer::NetworkServer(ServerCommunicator &com): communicator(com) {
+NetworkServer::NetworkServer(ServerCommunicator &com, ClientServerCommunicator &comB): communicator(com), offlineCommunicator(comB) {
 	udpSocket.bind(sf::Socket::AnyPort);
 	udpSocket.setBlocking(false);
 }
@@ -50,6 +50,36 @@ bool NetworkServer::networkUpdate() {
 		}
 	}
 	
+	while(true) {
+		std::string message = offlineCommunicator.getTcpMessagesForServer();
+		if(message == "")
+			break;
+		long timeStamp = 0;
+		for(int i=0; i<message.size(); i++) {
+			if(message.at(i) == '@') {
+				timeStamp = stol(message.substr(0, i));
+				message = message.substr(i+1);
+				break;
+			}
+		}
+		std::string ip = sf::IpAddress::getLocalAddress().toString();
+		if(message.at(0) == '_') {
+			message = message.substr(1);
+			if(message.substr(0, 7) == "CONNECT") {
+				unsigned short newUdpPort = stoi(message.substr(7));
+				for(int i=0; i<clients.size(); i++) {
+					if(clients[i].ip.toString() == ip)
+						clients[i].udpPort = newUdpPort;
+				}
+			}
+		}
+		else {
+			shouldContinue = shouldContinue && receivedTcp(message, sf::IpAddress(ip), timeStamp);
+			if(!shouldContinue)
+				return shouldContinue;
+		}
+	}
+	
 	// check for UDP messages
 	while(true) {
 		char buffer[1024];
@@ -74,6 +104,28 @@ bool NetworkServer::networkUpdate() {
 				sendUdp("_PING___" + std::to_string(timeStamp), sender);
 			else
 				receivedUdp(message, sender, timeStamp);
+		}
+		else
+			break;
+	}
+	
+	while(true) {
+		std::string message = offlineCommunicator.getUdpMessagesForServer();
+		if(message == "")
+			break;
+		long timeStamp = 0;
+		for(int i=0; i<message.size(); i++) {
+			if(message.at(i) == '@') {
+				timeStamp = stol(message.substr(0, i));
+				message = message.substr(i+1);
+				break;
+			}
+		}
+		if(message != "") {
+			if(message.at(0) == '_')
+				sendUdp("_PING___" + std::to_string(timeStamp), sf::IpAddress::getLocalAddress());
+			else
+				receivedUdp(message, sf::IpAddress::getLocalAddress(), timeStamp);
 		}
 		else
 			break;
@@ -130,7 +182,10 @@ void NetworkServer::sendUdp(std::string message, sf::IpAddress ipAddressOfClient
 	message = std::to_string(getTime()) + "@" + message;
 	for(int i=0; i<clients.size(); i++) {
 		if(clients[i].ip == ipAddressOfClient) {
-			udpSocket.send(message.c_str(), message.size(), ipAddressOfClient, clients[i].udpPort);
+			if(ipAddressOfClient == sf::IpAddress::getLocalAddress())
+				offlineCommunicator.sendUdpMessageToClient(message);
+			else
+				udpSocket.send(message.c_str(), message.size(), ipAddressOfClient, clients[i].udpPort);
 			break;
 		}
 	}
@@ -139,7 +194,10 @@ void NetworkServer::sendUdp(std::string message, sf::IpAddress ipAddressOfClient
 void NetworkServer::sendTcp(std::string message, sf::IpAddress ip) {
 	for(int i=0; i<clients.size(); i++) {
 		if(clients[i].ip == ip) {
-			sendTcpBySocket(message, clients[i].tcp);
+			if(ip == sf::IpAddress::getLocalAddress())
+				offlineCommunicator.sendTcpMessageToClient(message);
+			else
+				sendTcpBySocket(message, clients[i].tcp);
 			break;
 		}
 	}

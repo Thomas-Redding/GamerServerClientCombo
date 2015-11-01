@@ -6,8 +6,13 @@
 #include "Server.hpp"
 #include "TcpServer.hpp"
 
-void startMainServer(ServerCommunicator *com) {
-	Server server(*com);
+struct CommunicatorPair {
+	ClientServerCommunicator *offlineCommunicator;
+	ServerCommunicator *serverCommunicator;
+};
+
+void startMainServer(CommunicatorPair *pair) {
+	Server server(*pair->serverCommunicator, *pair->offlineCommunicator);
 	bool shouldContine = true;
 	while (shouldContine) {
 		server.networkUpdate();
@@ -28,14 +33,23 @@ int main(int, char const**) {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
 	window.setFramerateLimit(60);
 	
-	ServerCommunicator communicator;
-	std::thread mainServerThread(startMainServer, &communicator);
-	std::thread tcpServerThread(startTcpServer, &communicator);
+	ServerCommunicator serverCommunicator;
+	ClientServerCommunicator offlineCommunicator;
+	CommunicatorPair pair;
+	pair.offlineCommunicator = &offlineCommunicator;
+	pair.serverCommunicator = &serverCommunicator;
+	std::thread mainServerThread(startMainServer, &pair);
+	std::thread tcpServerThread;
+	bool didLaunchTcpThread = true;
+	if(sf::IpAddress::getLocalAddress().toString() == "0.0.0.0")
+		didLaunchTcpThread = false;
+	else
+		tcpServerThread = std::thread(startTcpServer, &serverCommunicator);
 	
 	// sleep for 10 ms to give the server time to set up
 	std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
 	
-	Client client(window, communicator);
+	Client client(window, serverCommunicator, offlineCommunicator);
 	
 	bool shouldProgramContinue = client.start();
 	
@@ -61,8 +75,11 @@ int main(int, char const**) {
 				shouldProgramContinue = shouldProgramContinue && client.mouseReleased(event.mouseButton.button, event.mouseButton.x, event.mouseButton.y);
 			else if(event.type == sf::Event::MouseWheelMoved)
 				shouldProgramContinue = shouldProgramContinue && client.mouseWheeled(event.mouseWheel.delta, event.mouseButton.x, event.mouseButton.y);
-			else if(event.type == sf::Event::Resized)
+			else if(event.type == sf::Event::Resized) {
+				sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+				window.setView(sf::View(visibleArea));
 				shouldProgramContinue = shouldProgramContinue && client.resized(event.size.width, event.size.height);
+			}
 			else
 				shouldProgramContinue = shouldProgramContinue && client.otherEvent(event);
 		}
@@ -82,10 +99,11 @@ int main(int, char const**) {
 		client.networkUpdate();
 		
 		if(!shouldProgramContinue) {
-			communicator.setShouldServersContinue(false);
+			serverCommunicator.setShouldServersContinue(false);
 			client.applicationIsClosing();
 			mainServerThread.join();
-			tcpServerThread.join();
+			if(didLaunchTcpThread)
+				tcpServerThread.join();
 			window.close();
 		}
 	}
