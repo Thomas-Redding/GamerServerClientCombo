@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <iostream>
 
 namespace util {
 	/*
@@ -34,6 +35,11 @@ namespace util {
 	 * if no intersection, returns -1; else returns distance to intersection
 	 */
 	bool rayCircleIntersect(double theta, double x, double y, double r);
+    
+    /*
+     * Line Segment Intersect fcn
+     */
+    bool segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4);
 }
 
 #endif /* utility_cpp */
