@@ -47,7 +47,7 @@ void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails
 	mapSystem.loadFromString(&entities->map, contents);
     
     if(isServer) {
-        std::cout << util::segmentIntersect(100, 100, 200, 200, 100, 200, 200, 100);
+        std::cout << util::segmentIntersect(100, 100, 200, 200, 100, 200, 200, 100).x;
     }
     
 }

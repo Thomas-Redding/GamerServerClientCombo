@@ -15,6 +15,12 @@
 #include <iostream>
 
 namespace util {
+    struct Pair {
+        bool didIntersect;
+        double x;
+        double y;
+    };
+    
 	/*
 	 * splits a string into a vector of substrings based on a character
 	 * Ex: split("alpha-beta-gamma", '-') --> ["alpha", "beta", "gamma"]
@@ -38,8 +44,17 @@ namespace util {
     
     /*
      * Line Segment Intersect fcn
+     * @param x1 - x position of first end of first segment
+     * @param y1 - y position of first end of first segment
+     * @param x2 - x position of second end of first segment
+     * @param y2 - y position of second end of first segment
+     * @param x3 - x position of first end of second segment
+     * @param y3 - y position of first end of second segment
+     * @param x4 - x position of second end of second segment
+     * @param y4 - y position of second end of second segment
+     * @returns true for intercept, false for no intercept
      */
-    bool segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4);
+    Pair segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4);
 }
 
 #endif /* utility_cpp */

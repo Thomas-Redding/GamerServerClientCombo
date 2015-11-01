@@ -65,16 +65,18 @@ bool util::rayCircleIntersect(double theta, double x, double y, double r) {
 }
 
 // Line Segment Intersect fcn
-bool util:: segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
+util::Pair util:: segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
 
     int yslope1 = y2 - y1;
     int xslope1 = x2 - x1;
     int yslope2 = y4 - y3;
     int xslope2 = x4 - x3;
+    Pair rtn;
+    rtn.didIntersect = false;
     
     //if parallel lines, false
     if((xslope1 == xslope2) && (yslope1 == yslope2)){
-        return false;
+        return rtn;
     }
     //need case for when segments overlap but don't intersect 
     
@@ -82,10 +84,12 @@ bool util:: segmentIntersect(double x1, double y1, double x2, double y2, double 
     double t = ((xslope2*s) + x3 - x1)/xslope1;
     
     if((s <= 1 && s >= 0) && (t <= 1 && t >= 0)){
-        std::cout << s <<","<< t <<"\n";
-        return true;
+        rtn.x = (xslope2*s) + x3;
+        rtn.y = (yslope2*s) + y3;
+        rtn.didIntersect = true;
+        return rtn;
     } else {
         std::cout << s << t;
-        return false;
+        return rtn;
     }
 }
