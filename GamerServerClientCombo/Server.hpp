@@ -37,7 +37,7 @@
 
 class Server : public NetworkServer {
 public:
-	Server(ServerCommunicator &com);
+	Server(ServerCommunicator &com, ClientServerCommunicator &comB);
 	
 	// return a boolean indicating whether the server should keep running
 	bool update();

@@ -13,6 +13,7 @@
 #include <iostream>
 #include <SFML/Network.hpp>
 #include "ServerCommunicator.hpp"
+#include "ClientServerCommunicator.hpp"
 
 /*
  NOTE: If you are a casual user, just focus on the Client and Server classes (i.e. ignore this one).
@@ -32,7 +33,7 @@ struct ClientInfo {
  */
 class NetworkServer {
 public:
-	NetworkServer(ServerCommunicator &com);
+	NetworkServer(ServerCommunicator &com, ClientServerCommunicator &comB);
 	bool networkUpdate();
 	void sendTcp(std::string message, sf::IpAddress ip);
 	void sendUdp(std::string message, sf::IpAddress ipAddressOfClient);
@@ -48,6 +49,7 @@ public:
 	long getTime();
 private:
 	ServerCommunicator &communicator;
+	ClientServerCommunicator &offlineCommunicator;
 	std::vector<ClientInfo> clients;
 	void checkForNewClients();
 	bool isClientInUpdatedList(sf::TcpSocket *client, std::vector<sf::TcpSocket *>&list);

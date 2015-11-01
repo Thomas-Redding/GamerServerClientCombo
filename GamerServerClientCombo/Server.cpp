@@ -8,7 +8,7 @@
 
 #include "Server.hpp"
 
-Server::Server(ServerCommunicator &com): NetworkServer(com) {
+Server::Server(ServerCommunicator &com, ClientServerCommunicator &comB): NetworkServer(com, comB) {
 }
 
 bool Server::update() {

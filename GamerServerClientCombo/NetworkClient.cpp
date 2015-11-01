@@ -8,7 +8,7 @@
 
 #include "NetworkClient.hpp"
 
-NetworkClient::NetworkClient(ServerCommunicator& com) : communicator(com) {
+NetworkClient::NetworkClient(ServerCommunicator& com, ClientServerCommunicator &comB) : communicator(com), offlineCommunicator(comB) {
 	tcpSocket.setBlocking(false);
 	udpSocket.setBlocking(false);
 	udpSocket.bind(sf::Socket::AnyPort);
@@ -73,6 +73,33 @@ void NetworkClient::networkUpdate() {
 			break;
 	}
 	
+	while(true) {
+		std::string message = offlineCommunicator.getTcpMessagesForClient();
+		if(message == "")
+			break;
+		long timeStamp = 0;
+		for(int i=0; i<message.size(); i++) {
+			if(message.at(i) == '@') {
+				timeStamp = stol(message.substr(0, i));
+				message = message.substr(i+1);
+				break;
+			}
+		}
+		if(message.at(0) == '_') {
+			// message is reserved for NetworkClient (Client shouldn't receive this)
+			message = message.substr(1);
+			if(message.substr(0, 7) == "CONNECT") {
+				if(connectionState != 3) {
+					int oldState = connectionState;
+					connectionState = 3;
+				}
+				udpPortOfServer = stoi(message.substr(7));
+			}
+		}
+		else
+			tcpMessageReceived(message, serverToClientTime(timeStamp));
+	}
+	
 	// check for UDP messages
 	while(true) {
 		char buffer[1024];
@@ -109,6 +136,32 @@ void NetworkClient::networkUpdate() {
 		else {
 			break;
 		}
+	}
+	
+	while(true) {
+		std::string message = offlineCommunicator.getUdpMessagesForClient();
+		if(message == "")
+			break;
+		long timeStamp = 0;
+		for(int i=0; i<message.size(); i++) {
+			if(message.at(i) == '@') {
+				timeStamp = stol(message.substr(0, i));
+				message = message.substr(i+1);
+				break;
+			}
+		}
+		if(message.at(0) == '_') {
+			long currentTime = getTime();
+			long timeSent = stol(message.substr(8));
+			/*
+			 So, I sent a PING at time "timeSent" according to my clock. A little later, the server received it and gave it "timeStamp" using its clock. Now, I have received that PING back.
+				*/
+			estimatedClockDifferences.push_back(timeStamp - (timeSent + currentTime)/2);
+			if(estimatedClockDifferences.size() > 40)
+				estimatedClockDifferences.erase(estimatedClockDifferences.begin(), estimatedClockDifferences.begin()+1);
+		}
+		else
+			udpMessageReceived(message, serverToClientTime(timeStamp));
 	}
 	
 	// handle PINGS
@@ -181,16 +234,23 @@ int NetworkClient::getConnectionState() {
 void NetworkClient::sendTcpMessage(std::string message) {
 	if(connectionState >= 1) {
 		message = std::to_string(getServerTime()) + "@" + message;
-		sf::Packet packet;
-		packet << message;
-		tcpSocket.send(packet);
+		if(ipAddressOfServer == sf::IpAddress::getLocalAddress())
+			offlineCommunicator.sendTcpMessageToServer(message);
+		else {
+			sf::Packet packet;
+			packet << message;
+			tcpSocket.send(packet);
+		}
 	}
 }
 
 void NetworkClient::sendUdpMessage(std::string message) {
 	if(connectionState >= 3) {
 		message = std::to_string(getServerTime()) + "@" + message;
-		udpSocket.send(message.c_str(), message.size(), ipAddressOfServer, udpPortOfServer);
+		if(ipAddressOfServer == sf::IpAddress::getLocalAddress())
+			offlineCommunicator.sendUdpMessageToServer(message);
+		else
+			udpSocket.send(message.c_str(), message.size(), ipAddressOfServer, udpPortOfServer);
 	}
 }
 

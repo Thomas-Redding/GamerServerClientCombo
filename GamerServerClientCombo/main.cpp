@@ -6,8 +6,13 @@
 #include "Server.hpp"
 #include "TcpServer.hpp"
 
-void startMainServer(ServerCommunicator *com) {
-	Server server(*com);
+struct CommunicatorPair {
+	ClientServerCommunicator *offlineCommunicator;
+	ServerCommunicator *serverCommunicator;
+};
+
+void startMainServer(CommunicatorPair *pair) {
+	Server server(*pair->serverCommunicator, *pair->offlineCommunicator);
 	bool shouldContine = true;
 	while (shouldContine) {
 		server.networkUpdate();
@@ -28,14 +33,18 @@ int main(int, char const**) {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
 	window.setFramerateLimit(60);
 	
-	ServerCommunicator communicator;
-	std::thread mainServerThread(startMainServer, &communicator);
-	std::thread tcpServerThread(startTcpServer, &communicator);
+	ServerCommunicator serverCommunicator;
+	ClientServerCommunicator offlineCommunicator;
+	CommunicatorPair pair;
+	pair.offlineCommunicator = &offlineCommunicator;
+	pair.serverCommunicator = &serverCommunicator;
+	std::thread mainServerThread(startMainServer, &pair);
+	std::thread tcpServerThread(startTcpServer, &serverCommunicator);
 	
 	// sleep for 10 ms to give the server time to set up
 	std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
 	
-	Client client(window, communicator);
+	Client client(window, serverCommunicator, offlineCommunicator);
 	
 	bool shouldProgramContinue = client.start();
 	
@@ -85,7 +94,7 @@ int main(int, char const**) {
 		client.networkUpdate();
 		
 		if(!shouldProgramContinue) {
-			communicator.setShouldServersContinue(false);
+			serverCommunicator.setShouldServersContinue(false);
 			client.applicationIsClosing();
 			mainServerThread.join();
 			tcpServerThread.join();

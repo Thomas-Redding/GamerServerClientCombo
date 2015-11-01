@@ -67,7 +67,7 @@ bool start() - called at the beginning immediately after the constructor; return
 
 class Client : public NetworkClient {
 public:
-	Client(sf::RenderWindow &myWindow, ServerCommunicator &com);
+	Client(sf::RenderWindow &myWindow, ServerCommunicator &com, ClientServerCommunicator &comB);
 	bool start();
 	/*
 	 These methods are triggered by events. It's worth noting that many of these could be emluated in update():
