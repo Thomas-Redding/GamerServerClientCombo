@@ -39,7 +39,12 @@ int main(int, char const**) {
 	pair.offlineCommunicator = &offlineCommunicator;
 	pair.serverCommunicator = &serverCommunicator;
 	std::thread mainServerThread(startMainServer, &pair);
-	std::thread tcpServerThread(startTcpServer, &serverCommunicator);
+	std::thread tcpServerThread;
+	bool didLaunchTcpThread = true;
+	if(sf::IpAddress::getLocalAddress().toString() == "0.0.0.0")
+		didLaunchTcpThread = false;
+	else
+		tcpServerThread = std::thread(startTcpServer, &serverCommunicator);
 	
 	// sleep for 10 ms to give the server time to set up
 	std::this_thread::sleep_for(std::chrono::nanoseconds(10000000));
@@ -97,7 +102,8 @@ int main(int, char const**) {
 			serverCommunicator.setShouldServersContinue(false);
 			client.applicationIsClosing();
 			mainServerThread.join();
-			tcpServerThread.join();
+			if(didLaunchTcpThread)
+				tcpServerThread.join();
 			window.close();
 		}
 	}
