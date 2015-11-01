@@ -36,6 +36,7 @@
 		28F2AA751BE69E6400F7227F /* PortTextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA6B1BE69E6400F7227F /* PortTextBox.cpp */; };
 		28F2AA761BE69E6400F7227F /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA6D1BE69E6400F7227F /* TextBox.cpp */; };
 		28F2AA781BE69E7B00F7227F /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA771BE69E7B00F7227F /* Client.cpp */; };
+		28F2AA7F1BE69F7100F7227F /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA7D1BE69F7100F7227F /* Graph.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,8 @@
 		28F2AA6D1BE69E6400F7227F /* TextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextBox.cpp; path = GamerServerClientCombo/TextBox.cpp; sourceTree = SOURCE_ROOT; };
 		28F2AA771BE69E7B00F7227F /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Client.cpp; path = GamerServerClientCombo/Client.cpp; sourceTree = SOURCE_ROOT; };
 		28F2AA7C1BE69E9A00F7227F /* GameServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GameServer.hpp; path = GamerServerClientCombo/GameServer.hpp; sourceTree = SOURCE_ROOT; };
+		28F2AA7D1BE69F7100F7227F /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
+		28F2AA7E1BE69F7100F7227F /* Graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Graph.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +179,8 @@
 				283004321BD453FC0000910C /* util.cpp */,
 				283004331BD453FC0000910C /* util.hpp */,
 				28434D0D1B753037008A51AC /* sansation.ttf */,
+				28F2AA7D1BE69F7100F7227F /* Graph.cpp */,
+				28F2AA7E1BE69F7100F7227F /* Graph.hpp */,
 				28434D0F1B753037008A51AC /* icon.png */,
 				28CB66161B9DD6B700833E69 /* ResourcePath.hpp */,
 				28CB38F71BCB1FFF006B1BFA /* ResourcePath.mm */,
@@ -351,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				287BE2291BCAE86F0012EDE4 /* NetworkClient.cpp in Sources */,
+				28F2AA7F1BE69F7100F7227F /* Graph.cpp in Sources */,
 				28A52A841BC41171001ED83C /* View.cpp in Sources */,
 				28F2AA6E1BE69E6400F7227F /* Button.cpp in Sources */,
 				28F2AA711BE69E6400F7227F /* HomePage.cpp in Sources */,

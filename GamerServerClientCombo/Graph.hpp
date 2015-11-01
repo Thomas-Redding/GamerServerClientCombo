@@ -19,8 +19,8 @@ template <class T> class Vertex;
 template <class T> class Edge {
 public:
 	Edge(Vertex<T> *org, Vertex<T> *dest);
-	Vertex* getOrigin();
-	Vertex* getDestination();
+	Vertex<T>* getOrigin();
+	Vertex<T>* getDestination();
 private:
 	Vertex<T>* origin;
 	Vertex<T>* destination;
