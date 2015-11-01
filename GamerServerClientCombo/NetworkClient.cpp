@@ -179,6 +179,12 @@ void NetworkClient::networkUpdate() {
 
 void NetworkClient::attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort) {
 	ipAddressOfServer = serverIpAddress;
+	// connect to remote server
+	if(serverIpAddress == "0.0.0.0") {
+		connectionState = 3;
+		return;
+	}
+	
 	if(connectionState != 0) {
 		int oldState = connectionState;
 		connectionState = 0;

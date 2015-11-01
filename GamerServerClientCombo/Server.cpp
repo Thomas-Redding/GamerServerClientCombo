@@ -9,6 +9,7 @@
 #include "Server.hpp"
 
 Server::Server(ServerCommunicator &com, ClientServerCommunicator &comB): NetworkServer(com, comB) {
+	clients.push_back(sf::IpAddress::getLocalAddress());
 }
 
 bool Server::update() {
@@ -47,7 +48,8 @@ bool Server::receivedTcp(std::string message, sf::IpAddress ip, long timeStamp) 
 }
 
 void Server::gotNewClient(sf::IpAddress ip) {
-	clients.push_back(ip);
+	if(ip != sf::IpAddress::getLocalAddress())
+		clients.push_back(ip);
 }
 
 void Server::lostClient(sf::IpAddress ip) {
