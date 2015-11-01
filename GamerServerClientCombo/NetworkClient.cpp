@@ -233,13 +233,21 @@ int NetworkClient::getConnectionState() {
 
 void NetworkClient::sendTcpMessage(std::string message) {
 	if(connectionState >= 1) {
-		message = std::to_string(getServerTime()) + "@" + message;
-		if(ipAddressOfServer == sf::IpAddress::getLocalAddress())
-			offlineCommunicator.sendTcpMessageToServer(message);
-		else {
+		if(message == "Quit Server") {
 			sf::Packet packet;
 			packet << message;
 			tcpSocket.send(packet);
+		}
+		else {
+			message = std::to_string(getServerTime()) + "@" + message;
+			if(ipAddressOfServer == sf::IpAddress::getLocalAddress()) {
+				offlineCommunicator.sendTcpMessageToServer(message);
+			}
+			else {
+				sf::Packet packet;
+				packet << message;
+				tcpSocket.send(packet);
+			}
 		}
 	}
 }
