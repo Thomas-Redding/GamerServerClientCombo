@@ -17,8 +17,8 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 		}
 	}
 	
-	me->x += inputState->moveX * deltaTime;
-	me->y += inputState->moveY * deltaTime;
+	me->x += inputState->moveX * deltaTime * 0.4;
+	me->y += inputState->moveY * deltaTime * 0.4;
 	
 	if(inputState->mouseClicked)
 		shoot(entities, avatarId, inputState->mouseX, inputState->mouseY);

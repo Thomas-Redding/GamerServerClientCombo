@@ -11,6 +11,11 @@
 NetworkServer::NetworkServer(ServerCommunicator &com, ClientServerCommunicator &comB): communicator(com), offlineCommunicator(comB) {
 	udpSocket.bind(sf::Socket::AnyPort);
 	udpSocket.setBlocking(false);
+	ClientInfo myInfo;
+	myInfo.ip = sf::IpAddress::getLocalAddress();
+	myInfo.tcp = nullptr;
+	myInfo.udpPort = 0;
+	clients.push_back(myInfo);
 }
 
 bool NetworkServer::networkUpdate() {
@@ -160,8 +165,10 @@ void NetworkServer::checkForNewClients() {
 	
 	for(int i=0; i<newClients.size(); i++)
 		gotNewClient(newClients[i]->getRemoteAddress());
-	for(int i=0; i<lostClients.size(); i++)
-		lostClient(lostClients[i]->getRemoteAddress());
+	for(int i=0; i<lostClients.size(); i++) {
+		if(lostClients[i] != nullptr)
+			lostClient(lostClients[i]->getRemoteAddress());
+	}
 }
 
 bool NetworkServer::isClientInUpdatedList(sf::TcpSocket *client, std::vector<sf::TcpSocket *>&list) {

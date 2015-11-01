@@ -254,6 +254,7 @@
 				28F2AA5C1BE69E6400F7227F /* ServerPage.hpp */,
 				28F2AA561BE69E3F00F7227F /* ServerPage.cpp */,
 				28F2AA5D1BE69E6400F7227F /* TextBox.hpp */,
+				28F2AA6D1BE69E6400F7227F /* TextBox.cpp */,
 				28F2AA5E1BE69E6400F7227F /* Button.cpp */,
 				28F2AA5F1BE69E6400F7227F /* Button.hpp */,
 				28F2AA601BE69E6400F7227F /* ClientMatchmakingPage.cpp */,
@@ -269,7 +270,6 @@
 				28F2AA6A1BE69E6400F7227F /* Page.cpp */,
 				28F2AA6B1BE69E6400F7227F /* PortTextBox.cpp */,
 				28F2AA6C1BE69E6400F7227F /* PortTextBox.hpp */,
-				28F2AA6D1BE69E6400F7227F /* TextBox.cpp */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
