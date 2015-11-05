@@ -10,7 +10,8 @@
 
 void PlayerSystem::update(Entities *entities, InputState *inputState, long deltaTime, int avatarId) {
 	Player *me;
-	for(int i=0; i<entities->players.size(); i++) {
+	int i;
+	for(i=0; i<entities->players.size(); i++) {
 		if(entities->players[i].id == avatarId) {
 			me = &entities->players[avatarId];
 			break;
@@ -19,6 +20,8 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 	
 	me->x += inputState->moveX * deltaTime * 0.4;
 	me->y += inputState->moveY * deltaTime * 0.4;
+	
+	std::cout << "<" << avatarId << " : " << i << ">\n";
 	
 	if(inputState->mouseClicked)
 		shoot(entities, avatarId, inputState->mouseX, inputState->mouseY);

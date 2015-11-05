@@ -98,6 +98,8 @@ bool Client::update() {
 		disconnect();
 	}
 	
+	str = pages[3]->getMessageForClient();
+	
 	str = pages[4]->getMessageForClient();
 	if(str == "logout") {
 		disconnect();
@@ -107,7 +109,7 @@ bool Client::update() {
 	if(str != "") {
 		sendUdpMessage(str);
 	}
-
+	
 	
 	int stage = getConnectionState();
 	for(int i=0; i<pages.size(); i++)

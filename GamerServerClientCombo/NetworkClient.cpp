@@ -180,7 +180,7 @@ void NetworkClient::networkUpdate() {
 void NetworkClient::attemptConnectionToServer(sf::IpAddress serverIpAddress, unsigned short serverPort) {
 	ipAddressOfServer = serverIpAddress;
 	// connect to remote server
-	if(serverIpAddress == "0.0.0.0") {
+	if(serverIpAddress.toString() == sf::IpAddress::getLocalAddress().toString()) {
 		connectionState = 3;
 		return;
 	}

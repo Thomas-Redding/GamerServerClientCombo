@@ -21,6 +21,7 @@
 		287BE22C1BCAE86F0012EDE4 /* TcpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE2261BCAE86F0012EDE4 /* TcpServer.cpp */; };
 		28A52A811BC4113C001ED83C /* SystemsHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A7F1BC4113C001ED83C /* SystemsHandler.cpp */; };
 		28A52A841BC41171001ED83C /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A52A821BC41171001ED83C /* View.cpp */; };
+		28D13AE11BE995B90090BBE2 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D13AE01BE995B90090BBE2 /* ResourcePath.mm */; };
 		28F2AA521BE69E2A00F7227F /* GameClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA4F1BE69E2A00F7227F /* GameClient.cpp */; };
 		28F2AA571BE69E3F00F7227F /* GameServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA531BE69E3F00F7227F /* GameServer.cpp */; };
 		28F2AA581BE69E3F00F7227F /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA541BE69E3F00F7227F /* Server.cpp */; };
@@ -36,7 +37,6 @@
 		28F2AA761BE69E6400F7227F /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA6D1BE69E6400F7227F /* TextBox.cpp */; };
 		28F2AA781BE69E7B00F7227F /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA771BE69E7B00F7227F /* Client.cpp */; };
 		28F2AA7F1BE69F7100F7227F /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA7D1BE69F7100F7227F /* Graph.cpp */; };
-		28F2AA831BE6A22B00F7227F /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA821BE6A22B00F7227F /* ResourcePath.mm */; };
 		28F2AA861BE6A30000F7227F /* ClientServerCommunicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28F2AA841BE6A30000F7227F /* ClientServerCommunicator.cpp */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +75,7 @@
 		28A52A831BC41171001ED83C /* View.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		28A52A861BC41270001ED83C /* Entities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entities.hpp; sourceTree = "<group>"; };
 		28CB66161B9DD6B700833E69 /* ResourcePath.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
+		28D13AE01BE995B90090BBE2 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		28F2AA4F1BE69E2A00F7227F /* GameClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameClient.cpp; path = GamerServerClientCombo/GameClient.cpp; sourceTree = SOURCE_ROOT; };
 		28F2AA501BE69E2A00F7227F /* GameClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GameClient.hpp; path = GamerServerClientCombo/GameClient.hpp; sourceTree = SOURCE_ROOT; };
 		28F2AA511BE69E2A00F7227F /* Client.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Client.hpp; path = GamerServerClientCombo/Client.hpp; sourceTree = SOURCE_ROOT; };
@@ -105,7 +106,6 @@
 		28F2AA7C1BE69E9A00F7227F /* GameServer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GameServer.hpp; path = GamerServerClientCombo/GameServer.hpp; sourceTree = SOURCE_ROOT; };
 		28F2AA7D1BE69F7100F7227F /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
 		28F2AA7E1BE69F7100F7227F /* Graph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Graph.hpp; sourceTree = "<group>"; };
-		28F2AA821BE6A22B00F7227F /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		28F2AA841BE6A30000F7227F /* ClientServerCommunicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ClientServerCommunicator.cpp; path = GamerServerClientCombo/ClientServerCommunicator.cpp; sourceTree = SOURCE_ROOT; };
 		28F2AA851BE6A30000F7227F /* ClientServerCommunicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ClientServerCommunicator.hpp; path = GamerServerClientCombo/ClientServerCommunicator.hpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -181,12 +181,12 @@
 				28316C0A1BD2A36300CBFE63 /* alpha.txt */,
 				283004321BD453FC0000910C /* util.cpp */,
 				283004331BD453FC0000910C /* util.hpp */,
+				28D13AE01BE995B90090BBE2 /* ResourcePath.mm */,
 				28434D0D1B753037008A51AC /* sansation.ttf */,
 				28F2AA7D1BE69F7100F7227F /* Graph.cpp */,
 				28F2AA7E1BE69F7100F7227F /* Graph.hpp */,
 				28434D0F1B753037008A51AC /* icon.png */,
 				28CB66161B9DD6B700833E69 /* ResourcePath.hpp */,
-				28F2AA821BE6A22B00F7227F /* ResourcePath.mm */,
 				28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */,
 			);
 			name = Resources;
@@ -251,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				28F2AA5B1BE69E6400F7227F /* Page.hpp */,
+				28F2AA6A1BE69E6400F7227F /* Page.cpp */,
 				28F2AA5C1BE69E6400F7227F /* ServerPage.hpp */,
 				28F2AA561BE69E3F00F7227F /* ServerPage.cpp */,
 				28F2AA5D1BE69E6400F7227F /* TextBox.hpp */,
@@ -267,7 +268,6 @@
 				28F2AA671BE69E6400F7227F /* IpTextBox.hpp */,
 				28F2AA681BE69E6400F7227F /* MultiplayerPage.cpp */,
 				28F2AA691BE69E6400F7227F /* MultiplayerPage.hpp */,
-				28F2AA6A1BE69E6400F7227F /* Page.cpp */,
 				28F2AA6B1BE69E6400F7227F /* PortTextBox.cpp */,
 				28F2AA6C1BE69E6400F7227F /* PortTextBox.hpp */,
 			);
@@ -364,9 +364,9 @@
 				28F2AA7F1BE69F7100F7227F /* Graph.cpp in Sources */,
 				28A52A841BC41171001ED83C /* View.cpp in Sources */,
 				28F2AA6E1BE69E6400F7227F /* Button.cpp in Sources */,
+				28D13AE11BE995B90090BBE2 /* ResourcePath.mm in Sources */,
 				28F2AA711BE69E6400F7227F /* HomePage.cpp in Sources */,
 				28F2AA781BE69E7B00F7227F /* Client.cpp in Sources */,
-				28F2AA831BE6A22B00F7227F /* ResourcePath.mm in Sources */,
 				28F2AA571BE69E3F00F7227F /* GameServer.cpp in Sources */,
 				28F2AA741BE69E6400F7227F /* Page.cpp in Sources */,
 				28F2AA701BE69E6400F7227F /* ClientPage.cpp in Sources */,

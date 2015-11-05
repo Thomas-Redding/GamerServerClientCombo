@@ -23,7 +23,7 @@ void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails
 	int numberOfPlayers = stoi(launchDetailsVector[1]);
 	entities->players = std::vector<Player>(numberOfPlayers);
 	for(int i=0; i<entities->players.size(); i++) {
-		entities->players[i].id = 0;
+		entities->players[i].id = i;
 		entities->players[i].x = 100;
 		entities->players[i].y = 200;
 	}
