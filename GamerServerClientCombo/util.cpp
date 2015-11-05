@@ -89,7 +89,6 @@ util::Pair util:: segmentIntersect(double x1, double y1, double x2, double y2, d
         rtn.didIntersect = true;
         return rtn;
     } else {
-        std::cout << s << t;
         return rtn;
     }
 }

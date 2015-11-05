@@ -44,12 +44,7 @@ void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails
 	}
 	
 	MapSystem mapSystem = MapSystem();
-	mapSystem.loadFromString(&entities->map, contents);
-    
-    if(isServer) {
-        std::cout << util::segmentIntersect(100, 100, 200, 200, 100, 200, 200, 100).x;
-    }
-    
+	mapSystem.loadFromString(&entities->map, contents);    
 }
 
 void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime, int avatarId) {

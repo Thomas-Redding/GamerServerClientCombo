@@ -21,8 +21,6 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 	me->x += inputState->moveX * deltaTime * 0.4;
 	me->y += inputState->moveY * deltaTime * 0.4;
 	
-	std::cout << "<" << avatarId << " : " << i << ">\n";
-	
 	if(inputState->mouseClicked)
 		shoot(entities, avatarId, inputState->mouseX, inputState->mouseY);
 	
