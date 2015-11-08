@@ -35,7 +35,7 @@ void GameServer::update() {
 	timeOfLastFrame = getTime();
 	entities.front().timeStamp = timeOfLastFrame;
 	
-	while(entities.back().timeStamp > timeOfLastFrame - 1000)
+	while(!entities.empty() && entities.back().timeStamp > timeOfLastFrame - 1000)
 		entities.pop_back();
 	for(int i=0; i<inputStates.size(); i++)
 		while(inputStates[i].back().timeStamp > timeOfLastFrame - 1000)
@@ -59,8 +59,6 @@ void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeSta
 void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
 	InputState newInfo;
 	systemsHandler.inputStateFromString(&newInfo, message);
-	
-	std::cout << ip << " : " << newInfo.timeStamp << " : " << timeStamp << "\n";
 	
 	for(int i=0; i<players.size(); i++) {
 		if(ip == players[i]) {			

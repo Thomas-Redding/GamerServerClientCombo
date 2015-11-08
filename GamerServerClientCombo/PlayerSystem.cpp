@@ -41,6 +41,3 @@ void PlayerSystem::shoot(Entities *entities, int avatarId, double x, double y) {
 	}
 }
 
-
-
-
