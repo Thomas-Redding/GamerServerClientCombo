@@ -52,7 +52,9 @@ void NetworkClient::networkUpdate() {
 			long timeStamp = 0;
 			for(int i=0; i<message.size(); i++) {
 				if(message.at(i) == '@') {
-					timeStamp = stol(message.substr(0, i));
+					std::cout << message << i << "\n";
+					char * pEnd;
+					timeStamp = strtoull(message.c_str(), &pEnd, 10);
 					message = message.substr(i+1);
 					break;
 				}
