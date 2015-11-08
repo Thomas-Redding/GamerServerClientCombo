@@ -92,8 +92,8 @@ bool GameClient::update() {
 	}
 	
 	// make time computations
-	long deltaTime = getTime() - timeOfLastFrame;
-	timeOfLastFrame = getTime();
+	long deltaTime = networkClock::getLocalTime() - timeOfLastFrame;
+	timeOfLastFrame = networkClock::getLocalTime();
 	
 	// push_front() and push_back() copy the value given
 	// by the time we get here, all the input events for this frame have been polled
@@ -162,7 +162,7 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 	if(vect[0] == "startGame") {
 		// set up game
 		inputStates.push_back(std::deque<InputState>());
-		timeOfLastFrame = getTime();
+		timeOfLastFrame = networkClock::getServerTime();
 		currentInputState.timeStamp = timeOfLastFrame;
 		
 		// put empty InputState and Entities into queues
@@ -175,12 +175,20 @@ void GameClient::tcpMessageReceived(std::string message, long timeStamp) {
 	}
 };
 
+/*
+ long getLocalTime();
+	signed long estimateClockDiff();
+	long getServerTime();
+	long serverToClientTime(long serverTime);
+ */
+
 void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	// insert server's world state into queue (store back up to 1 second)
 	Entities newEntities;
 	std::vector<std::string> vect = util::split(message, '$');
 	systemsHandler.entitiesFromString(&newEntities, vect[1]);
 	newEntities.timeStamp = stol(vect[0]);
+	newEntities.timeStamp = networkClock::serverToClientTime(newEntities.timeStamp);
 	newEntities.map = entities.front().map;
 	
 	int i;
@@ -194,7 +202,7 @@ void GameClient::udpMessageReceived(std::string message, long timeStamp) {
 	if(i == 0 || i == serverEntities.size())
 		serverEntities.push_back(newEntities);
 	
-	long t = getTime();
+	long t = networkClock::getLocalTime();
 	while(serverEntities.size() > 1 && serverEntities.back().timeStamp < t - 1000) {
 		serverEntities.pop_back();
 	}
@@ -212,9 +220,3 @@ bool GameClient::draw() {
 	return true;
 }
 
-
-/*** Private ***/
-
-long GameClient::getTime() {
-	return std::chrono::duration_cast< std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-}

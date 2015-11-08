@@ -19,6 +19,7 @@
 #include "SystemsHandler.hpp"
 #include "View.hpp"
 #include "util.hpp"
+#include "networkClock.hpp"
 
 /*
  During a frame, the methods are called in the following order:
@@ -53,7 +54,6 @@ private:
 	int myAvatarId = -1;
 	SystemsHandler systemsHandler;
 	long timeOfLastFrame;
-	long getTime();
 	bool useSimpleClient = false;
 	bool useSimpleServer = false;
 };
