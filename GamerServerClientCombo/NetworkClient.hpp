@@ -13,8 +13,10 @@
 #include <iostream>
 #include <SFML/Network.hpp>
 #include <SFML/Graphics.hpp>
+
 #include "ServerCommunicator.hpp"
 #include "ClientServerCommunicator.hpp"
+#include "networkClock.hpp"
 
 /*
  NOTE: If you are a casual user, just focus on the Client and Server classes (i.e. ignore this one).
@@ -61,8 +63,6 @@ public:
 	bool draw() {return true;};
 	bool update() {return true;};
 	void closing() {};
-	long getTime();
-	long getServerTime();
 private:
 	int connectionState = 0;
 	sf::TcpSocket tcpSocket;
@@ -74,9 +74,6 @@ private:
 	unsigned short udpPortOfServer = 0;
 	void sendOwnTcpServerMessageToQuit();
 	long timeLastPingSent = 0;
-	std::vector<long> estimatedClockDifferences;
-	signed long estimateClockDiff();
-	long serverToClientTime(long serverTime);
 };
 
 #endif /* NetworkClient_cpp */

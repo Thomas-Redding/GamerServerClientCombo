@@ -6,6 +6,8 @@
 #include "Server.hpp"
 #include "TcpServer.hpp"
 
+std::vector<long> estimatedClockDifferences;
+
 struct CommunicatorPair {
 	ClientServerCommunicator *offlineCommunicator;
 	ServerCommunicator *serverCommunicator;

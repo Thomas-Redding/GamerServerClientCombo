@@ -8,6 +8,8 @@
 
 #include "NetworkClient.hpp"
 
+extern std::vector<long> estimatedClockDifferences;
+
 NetworkClient::NetworkClient(ServerCommunicator& com, ClientServerCommunicator &comB) : communicator(com), offlineCommunicator(comB) {
 	tcpSocket.setBlocking(false);
 	udpSocket.setBlocking(false);
@@ -67,7 +69,7 @@ void NetworkClient::networkUpdate() {
 				}
 			}
 			else
-				tcpMessageReceived(message, serverToClientTime(timeStamp));
+				tcpMessageReceived(message, networkClock::serverToClientTime(timeStamp));
 		}
 		else
 			break;
@@ -97,7 +99,7 @@ void NetworkClient::networkUpdate() {
 			}
 		}
 		else
-			tcpMessageReceived(message, serverToClientTime(timeStamp));
+			tcpMessageReceived(message, networkClock::serverToClientTime(timeStamp));
 	}
 	
 	// check for UDP messages
@@ -121,7 +123,7 @@ void NetworkClient::networkUpdate() {
 				}
 			}
 			if(message.at(0) == '_') {
-				long currentTime = getTime();
+				long currentTime = networkClock::getLocalTime();
 				long timeSent = stol(message.substr(8));
 				/*
 				 So, I sent a PING at time "timeSent" according to my clock. A little later, the server received it and gave it "timeStamp" using its clock. Now, I have received that PING back.
@@ -131,7 +133,7 @@ void NetworkClient::networkUpdate() {
 					estimatedClockDifferences.erase(estimatedClockDifferences.begin(), estimatedClockDifferences.begin()+1);
 			}
 			else
-				udpMessageReceived(message, serverToClientTime(timeStamp));
+				udpMessageReceived(message, networkClock::serverToClientTime(timeStamp));
 		}
 		else {
 			break;
@@ -151,7 +153,7 @@ void NetworkClient::networkUpdate() {
 			}
 		}
 		if(message.at(0) == '_') {
-			long currentTime = getTime();
+			long currentTime = networkClock::getLocalTime();
 			long timeSent = stol(message.substr(8));
 			/*
 			 So, I sent a PING at time "timeSent" according to my clock. A little later, the server received it and gave it "timeStamp" using its clock. Now, I have received that PING back.
@@ -161,15 +163,15 @@ void NetworkClient::networkUpdate() {
 				estimatedClockDifferences.erase(estimatedClockDifferences.begin(), estimatedClockDifferences.begin()+1);
 		}
 		else
-			udpMessageReceived(message, serverToClientTime(timeStamp));
+			udpMessageReceived(message, networkClock::serverToClientTime(timeStamp));
 	}
 	
 	// handle PINGS
 	if(connectionState >= 3) {
-		long currentTime = getTime();
+		long currentTime = networkClock::getLocalTime();
 		// send ping every 200 ms (unless we've just connected, then we want a large sample quickly)
 		if(currentTime - timeLastPingSent > 200 || (currentTime - timeLastPingSent > 30 && estimatedClockDifferences.size() < 10)) {
-			std::string message = std::to_string(getTime()) + "@_PING___";
+			std::string message = std::to_string(networkClock::getLocalTime()) + "@_PING___";
 			udpSocket.send(message.c_str(), message.size(), ipAddressOfServer, udpPortOfServer);
 			timeLastPingSent = currentTime;
 		}
@@ -245,7 +247,7 @@ void NetworkClient::sendTcpMessage(std::string message) {
 			tcpSocket.send(packet);
 		}
 		else {
-			message = std::to_string(getServerTime()) + "@" + message;
+			message = std::to_string(networkClock::getServerTime()) + "@" + message;
 			if(ipAddressOfServer == sf::IpAddress::getLocalAddress()) {
 				offlineCommunicator.sendTcpMessageToServer(message);
 			}
@@ -260,35 +262,10 @@ void NetworkClient::sendTcpMessage(std::string message) {
 
 void NetworkClient::sendUdpMessage(std::string message) {
 	if(connectionState >= 3) {
-		message = std::to_string(getServerTime()) + "@" + message;
+		message = std::to_string(networkClock::getServerTime()) + "@" + message;
 		if(ipAddressOfServer == sf::IpAddress::getLocalAddress())
 			offlineCommunicator.sendUdpMessageToServer(message);
 		else
 			udpSocket.send(message.c_str(), message.size(), ipAddressOfServer, udpPortOfServer);
 	}
-}
-
-long NetworkClient::getTime() {
-	return std::chrono::duration_cast< std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
-}
-
-long NetworkClient::getServerTime() {
-	return getTime() + estimateClockDiff();
-}
-
-long NetworkClient::serverToClientTime(long serverTime) {
-	return serverTime - estimateClockDiff();
-}
-
-signed long NetworkClient::estimateClockDiff() {
-	return 0; // delete-me
-	signed long avg = 0;
-	if(estimatedClockDifferences.size() > 0) {
-		std::vector<long> vect = estimatedClockDifferences;
-		std::sort(vect.begin(), vect.begin()+vect.size());
-		int middleIndex = vect.size()/2;
-		return vect[middleIndex];
-	}
-	else
-		return 0;
 }
