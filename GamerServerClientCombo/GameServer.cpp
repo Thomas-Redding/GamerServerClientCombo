@@ -38,7 +38,7 @@ void GameServer::update() {
 	while(!entities.empty() && entities.back().timeStamp > timeOfLastFrame - 1000)
 		entities.pop_back();
 	for(int i=0; i<inputStates.size(); i++)
-		while(inputStates[i].back().timeStamp > timeOfLastFrame - 1000)
+		while(!inputStates.empty() && inputStates[i].back().timeStamp > timeOfLastFrame - 1000)
 			inputStates[i].pop_back();
 	
 	for(int i=0; i<players.size(); i++) {
