@@ -29,7 +29,13 @@ void GameServer::start(std::vector<sf::IpAddress> myPlayers, std::string startDe
 }
 
 void GameServer::update() {
-	entities.push_front(entities.front());
+	if (entities.empty()) {
+		entities.push_back(Entities());
+		systemsHandler.setupEntities(&entities.front(), startDetails);
+	}
+	else
+		entities.push_front(entities.front());
+
 	
 	long deltaTime = getTime() - timeOfLastFrame;
 	timeOfLastFrame = getTime();
@@ -38,14 +44,18 @@ void GameServer::update() {
 	while(!entities.empty() && entities.back().timeStamp > timeOfLastFrame - 1000)
 		entities.pop_back();
 	for(int i=0; i<inputStates.size(); i++)
-		while(!inputStates.empty() && inputStates[i].back().timeStamp > timeOfLastFrame - 1000)
+		while(!inputStates[i].empty() && inputStates[i].back().timeStamp > timeOfLastFrame - 1000)
 			inputStates[i].pop_back();
 	
 	for(int i=0; i<players.size(); i++) {
+		if (entities.empty() || inputStates[i].empty())
+			break;
 		systemsHandler.update(&entities.front(), &inputStates[i], timeOfLastFrame-deltaTime, timeOfLastFrame, i);
 	}
 	
 	for(int i=0; i<players.size(); i++) {
+		if (entities.empty())
+			break;
 		std::string str = systemsHandler.entitiesToString(&entities.front(), players[i]);
 		str = std::to_string(inputStates[i].front().timeStamp) + "$" + str;
 		udpMessagesToSend.push_back(str);
@@ -86,8 +96,13 @@ long GameServer::getTime() {
 }
 
 void GameServer::simulateFromTime(long startTime) {
-	if(startTime == -1)
+	if (startTime == -1) {
+		if (entities.empty()) {
+			entities.push_back(Entities());
+			systemsHandler.setupEntities(&entities.front(), startDetails);
+		}
 		startTime = entities.back().timeStamp;
+	}
 	int startEntity = entities.size()-1;
 	
 	for(int i=0; i<entities.size(); i++) {

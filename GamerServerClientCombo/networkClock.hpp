@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <chrono>
 #include <vector>
+#include <algorithm>
 
 namespace networkClock {
 	long getLocalTime();

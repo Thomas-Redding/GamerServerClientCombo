@@ -81,16 +81,22 @@
     <ClCompile Include="gamerserverclientcombo\View.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GamerServerClientCombo\ResourcePath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GamerServerClientCombo\PlayerSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graph.cpp">
+    <ClCompile Include="GamerServerClientCombo\Graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GamerServerClientCombo\utility.cpp">
+    <ClCompile Include="GamerServerClientCombo\util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GamerServerClientCombo\ResourcePath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GamerServerClientCombo\ClientServerCommunicator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GamerServerClientCombo\networkClock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -183,6 +189,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GamerServerClientCombo\Waypoint.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GamerServerClientCombo\ClientServerCommunicator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GamerServerClientCombo\networkClock.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

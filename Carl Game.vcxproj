@@ -112,14 +112,17 @@
     <ClCompile Include="gamerserverclientcombo\Client.cpp" />
     <ClCompile Include="gamerserverclientcombo\ClientMatchmakingPage.cpp" />
     <ClCompile Include="gamerserverclientcombo\ClientPage.cpp" />
+    <ClCompile Include="GamerServerClientCombo\ClientServerCommunicator.cpp" />
     <ClCompile Include="gamerserverclientcombo\GameClient.cpp" />
     <ClCompile Include="gamerserverclientcombo\GameServer.cpp" />
+    <ClCompile Include="GamerServerClientCombo\Graph.cpp" />
     <ClCompile Include="gamerserverclientcombo\HomePage.cpp" />
     <ClCompile Include="gamerserverclientcombo\IpTextBox.cpp" />
     <ClCompile Include="gamerserverclientcombo\main.cpp" />
     <ClCompile Include="gamerserverclientcombo\MapSystem.cpp" />
     <ClCompile Include="gamerserverclientcombo\MultiplayerPage.cpp" />
     <ClCompile Include="gamerserverclientcombo\NetworkClient.cpp" />
+    <ClCompile Include="GamerServerClientCombo\networkClock.cpp" />
     <ClCompile Include="gamerserverclientcombo\NetworkServer.cpp" />
     <ClCompile Include="gamerserverclientcombo\Page.cpp" />
     <ClCompile Include="GamerServerClientCombo\PlayerSystem.cpp" />
@@ -131,9 +134,8 @@
     <ClCompile Include="gamerserverclientcombo\SystemsHandler.cpp" />
     <ClCompile Include="gamerserverclientcombo\TcpServer.cpp" />
     <ClCompile Include="gamerserverclientcombo\TextBox.cpp" />
-    <ClCompile Include="GamerServerClientCombo\utility.cpp" />
+    <ClCompile Include="GamerServerClientCombo\util.cpp" />
     <ClCompile Include="gamerserverclientcombo\View.cpp" />
-    <ClCompile Include="Graph.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gamerserverclientcombo\AvatarSystem.hpp" />
@@ -141,6 +143,7 @@
     <ClInclude Include="gamerserverclientcombo\Client.hpp" />
     <ClInclude Include="gamerserverclientcombo\ClientMatchmakingPage.hpp" />
     <ClInclude Include="gamerserverclientcombo\ClientPage.hpp" />
+    <ClInclude Include="GamerServerClientCombo\ClientServerCommunicator.hpp" />
     <ClInclude Include="gamerserverclientcombo\Entities.hpp" />
     <ClInclude Include="gamerserverclientcombo\GameClient.hpp" />
     <ClInclude Include="gamerserverclientcombo\GameServer.hpp" />
@@ -151,6 +154,7 @@
     <ClInclude Include="gamerserverclientcombo\MapSystem.hpp" />
     <ClInclude Include="gamerserverclientcombo\MultiplayerPage.hpp" />
     <ClInclude Include="gamerserverclientcombo\NetworkClient.hpp" />
+    <ClInclude Include="GamerServerClientCombo\networkClock.hpp" />
     <ClInclude Include="gamerserverclientcombo\NetworkServer.hpp" />
     <ClInclude Include="gamerserverclientcombo\Page.hpp" />
     <ClInclude Include="gamerserverclientcombo\PortTextBox.hpp" />

@@ -35,6 +35,8 @@ private:
 	long getTime();
 	std::vector<sf::IpAddress> players;
 	void simulateFromTime(long startTime);
+	std::string startDetails;
+
 };
 
 #endif /* GameServer_cpp */
