@@ -59,6 +59,9 @@ void GameServer::receivedTcp(std::string message, sf::IpAddress ip, long timeSta
 void GameServer::receivedUdp(std::string message, sf::IpAddress ip, long timeStamp) {
 	InputState newInfo;
 	systemsHandler.inputStateFromString(&newInfo, message);
+	
+	std::cout << ip << " : " << newInfo.timeStamp << " : " << timeStamp << "\n";
+	
 	for(int i=0; i<players.size(); i++) {
 		if(ip == players[i]) {			
 			// insert in correct place in player's input queue

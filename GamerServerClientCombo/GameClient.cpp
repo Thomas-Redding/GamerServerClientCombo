@@ -150,10 +150,12 @@ bool GameClient::update() {
 		systemsHandler.update(&entities.front(), &inputStates[0], timeOfLastFrame-deltaTime, timeOfLastFrame, myAvatarId);
 	}
 	
+	long diff = networkClock::estimateClockDiff();
+	inputStates[0][0].timeStamp += diff;
 	std::string stringToSendToServer = systemsHandler.inputStateToString(&inputStates[0].front());
     sendMessageToClient(stringToSendToServer);
+	inputStates[0][0].timeStamp -= diff;
 	currentInputState.mouseClicked = false;
-	
 	return true;
 }
 
