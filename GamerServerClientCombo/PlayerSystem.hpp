@@ -33,7 +33,7 @@ private:
 	 * @param x - x position of crosshairs
 	 * @param y - y position of crosshairs
 	 */
-	void shoot(Entities *entities, int avatarId, double x, double y);
+	void shoot(Entities *entities, Player *me, double x, double y);
 };
 
 

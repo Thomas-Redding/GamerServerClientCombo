@@ -22,21 +22,19 @@ void PlayerSystem::update(Entities *entities, InputState *inputState, long delta
 	me->y += inputState->moveY * deltaTime * 0.4;
 	
 	if(inputState->mouseClicked)
-		shoot(entities, avatarId, inputState->mouseX, inputState->mouseY);
-	
-	if(inputState->mouseDown && me->health > 10)
-		me->health -= deltaTime/10;
+		shoot(entities, me, inputState->mouseX, inputState->mouseY);
 }
 
-void PlayerSystem::shoot(Entities *entities, int avatarId, double x, double y) {
-	Player *me = &entities->players[avatarId];
+void PlayerSystem::shoot(Entities *entities, Player *me, double x, double y) {
 	double theta = atan2(y - me->y, x - me->x);
 	for(int i=0; i<entities->players.size(); i++) {
-		if(i != avatarId) {
+		if(&entities->players[i] != me) {
 			Player *they = &entities->players[i];
 			bool didHit = util::rayCircleIntersect(theta, they->x - me->x, they->y - me->y, they->health);
 			if(didHit)
 				they->health -= 10;
+			if(they->health < 0)
+				they->health = 0;
 		}
 	}
 }
