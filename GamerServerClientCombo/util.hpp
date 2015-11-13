@@ -60,7 +60,7 @@ namespace util {
      * @param y3 - y position of first end of second segment
      * @param x4 - x position of second end of second segment
      * @param y4 - y position of second end of second segment
-     * @return true for intercept, false for no intercept
+     * @return struct indicating (1) whether the segments intersect and (2) the position of the intersection
      */
     Pair segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4);
 }
