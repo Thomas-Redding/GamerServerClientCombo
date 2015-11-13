@@ -32,13 +32,21 @@ namespace util {
 	
 	/*
 	 * determines whether a ray intersects with a line segment
-	 * if no intersection, returns -1; else returns distance of intersection point from origin
+	 * @param theta - angle between ray and x-axis
+	 * @param x1 - x position of first end of line segment
+	 * @param y1 - y position of first end of line segment
+	 * @param x2 - x position of second end of line segment
+	 * @param y2 - y position of second end of line segment
 	 */
 	double rayLineIntersect(double theta, double x1, double y1, double x2, double y2);
 	
 	/*
 	 * determines whether a ray intersects a circle
-	 * if no intersection, returns -1; else returns distance to intersection
+	 * @param theta - angle between ray and x-axis
+	 * @param x - x position of circle
+	 * @param y - y position of circlce
+	 * @param r - radius of circle
+	 * @return distance to intersection, if no intersection return -1
 	 */
 	bool rayCircleIntersect(double theta, double x, double y, double r);
     
@@ -52,7 +60,7 @@ namespace util {
      * @param y3 - y position of first end of second segment
      * @param x4 - x position of second end of second segment
      * @param y4 - y position of second end of second segment
-     * @returns true for intercept, false for no intercept
+     * @return true for intercept, false for no intercept
      */
     Pair segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4);
 }
