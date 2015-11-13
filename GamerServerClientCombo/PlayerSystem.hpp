@@ -29,11 +29,19 @@ public:
 private:
 	/*
 	 * @param entities - current state of the world
-	 * @param avatarId - id of the shooter
+	 * @param me - pointer to the shooter
 	 * @param x - x position of crosshairs
 	 * @param y - y position of crosshairs
 	 */
 	void shoot(Entities *entities, Player *me, double x, double y);
+	
+	/*
+	 * @param entities - Entities object
+	 * @param me - pointer to the shooter
+	 * @param dx - x-component of movement vector
+	 * @param dy - y-component of movement vector
+	 */
+	void move(Entities *entities, Player *me, double dx, double dy);
 };
 
 

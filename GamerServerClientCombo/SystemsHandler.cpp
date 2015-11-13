@@ -25,7 +25,7 @@ void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails
 	for(int i=0; i<entities->players.size(); i++) {
 		entities->players[i].id = i;
 		entities->players[i].x = 100;
-		entities->players[i].y = 200;
+		entities->players[i].y = 300;
 	}
 	
 	std::string line;

@@ -27,19 +27,27 @@ std::vector<std::string> util::split(std::string str, char delim) {
 double util::rayLineIntersect(double theta, double x1, double y1, double x2, double y2) {
 	double sin = std::sin(theta);
 	double cos = std::cos(theta);
-	if((x1 == 0 && y1 == 0) || (x2 == 0 && y2 == 0))
+	if((x1 == 0 && y1 == 0) || (x2 == 0 && y2 == 0)) {
+		std::cout << 0;
 		return 0;
+	}
 	else if((y2-y1)*cos == (x2-x1)*sin) {
 		// line is parallel to ray
 		double phi = std::atan2(y2, x2);
 		if(phi == theta) {
-			if(x1 == 0)
+			if(x1 == 0) {
+				std::cout << std::fmin(y1, y2);
 				return std::fmin(y1, y2); // ray and line are both horizontal
+			}
 			else {
-				if(x1 < x2)
+				if(x1 < x2) {
+					std::cout << std::sqrt(x1*x1+y1*y1);
 					return std::sqrt(x1*x1+y1*y1);
-				else
+				}
+				else {
+					std::cout << std::sqrt(x2*x2+y2*y2);
 					return std::sqrt(x2*x2+y2*y2);
+				}
 			}
 		}
 		else
@@ -47,13 +55,40 @@ double util::rayLineIntersect(double theta, double x1, double y1, double x2, dou
 	}
 	else {
 		// line is not parallel to ray
-		double t = (x1*sin-y1*cos)/((y2-y1)*cos - (x2-x1)*sin);
-		double r = ((x2-x1)*t+x1)/cos;
+		double r = (y1*(x2-x1)-x1*(y2-y1))/((x2-x1)*sin+(y2-y1)*cos);
 		if(r < 0)
 			return -1;
 		else
 			return r;
 	}
+}
+
+bool util::isPointOnLine(double x, double y, double x1, double y1, double x2, double y2) {
+	if(x1 == x2) {
+		if(y1 == y2)
+			return x == x1 && y == y1; // point
+		else
+			return x == x1; // vertical line
+	}
+	else if(y1 == y2)
+		return y == y1; // horizontal line
+	else {
+		// non-vertical, non-horizontal line
+		double tx = (x-x1)/(x2-x1);
+		double ty = (y-y1)/(y2-y1);
+		return tx == ty;
+	}
+}
+
+bool util::isPointOnSegment(double x, double y, double x1, double y1, double x2, double y2) {
+	if(isPointOnLine(x, y, x1, y1, x2, y2)) {
+		double r1 = x1*x1+y1*y1;
+		double r2 = x2*x2+y2*y2;
+		double r = x*x+y*y;
+		return isBetween(r, r1, r2);
+	}
+	else
+		return false;
 }
 
 bool util::rayCircleIntersect(double theta, double x, double y, double r) {
@@ -62,6 +97,24 @@ bool util::rayCircleIntersect(double theta, double x, double y, double r) {
 	double t = cos*x + sin*y;
 	double minDistSquared = (cos*t-x)*(cos*t-x) + (sin*t-y)*(sin*t-y);
 	return minDistSquared < r*r;
+}
+
+inline bool util::isBetween(double x, double a, double b) {
+	return (a < x && x < b) || (b < x && x < a);
+}
+
+double util::raySegmentIntersect(double theta, double x1, double y1, double x2, double y2) {
+	double answer = rayLineIntersect(theta, x1, y1, x2, y2);
+	if(answer > -1) {
+		double x = std::cos(theta) * answer;
+		double y = std::sin(theta) * answer;
+		if(isPointOnSegment(x, y, x1, y1, x2, y2))
+			return x*x+y*y;
+		else
+			return -1;
+	}
+	else
+		return -1;
 }
 
 // Line Segment Intersect fcn

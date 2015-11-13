@@ -37,8 +37,41 @@ namespace util {
 	 * @param y1 - y position of first end of line segment
 	 * @param x2 - x position of second end of line segment
 	 * @param y2 - y position of second end of line segment
+	 * returns the distance between the origin and the point of intersection; returns -1 if no intersection
 	 */
 	double rayLineIntersect(double theta, double x1, double y1, double x2, double y2);
+	
+	/*
+	 * @param x - x position of point
+	 * @param y - x position of point
+	 * @param x1 - x position of first end of line segment
+	 * @param y1 - y position of first end of line segment
+	 * @param x2 - x position of second end of line segment
+	 * @param y2 - y position of second end of line segment
+	 */
+	bool isPointOnLine(double x, double y, double x1, double y1, double x2, double y2);
+	
+	/*
+	 * @param x - x position of point
+	 * @param y - x position of point
+	 * @param x1 - x position of first end of line segment
+	 * @param y1 - y position of first end of line segment
+	 * @param x2 - x position of second end of line segment
+	 * @param y2 - y position of second end of line segment
+	 */
+	bool isPointOnSegment(double x, double y, double x1, double y1, double x2, double y2);
+	
+	inline bool isBetween(double x, double a, double b);
+	
+	/*
+	 * @param theta - angle between ray and x-axis
+	 * @param x1 - x position of first end of line segment
+	 * @param y1 - y position of first end of line segment
+	 * @param x2 - x position of second end of line segment
+	 * @param y2 - y position of second end of line segment
+	 * returns the distance between the origin and the point of intersection; returns -1 if no intersection
+	 */
+	double raySegmentIntersect(double theta, double x1, double y1, double x2, double y2);
 	
 	/*
 	 * determines whether a ray intersects a circle
