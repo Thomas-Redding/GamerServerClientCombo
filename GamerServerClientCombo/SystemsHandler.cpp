@@ -43,8 +43,7 @@ void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails
 		return;
 	}
 	
-	MapSystem mapSystem = MapSystem();
-	mapSystem.loadFromString(&entities->map, contents);    
+	entities->map.loadFromString(contents);
 }
 
 void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime, int avatarId) {

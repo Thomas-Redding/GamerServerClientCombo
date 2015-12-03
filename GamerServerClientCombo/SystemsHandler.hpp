@@ -18,7 +18,6 @@
 #include "ResourcePath.hpp"
 
 #include "PlayerSystem.hpp"
-#include "MapSystem.hpp"
 #include "util.hpp"
 
 /*
