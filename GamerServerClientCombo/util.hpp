@@ -15,7 +15,7 @@
 #include <iostream>
 
 namespace util {
-    struct Pair {
+    struct IntersectAnswer {
         bool didIntersect;
         double x;
         double y;
@@ -95,7 +95,7 @@ namespace util {
      * @param y4 - y position of second end of second segment
      * @return struct indicating (1) whether the segments intersect and (2) the position of the intersection
      */
-    Pair segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4);
+    IntersectAnswer segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4);
 }
 
 #endif /* utility_cpp */

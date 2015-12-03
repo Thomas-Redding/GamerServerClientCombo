@@ -57,7 +57,7 @@ void PlayerSystem::shoot(Entities *entities, Player *me, double x, double y) {
 	double distanceToNearestHit = INFINITY; // infinity
 	for(int i=0; i<entities->map.walls.size(); i++) {
 		Wall *wall = &entities->map.walls[i];
-		util::Pair answer = util::segmentIntersect(me->x, me->y, x, y, wall->x1, wall->y1, wall->x2, wall->y2);
+		util::IntersectAnswer answer = util::segmentIntersect(me->x, me->y, x, y, wall->x1, wall->y1, wall->x2, wall->y2);
 		double dist = (answer.x - me->x)*(answer.x - me->x) + (answer.y - me->y)*(answer.y - me->y);
 		if(answer.didIntersect && dist < distanceToNearestHit) {
 			distanceToNearestHit = dist;

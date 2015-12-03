@@ -6,6 +6,8 @@
 #include "Server.hpp"
 #include "TcpServer.hpp"
 
+#include "HashTable.hpp"
+
 std::vector<long> estimatedClockDifferences;
 
 struct CommunicatorPair {

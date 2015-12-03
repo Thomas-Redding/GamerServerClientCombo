@@ -118,13 +118,13 @@ double util::raySegmentIntersect(double theta, double x1, double y1, double x2, 
 }
 
 // Line Segment Intersect fcn
-util::Pair util:: segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
+util::IntersectAnswer util:: segmentIntersect(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4) {
 
     int yslope1 = y2 - y1;
     int xslope1 = x2 - x1;
     int yslope2 = y4 - y3;
     int xslope2 = x4 - x3;
-    Pair rtn;
+    IntersectAnswer rtn;
     rtn.didIntersect = false;
     
     //if parallel lines, false
