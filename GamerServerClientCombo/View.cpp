@@ -13,21 +13,12 @@ View::View(sf::RenderWindow *myWindow) {
 }
 
 bool View::draw(Entities *entities) {
-	for(int i=0; i<entities->players.size(); i++) {
-		Player *me = &entities->players[i];
+	for(int i=0; i<entities->soldiers.size(); i++) {
+		Soldier *me = &entities->soldiers[i];
 		sf::CircleShape circ;
 		circ.setRadius(me->health * screenScale);
 		circ.setPosition((me->x - screenX - me->health) * screenScale, (me->y - screenY - me->health) * screenScale);
 		circ.setFillColor(sf::Color::Red);
-		window->draw(circ);
-	}
-	
-	for(int i=0; i<entities->botSoldiers.size(); i++) {
-		BotSoldier *me = &entities->botSoldiers[i];
-		sf::CircleShape circ;
-		circ.setRadius(100 * screenScale);
-		circ.setPosition((me->x - screenX - 100) * screenScale, (me->y - screenY - 100) * screenScale);
-		circ.setFillColor(sf::Color::Blue);
 		window->draw(circ);
 	}
 	

@@ -17,7 +17,7 @@
 #include <SFML/Network.hpp>
 #include "ResourcePath.hpp"
 
-#include "PlayerSystem.hpp"
+#include "SoldierSystem.hpp"
 #include "util.hpp"
 
 /*
@@ -76,19 +76,9 @@ public:
 	 * @param str - string to be decompressed
 	 */
     void inputStateFromString(InputState *inputState, std::string str);
-	
-	/*
-	 * Fludily interpolate between two Entities. Note to developers: Do NOT focus on this. We may end up not needing it.
-	 * @param from - the Entities to return at t=0
-	 * @param to - the Entities to return at t=1
-	 * @param t - number between 0 and 1
-	 * @return the constructed Entities between from and to
-	 */
-	Entities interpolate(Entities *from, Entities *to, double t);
-	
 private:
 	bool isServer;
-	PlayerSystem playerSystem;
+	SoldierSystem soldierSystem;
 	
 	/*
 	 * @inputStates - computes the deltaTime of each inputState

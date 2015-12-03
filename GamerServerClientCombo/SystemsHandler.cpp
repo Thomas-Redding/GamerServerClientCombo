@@ -20,14 +20,8 @@ void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails
 		std::cout << "Launch Details From Server Ill-Formated\n";
 		return;
 	}
-	int numberOfPlayers = stoi(launchDetailsVector[1]);
-	entities->players = std::vector<Player>(numberOfPlayers);
-	for(int i=0; i<entities->players.size(); i++) {
-		entities->players[i].id = i;
-		entities->players[i].x = 100;
-		entities->players[i].y = 300;
-	}
 	
+	/*
 	std::string line;
 	std::string contents;
 	std::ifstream myfile (resourcePath() + launchDetailsVector[0] + ".txt");
@@ -44,27 +38,30 @@ void SystemsHandler::setupEntities(Entities *entities, std::string launchDetails
 	}
 	
 	entities->map.loadFromString(contents);
+	*/
 }
 
-void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime, int avatarId) {
+void SystemsHandler::update(Entities *entities, std::deque<InputState> *inputStates, long startTime, long endTime, int id) {
 	std::vector<float> weights = inputStateWeights(inputStates, startTime, endTime);
 	for(int i=0; i<weights.size(); i++) {
 		if(weights[i] != 0)
-			playerSystem.update(entities, &inputStates->at(i), weights[i], avatarId);
+			soldierSystem.update(entities, weights[i], id);
 	}
 }
 
 std::string SystemsHandler::entitiesToString(Entities *entities, sf::IpAddress ip) {
 	std::string rtn = std::to_string(entities->timeStamp);
-	for(int i=0; i<entities->players.size(); i++) {
+	for(int i=0; i<entities->soldiers.size(); i++) {
 		rtn += ";";
-		rtn += std::to_string(entities->players[i].id);
+		rtn += std::to_string(entities->soldiers[i].id);
 		rtn += ",";
-		rtn += std::to_string(entities->players[i].x);
+		rtn += std::to_string(entities->soldiers[i].isPlayer);
 		rtn += ",";
-		rtn += std::to_string(entities->players[i].y);
+		rtn += std::to_string(entities->soldiers[i].x);
 		rtn += ",";
-		rtn += std::to_string(entities->players[i].health);
+		rtn += std::to_string(entities->soldiers[i].y);
+		rtn += ",";
+		rtn += std::to_string(entities->soldiers[i].health);
 	}
 	return rtn;
 }
@@ -73,14 +70,15 @@ void SystemsHandler::entitiesFromString(Entities *entities, std::string str) {
     std::vector<std::string> vect = util::split(str, ';');
 	if(vect.size() >= 1)
 		entities->timeStamp = stol(vect[0]);
-	entities->players = std::vector<Player>(vect.size()-1);
+	entities->soldiers = std::vector<Soldier>(vect.size()-1);
 	for(int i=1; i<vect.size(); i++) {
 		std::vector<std::string> vect2 = util::split(vect[i], ',');
-		if(vect2.size() >= 4) {
-			entities->players[i-1].id = stoi(vect2[0]);
-			entities->players[i-1].x = stof(vect2[1]);
-			entities->players[i-1].y = stof(vect2[2]);
-			entities->players[i-1].health = stof(vect2[3]);
+		if(vect2.size() >= 5) {
+			entities->soldiers[i-1].id = stoi(vect2[0]);
+			entities->soldiers[i-1].isPlayer = stoi(vect2[1]);
+			entities->soldiers[i-1].x = stof(vect2[2]);
+			entities->soldiers[i-1].y = stof(vect2[3]);
+			entities->soldiers[i-1].health = stof(vect2[4]);
 		}
 	}
 }
@@ -119,58 +117,6 @@ void SystemsHandler::inputStateFromString(InputState *inputState, std::string st
 		inputState->moveX = stof(vect2[0]);
 		inputState->moveY = stof(vect2[1]);
 	}
-}
-
-Entities SystemsHandler::interpolate(Entities *from, Entities *to, double t) {
-	Entities rtn;
-	
-	// interpolate between timeStamps
-	rtn.timeStamp = from->timeStamp * (1-t) + to->timeStamp * t;
-	
-	// interpolate between players
-	if(t < 0.5) {
-		rtn.players = std::vector<Player>(from->players.size());
-		for(int i=0; i<from->players.size(); i++) {
-			rtn.players[i].id = from->players[i].id;
-			rtn.players[i].followerIds = std::vector<int>(from->players[i].followerIds.size());
-			int j;
-			for(j=0; j<to->players.size(); j++) {
-				if(to->players[j].id == rtn.players[i].id) {
-					rtn.players[i].x = from->players[i].x * (1-t) + to->players[i].x * t;
-					rtn.players[i].y = from->players[i].y * (1-t) + to->players[i].y * t;
-					rtn.players[i].health = from->players[i].health * (1-t) + to->players[i].health * t;
-					break;
-				}
-			}
-			if(j == to->players.size()) {
-				rtn.players[i].x = from->players[i].x;
-				rtn.players[i].y = from->players[i].y;
-				rtn.players[i].health = from->players[i].health;
-			}
-		}
-	}
-	else {
-		rtn.players = std::vector<Player>(to->players.size());
-		for(int i=0; i<to->players.size(); i++) {
-			rtn.players[i].id = to->players[i].id;
-			rtn.players[i].followerIds = std::vector<int>(to->players[i].followerIds.size());
-			int j;
-			for(j=0; j<from->players.size(); j++) {
-				if(from->players[j].id == rtn.players[i].id) {
-					rtn.players[i].x = from->players[i].x * (1-t) + to->players[i].x * t;
-					rtn.players[i].y = from->players[i].y * (1-t) + to->players[i].y * t;
-					rtn.players[i].health = from->players[i].health * (1-t) + to->players[i].health * t;
-					break;
-				}
-			}
-			if(j == from->players.size()) {
-				rtn.players[i].x = to->players[i].x;
-				rtn.players[i].y = to->players[i].y;
-				rtn.players[i].health = to->players[i].health;
-			}
-		}
-	}
-	return rtn;
 }
 
 /*** Private ***/

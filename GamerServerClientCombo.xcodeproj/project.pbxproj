@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281304C41C10DF6F004B3228 /* SoldierSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 281304C21C10DF6F004B3228 /* SoldierSystem.cpp */; };
 		282F41871C10ABAB003AEBA9 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282F41851C10ABAB003AEBA9 /* Map.cpp */; };
 		282F419B1C10D163003AEBA9 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 282F419A1C10D163003AEBA9 /* ResourcePath.mm */; };
 		283004341BD453FC0000910C /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 283004321BD453FC0000910C /* util.cpp */; };
 		28316C0B1BD2A36300CBFE63 /* alpha.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28316C0A1BD2A36300CBFE63 /* alpha.txt */; };
-		28316C1D1BD2F69F00CBFE63 /* PlayerSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28316C1B1BD2F69F00CBFE63 /* PlayerSystem.cpp */; };
-		28316C201BD2F70D00CBFE63 /* BotSoldierSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28316C1E1BD2F70D00CBFE63 /* BotSoldierSystem.cpp */; };
 		28434D0E1B753037008A51AC /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0D1B753037008A51AC /* sansation.ttf */; };
 		28434D101B753037008A51AC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0F1B753037008A51AC /* icon.png */; };
 		287BE2281BCAE86F0012EDE4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE21F1BCAE86F0012EDE4 /* main.cpp */; };
@@ -42,6 +41,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		281304C01C10DD8F004B3228 /* Team.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Team.hpp; sourceTree = "<group>"; };
+		281304C21C10DF6F004B3228 /* SoldierSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoldierSystem.cpp; sourceTree = "<group>"; };
+		281304C31C10DF6F004B3228 /* SoldierSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SoldierSystem.hpp; sourceTree = "<group>"; };
 		282F41851C10ABAB003AEBA9 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
 		282F41861C10ABAB003AEBA9 /* Map.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
 		282F419A1C10D163003AEBA9 /* ResourcePath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -53,10 +55,6 @@
 		28316C131BD2EC8500CBFE63 /* Player.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		28316C161BD2F3E300CBFE63 /* Waypoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Waypoint.hpp; sourceTree = "<group>"; };
 		28316C191BD2F56400CBFE63 /* BotSoldier.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BotSoldier.hpp; sourceTree = "<group>"; };
-		28316C1B1BD2F69F00CBFE63 /* PlayerSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerSystem.cpp; sourceTree = "<group>"; };
-		28316C1C1BD2F69F00CBFE63 /* PlayerSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerSystem.hpp; sourceTree = "<group>"; };
-		28316C1E1BD2F70D00CBFE63 /* BotSoldierSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BotSoldierSystem.cpp; sourceTree = "<group>"; };
-		28316C1F1BD2F70D00CBFE63 /* BotSoldierSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BotSoldierSystem.hpp; sourceTree = "<group>"; };
 		28434CFE1B753036008A51AC /* GamerServerClientCombo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamerServerClientCombo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GamerServerClientCombo-Info.plist"; sourceTree = "<group>"; };
 		28434D0D1B753037008A51AC /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
@@ -127,13 +125,11 @@
 		28316C211BD2FB2700CBFE63 /* Dynamic */ = {
 			isa = PBXGroup;
 			children = (
-				28316C1B1BD2F69F00CBFE63 /* PlayerSystem.cpp */,
-				28316C1C1BD2F69F00CBFE63 /* PlayerSystem.hpp */,
-				28316C1E1BD2F70D00CBFE63 /* BotSoldierSystem.cpp */,
-				28316C1F1BD2F70D00CBFE63 /* BotSoldierSystem.hpp */,
 				28A52A7A1BC410D7001ED83C /* InputState.hpp */,
 				28316C191BD2F56400CBFE63 /* BotSoldier.hpp */,
 				28316C131BD2EC8500CBFE63 /* Player.hpp */,
+				281304C21C10DF6F004B3228 /* SoldierSystem.cpp */,
+				281304C31C10DF6F004B3228 /* SoldierSystem.hpp */,
 			);
 			name = Dynamic;
 			sourceTree = "<group>";
@@ -201,6 +197,7 @@
 				28A52A821BC41171001ED83C /* View.cpp */,
 				28A52A831BC41171001ED83C /* View.hpp */,
 				28A52A861BC41270001ED83C /* Entities.hpp */,
+				281304C01C10DD8F004B3228 /* Team.hpp */,
 				28A52A7F1BC4113C001ED83C /* SystemsHandler.cpp */,
 				28A52A801BC4113C001ED83C /* SystemsHandler.hpp */,
 			);
@@ -373,6 +370,7 @@
 				28F2AA781BE69E7B00F7227F /* Client.cpp in Sources */,
 				282F41871C10ABAB003AEBA9 /* Map.cpp in Sources */,
 				28F2AA571BE69E3F00F7227F /* GameServer.cpp in Sources */,
+				281304C41C10DF6F004B3228 /* SoldierSystem.cpp in Sources */,
 				28F2AA741BE69E6400F7227F /* Page.cpp in Sources */,
 				28F2AA701BE69E6400F7227F /* ClientPage.cpp in Sources */,
 				28F2AA761BE69E6400F7227F /* TextBox.cpp in Sources */,
@@ -383,13 +381,11 @@
 				28F2AA521BE69E2A00F7227F /* GameClient.cpp in Sources */,
 				287BE2281BCAE86F0012EDE4 /* main.cpp in Sources */,
 				28F2AA751BE69E6400F7227F /* PortTextBox.cpp in Sources */,
-				28316C201BD2F70D00CBFE63 /* BotSoldierSystem.cpp in Sources */,
 				28F2AA6F1BE69E6400F7227F /* ClientMatchmakingPage.cpp in Sources */,
 				28A52A811BC4113C001ED83C /* SystemsHandler.cpp in Sources */,
 				28F2AA581BE69E3F00F7227F /* Server.cpp in Sources */,
 				283004341BD453FC0000910C /* util.cpp in Sources */,
 				287BE22C1BCAE86F0012EDE4 /* TcpServer.cpp in Sources */,
-				28316C1D1BD2F69F00CBFE63 /* PlayerSystem.cpp in Sources */,
 				282F419B1C10D163003AEBA9 /* ResourcePath.mm in Sources */,
 				287BE22A1BCAE86F0012EDE4 /* NetworkServer.cpp in Sources */,
 				28F2AA731BE69E6400F7227F /* MultiplayerPage.cpp in Sources */,
