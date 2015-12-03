@@ -30,14 +30,12 @@ void NetworkClient::networkUpdate() {
 		if(tcpSocket.getRemoteAddress() != sf::IpAddress::None) {
 			// our TCP sockets just connected
 			sendTcpMessage("_CONNECT" + std::to_string(udpSocket.getLocalPort()));
-			int oldState = connectionState;
 			connectionState = 2;
 			// now we wait for the server to send us a TCP message giving us its UDP port number
 		}
 	}
 	else if(connectionState == 2) {
 		if(tcpSocket.getRemoteAddress() == sf::IpAddress::None) {
-			int oldState = connectionState;
 			connectionState = -1;
 		}
 	}
@@ -64,7 +62,6 @@ void NetworkClient::networkUpdate() {
 				message = message.substr(1);
 				if(message.substr(0, 7) == "CONNECT") {
 					if(connectionState != 3) {
-						int oldState = connectionState;
 						connectionState = 3;
 					}
 					udpPortOfServer = stoi(message.substr(7));
@@ -94,7 +91,6 @@ void NetworkClient::networkUpdate() {
 			message = message.substr(1);
 			if(message.substr(0, 7) == "CONNECT") {
 				if(connectionState != 3) {
-					int oldState = connectionState;
 					connectionState = 3;
 				}
 				udpPortOfServer = stoi(message.substr(7));
@@ -190,13 +186,12 @@ void NetworkClient::attemptConnectionToServer(sf::IpAddress serverIpAddress, uns
 	}
 	
 	if(connectionState != 0) {
-		int oldState = connectionState;
 		connectionState = 0;
 	}
 	else
 		connectionState = 0;
 	tcpSocket.setBlocking(false);
-	sf::Socket::Status status = tcpSocket.connect(serverIpAddress, serverPort);
+	tcpSocket.connect(serverIpAddress, serverPort);
 	connectionState = 1;
 }
 
@@ -206,7 +201,6 @@ void NetworkClient::disconnect() {
 }
 
 void NetworkClient::sendOwnTcpServerMessageToQuit() {
-	unsigned short localTcpPort = getLocalServerTcpPort();
 	if(sf::IpAddress::getLocalAddress() == tcpSocket.getRemoteAddress())
 		sendTcpMessage("Quit Server");
 	else {

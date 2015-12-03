@@ -10,8 +10,7 @@
 
 void PlayerSystem::update(Entities *entities, InputState *inputState, long deltaTime, int avatarId) {
 	Player *me;
-	int i;
-	for(i=0; i<entities->players.size(); i++) {
+	for(unsigned int i=0; i<entities->players.size(); i++) {
 		if(entities->players[i].id == avatarId) {
 			me = &entities->players[avatarId];
 			break;

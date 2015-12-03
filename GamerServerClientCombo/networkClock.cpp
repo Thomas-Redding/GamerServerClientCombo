@@ -15,11 +15,10 @@ long networkClock::getLocalTime() {
 }
 
 signed long networkClock::estimateClockDiff() {
-	signed long avg = 0;
 	if(estimatedClockDifferences.size() > 0) {
 		std::vector<long> vect = estimatedClockDifferences;
 		std::sort(vect.begin(), vect.begin()+vect.size());
-		int middleIndex = vect.size()/2;
+		unsigned long middleIndex = vect.size()/2;
 		return vect[middleIndex];
 	}
 	else

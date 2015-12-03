@@ -12,7 +12,7 @@ std::vector<std::string> util::split(std::string str, char delim) {
 	std::vector<std::string> elems;
 	std::string item;
 	while(true) {
-		int index = str.find(delim);
+		size_t index = str.find(delim);
 		if(index == -1) {
 			elems.push_back(str);
 			return elems;

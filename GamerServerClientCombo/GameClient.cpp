@@ -120,7 +120,7 @@ bool GameClient::update() {
 	else {
 		// interpolate
 		long artificialLag = 100; // ms
-		int serverEntityIndex = -1;
+		long serverEntityIndex = -1;
 		for(int i=0; i<serverEntities.size(); i++) {
 			if(serverEntities[i].timeStamp > timeOfLastFrame - artificialLag) {
 				serverEntityIndex = i;

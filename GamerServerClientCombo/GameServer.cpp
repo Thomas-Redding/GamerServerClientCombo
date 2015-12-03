@@ -103,7 +103,7 @@ void GameServer::simulateFromTime(long startTime) {
 		}
 		startTime = entities.back().timeStamp;
 	}
-	int startEntity = entities.size()-1;
+	long startEntity = entities.size()-1;
 	
 	for(int i=0; i<entities.size(); i++) {
 		if(entities[i].timeStamp < startTime) {
@@ -113,7 +113,7 @@ void GameServer::simulateFromTime(long startTime) {
 	}
 	if(startEntity == entities.size()-1)
 		startEntity--;
-	for(int i=startEntity-1; i>=0; i--) {
+	for(long i=startEntity-1; i>=0; i--) {
 		long timeStamp = entities[i].timeStamp;
 		entities[i] = entities[i+1];
 		entities[i].timeStamp = timeStamp;

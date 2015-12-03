@@ -31,7 +31,7 @@ bool IpTextBox::textEntered(sf::Uint32 character) {
 	else if(48 <= character && character <= 57) {
 		// numeral
 		int numeralsInFront = 0;
-		for(int i=str.length()-1; i>=0; i--) {
+		for(long i=str.length()-1; i>=0; i--) {
 			if(str.at(i) != '.')
 				numeralsInFront++;
 			else
