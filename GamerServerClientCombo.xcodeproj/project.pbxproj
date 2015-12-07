@@ -14,6 +14,10 @@
 		28316C0B1BD2A36300CBFE63 /* alpha.txt in Resources */ = {isa = PBXBuildFile; fileRef = 28316C0A1BD2A36300CBFE63 /* alpha.txt */; };
 		28434D0E1B753037008A51AC /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0D1B753037008A51AC /* sansation.ttf */; };
 		28434D101B753037008A51AC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 28434D0F1B753037008A51AC /* icon.png */; };
+		285053981C15F61100118B7B /* chair.png in Resources */ = {isa = PBXBuildFile; fileRef = 285053941C15F61100118B7B /* chair.png */; };
+		285053991C15F61100118B7B /* soldier.png in Resources */ = {isa = PBXBuildFile; fileRef = 285053951C15F61100118B7B /* soldier.png */; };
+		2850539A1C15F61100118B7B /* table.png in Resources */ = {isa = PBXBuildFile; fileRef = 285053961C15F61100118B7B /* table.png */; };
+		2850539B1C15F61100118B7B /* tv.png in Resources */ = {isa = PBXBuildFile; fileRef = 285053971C15F61100118B7B /* tv.png */; };
 		287BE2281BCAE86F0012EDE4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE21F1BCAE86F0012EDE4 /* main.cpp */; };
 		287BE2291BCAE86F0012EDE4 /* NetworkClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE2201BCAE86F0012EDE4 /* NetworkClient.cpp */; };
 		287BE22A1BCAE86F0012EDE4 /* NetworkServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 287BE2221BCAE86F0012EDE4 /* NetworkServer.cpp */; };
@@ -59,6 +63,10 @@
 		28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GamerServerClientCombo-Info.plist"; sourceTree = "<group>"; };
 		28434D0D1B753037008A51AC /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		28434D0F1B753037008A51AC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		285053941C15F61100118B7B /* chair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chair.png; sourceTree = "<group>"; };
+		285053951C15F61100118B7B /* soldier.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soldier.png; sourceTree = "<group>"; };
+		285053961C15F61100118B7B /* table.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = table.png; sourceTree = "<group>"; };
+		285053971C15F61100118B7B /* tv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tv.png; sourceTree = "<group>"; };
 		287BE21F1BCAE86F0012EDE4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = GamerServerClientCombo/main.cpp; sourceTree = SOURCE_ROOT; };
 		287BE2201BCAE86F0012EDE4 /* NetworkClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NetworkClient.cpp; path = GamerServerClientCombo/NetworkClient.cpp; sourceTree = SOURCE_ROOT; };
 		287BE2211BCAE86F0012EDE4 /* NetworkClient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = NetworkClient.hpp; path = GamerServerClientCombo/NetworkClient.hpp; sourceTree = SOURCE_ROOT; };
@@ -187,6 +195,7 @@
 				28434D0F1B753037008A51AC /* icon.png */,
 				28CB66161B9DD6B700833E69 /* ResourcePath.hpp */,
 				28434D021B753036008A51AC /* GamerServerClientCombo-Info.plist */,
+				285053931C15F61100118B7B /* textures */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -230,6 +239,17 @@
 				28F2AA501BE69E2A00F7227F /* GameClient.hpp */,
 			);
 			name = Client;
+			sourceTree = "<group>";
+		};
+		285053931C15F61100118B7B /* textures */ = {
+			isa = PBXGroup;
+			children = (
+				285053941C15F61100118B7B /* chair.png */,
+				285053951C15F61100118B7B /* soldier.png */,
+				285053961C15F61100118B7B /* table.png */,
+				285053971C15F61100118B7B /* tv.png */,
+			);
+			path = textures;
 			sourceTree = "<group>";
 		};
 		28CB66031B9DD67F00833E69 /* Ignore Me */ = {
@@ -335,7 +355,11 @@
 			files = (
 				28434D101B753037008A51AC /* icon.png in Resources */,
 				28434D0E1B753037008A51AC /* sansation.ttf in Resources */,
+				2850539A1C15F61100118B7B /* table.png in Resources */,
 				28316C0B1BD2A36300CBFE63 /* alpha.txt in Resources */,
+				2850539B1C15F61100118B7B /* tv.png in Resources */,
+				285053981C15F61100118B7B /* chair.png in Resources */,
+				285053991C15F61100118B7B /* soldier.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
